@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Angela – Dein nachhaltiger Lifestyle-Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage: #7A9E7E;
+    --sage-light: #EEF4EE;
+    --sand: #F5EFE6;
+    --terracotta: #C97B5A;
+    --terracotta-light: #FAF0EB;
+    --charcoal: #2C2C2C;
+    --warm-grey: #6B6B6B;
+    --white: #FDFCFB;
+    --border: #E2DDD8;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--sand);
+    color: var(--charcoal);
+    line-height: 1.6;
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--charcoal);
+    color: var(--white);
+    padding: 64px 24px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 70% 30%, rgba(122,158,126,0.25) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(201,123,90,0.2) 0%, transparent 50%);
+  }
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 6vw, 52px);
+    font-weight: 400;
+    line-height: 1.15;
+    position: relative;
+    margin-bottom: 16px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(255,255,255,0.65);
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* PHILOSOPHY BANNER */
+  .philosophy {
+    background: var(--sage);
+    color: white;
+    padding: 20px 24px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+  .philosophy span {
+    opacity: 0.85;
+    font-weight: 300;
+  }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  /* SECTION */
+  .section {
+    margin-top: 48px;
+  }
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: var(--charcoal);
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .tab {
+    padding: 8px 20px;
+    border-radius: 100px;
+    border: 1.5px solid var(--border);
+    background: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--warm-grey);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .tab:hover { border-color: var(--sage); color: var(--sage); }
+  .tab.active {
+    background: var(--sage);
+    border-color: var(--sage);
+    color: white;
+  }
+
+  /* MEAL CARDS */
+  .meal-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .meal-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px 24px;
+    border: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 16px;
+    align-items: start;
+    transition: box-shadow 0.2s;
+  }
+  .meal-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
+  .meal-time {
+    text-align: center;
+  }
+  .meal-time .time {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--charcoal);
+    display: block;
+  }
+  .meal-time .label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--warm-grey);
+    display: block;
+    margin-top: 2px;
+  }
+  .meal-divider {
+    width: 1px;
+    background: var(--border);
+    margin: 0 8px;
+    align-self: stretch;
+    display: none;
+  }
+  .meal-content h3 {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--charcoal);
+  }
+  .meal-options {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .meal-options li {
+    font-size: 13.5px;
+    color: var(--warm-grey);
+    padding-left: 14px;
+    position: relative;
+  }
+  .meal-options li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--sage);
+  }
+  .meal-tag {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 100px;
+    background: var(--sage-light);
+    color: var(--sage);
+    font-weight: 500;
+  }
+  .meal-tag.orange { background: var(--terracotta-light); color: var(--terracotta); }
+
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* BATCH COOKING */
+  .batch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .batch-card {
+    background: white;
+    border-radius: 16px;
+    padding: 20px;
+    border: 1px solid var(--border);
+  }
+  .batch-icon {
+    font-size: 28px;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .batch-card h4 {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  .batch-card p {
+    font-size: 13px;
+    color: var(--warm-grey);
+    line-height: 1.5;
+  }
+  .batch-card .duration {
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--sage);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  /* RULE CARD */
+  .rule-card {
+    background: white;
+    border-radius: 16px;
+    padding: 22px 24px;
+    border: 1px solid var(--border);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+  .rule-number {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--sage-light);
+    color: var(--sage);
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .rule-card h4 {
+    font-weight: 500;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .rule-card p {
+    font-size: 13.5px;
+    color: var(--warm-grey);
+    line-height: 1.55;
+  }
+
+  /* SUPPLEMENT TABLE */
+  .supp-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .supp-row {
+    background: white;
+    border-radius: 14px;
+    padding: 16px 20px;
+    border: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr 2fr 80px;
+    gap: 12px;
+    align-items: center;
+  }
+  .supp-name {
+    font-weight: 500;
+    font-size: 14px;
+  }
+  .supp-why {
+    font-size: 13px;
+    color: var(--warm-grey);
+  }
+  .supp-prio {
+    text-align: right;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--sage);
+  }
+  .supp-prio.mid { color: var(--terracotta); }
+
+  /* ALCOHOL SECTION */
+  .highlight-box {
+    background: var(--terracotta-light);
+    border-left: 3px solid var(--terracotta);
+    border-radius: 0 12px 12px 0;
+    padding: 20px 24px;
+    margin-top: 24px;
+  }
+  .highlight-box h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--terracotta);
+    margin-bottom: 8px;
+  }
+  .highlight-box p {
+    font-size: 14px;
+    color: var(--charcoal);
+    line-height: 1.6;
+  }
+
+  /* ROUTINE SECTION */
+  .routine-week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-top: 20px;
+  }
+  .day-pill {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 6px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .day-pill:hover { border-color: var(--sage); }
+  .day-pill.reset-day {
+    background: var(--sage);
+    border-color: var(--sage);
+    color: white;
+  }
+  .day-pill .day-name {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    display: block;
+  }
+  .day-pill .day-icon {
+    font-size: 20px;
+    display: block;
+    margin: 6px 0;
+  }
+  .day-pill .day-desc {
+    font-size: 9px;
+    color: var(--warm-grey);
+    line-height: 1.3;
+  }
+  .day-pill.reset-day .day-desc { color: rgba(255,255,255,0.75); }
+
+  /* MANTRA */
+  .mantra {
+    background: var(--charcoal);
+    color: white;
+    border-radius: 20px;
+    padding: 40px 32px;
+    text-align: center;
+    margin-top: 48px;
+  }
+  .mantra h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .mantra h2 em { color: var(--sage); font-style: italic; }
+  .mantra p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  /* PROGRESS TRACKER */
+  .tracker-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .tracker-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px;
+    text-align: center;
+  }
+  .tracker-emoji { font-size: 28px; display: block; margin-bottom: 8px; }
+  .tracker-label { font-size: 12px; color: var(--warm-grey); display: block; margin-bottom: 10px; }
+  .tracker-stars { display: flex; gap: 4px; justify-content: center; }
+  .star {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 1.5px solid var(--border);
+    cursor: pointer;
+    background: white;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    transition: all 0.15s;
+    color: transparent;
+  }
+  .star.filled { background: var(--sage); border-color: var(--sage); color: white; }
+  .star:hover { border-color: var(--sage); }
+  .tracker-note {
+    margin-top: 10px;
+    font-size: 11px;
+    color: var(--warm-grey);
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    .supp-row { grid-template-columns: 1fr 1fr; }
+    .supp-why { display: none; }
+    .routine-week { grid-template-columns: repeat(4, 1fr); }
+    .meal-card { grid-template-columns: 64px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Dein persönlicher Lifestyle-Plan</div>
+  <h1>Kein Extrem.<br><em>Nur Rhythmus.</em></h1>
+  <p class="hero-sub">Ein Plan, der zu deinem Alltag passt – nicht umgekehrt. Struktur ohne Strenge, Genuss ohne Schuldgefühle.</p>
+</div>
+
+<div class="philosophy">
+  80% bewusst · 20% genießen · 100% du selbst <span>— das ist Nachhaltigkeit</span>
+</div>
+
+<div class="container">
+
+  <!-- ERNÄHRUNG -->
+  <div class="section">
+    <div class="section-label">Ernährung</div>
+    <div class="section-title">Was du wann isst</div>
+
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('buerotag')">📋 Bürotag</button>
+      <button class="tab" onclick="switchTab('heimtag')">🏠 Heimtag</button>
+      <button class="tab" onclick="switchTab('wochenende')">☀️ Wochenende</button>
+    </div>
+
+    <!-- BÜROTAG -->
+    <div class="tab-panel active" id="tab-buerotag">
+      <div class="meal-grid">
+        <div class="meal-card">
+          <div class="meal-time">
+            <span class="time">07:00</span>
+            <span class="label">Frühstück</span>
+          </div>
+          <div class="meal-content">
+            <h3>Schnell & sättigend</h3>
+            <ul class="meal-options">
+              <li>Griechischer Joghurt (laktosefrei) + Beeren + Nüsse</li>
+              <li>2 hartgekochte Eier + Reiswaffel + Avocado</li>
+              <li>Overnight Oats (GF) – am Vorabend vorbereitet</li>
+            </ul>
+            <span class="meal-tag">⏱ max. 5 Min</span>
+          </div>
+        </div>
+
+        <div class="meal-card">
+          <div class="meal-time">
+            <span class="time">10:00</span>
+            <span class="label">Znüni</span>
+          </div>
+          <div class="meal-content">
+            <h3>Bürotauglich</h3>
+            <ul class="meal-options">
+              <li>Handvoll Nüsse + 1 Frucht</li>
+              <li>Hartgekochtes Ei + Gemüsesticks (vorbereitet)</li>
+              <li>Kleines Glas Proteinshake wenn's schnell gehen muss</li>
+            </ul>
+            <span class="meal-tag">🎒 Mitbringen</span>
+          </div>
+        </div>
+
+        <div class="meal-card">
+          <div class="meal-time">
+            <span class="time">12:30</span>
+            <span class="label">Mittagessen</span>
+          </div>
+          <div class="meal-content">
+            <h3>Überall erhältlich</h3>
+            <ul class="meal-options">
+              <li>Salat mit Protein (Hühnchen, Ei, Thunfisch, Lachs)</li>
+              <li>Sushi – Nigiri/Sashimi (proteinreich, kein Gluten)</li>
+              <li>Suppe + kleines Proteinbeilagentellerchen</li>
+              <li>Bowl mit Reis, Gemüse, Protein</li>
+            </ul>
+            <span class="meal-tag orange">🍱 Restaurant ok</span>
+          </div>
+        </div>
+
+        <div class="meal-card">
+          <div class="meal-time">
+            <span class="time">18:30</span>
+            <span class="label">Abendessen</span>
+          </div>
+          <div class="meal-content">
+            <h3>Aufwärmen genügt</h3>
+            <ul class="meal-options">
+              <li>Vorbereitetes Batch-Gericht (siehe unten) – 5 Min</li>
+              <li>Lachs aus dem Ofen + Tiefkühlgemüse – 15 Min</li>
+              <li>Rührei mit Gemüse + Reis aus dem Kühlschrank</li>
+            </ul>
+            <span class="meal-tag">🔥 Batch Cooking Sonntag</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HEIMTAG -->
+    <div class="tab-panel" id="tab-heimtag">
+      <div class="meal-grid">
+        <div class="meal-card">
+          <div class="meal-time">
+            <span class="time">08:00</span>
+            <span class="label">Frühstück</span>
+          </div>
+          <div class="meal-content">
+            <h3>Etwas mehr Zeit</h3>
+            <ul class="meal-options">
+              <li>Rührei (2–3 Eier) mit Spinat + Cherrytomaten</li>
+              <li>Smoothie Bowl mit Beeren, Banane, Proteinpulver</li>
+              <li>Warme Haferflocken (GF) mit Nüssen und Früchten</li>
+            </ul>
+            <span class="meal-tag">☕ Genussvoll</span>
+          </div>
+        </div>
+        <div class="meal-card">
+          <div class="meal-time">
+            <span class="time">12:30</span>
+            <span class="label">Mittagessen</span>
+          </div>
+          <div class="meal-content">
+            <h3>Warm & sättigend</h3>
+            <ul class="meal-options">
+              <li>Hühnchen-Gemüsepfanne mit Reis oder Quinoa</li>
+              <li>Linsensuppe mit Brot (GF)</li>
+              <li>Grosser Salat + Ei oder Thunfisch + Avocado</li>
+            </ul>
+            <span class="meal-tag">🏠 Selbst gekocht</span>
+          </div>
+        </div>
+        <div class="meal-card">
+          <div class="meal-time">
+            <span class="time">18:00</span>
+            <span class="label">Abendessen</span>
+          </div>
+          <div class="meal-content">
+            <h3>Leicht & befriedigend</h3>
+            <ul class="meal-options">
+              <li>Lachsfilet mit Ofengemüse (Zucchini, Paprika, Zwiebeln)</li>
+              <li>Pute mit Spargel und einem kleinen Reis</li>
+              <li>Rindfleisch-Gemüsepfanne mit Süsskartoffel</li>
+            </ul>
+            <span class="meal-tag orange">🌿 Omega-3 Fokus</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- WOCHENENDE -->
+    <div class="tab-panel" id="tab-wochenende">
+      <div class="meal-grid">
+        <div class="meal-card">
+          <div class="meal-time">
+            <span class="time">09:00</span>
+            <span class="label">Brunch</span>
+          </div>
+          <div class="meal-content">
+            <h3>Entspannt & bewusst</h3>
+            <ul class="meal-options">
+              <li>Avocado-Toast (GF-Brot) + 2 Eier nach Wahl</li>
+              <li>Ausgiebiges Rührei-Menü mit viel Gemüse</li>
+              <li>Joghurt-Bowl mit Granola (GF), Früchten, Honig</li>
+            </ul>
+            <span class="meal-tag">😊 Geniessen erlaubt</span>
+          </div>
+        </div>
+        <div class="meal-card">
+          <div class="meal-time">
+            <span class="time">13:00</span>
+            <span class="label">Mittagessen</span>
+          </div>
+          <div class="meal-content">
+            <h3>Batch Cooking Sonntag</h3>
+            <ul class="meal-options">
+              <li>Hühnchen-Reissalat für die Woche vorbereiten</li>
+              <li>Kichererbsen-Curry kochen und einfrieren</li>
+              <li>Gemüse rösten für 3 Abendmahlzeiten</li>
+            </ul>
+            <span class="meal-tag">📦 Vorbereiten = Erfolg</span>
+          </div>
+        </div>
+        <div class="meal-card">
+          <div class="meal-time">
+            <span class="time">19:00</span>
+            <span class="label">Abendessen</span>
+          </div>
+          <div class="meal-content">
+            <h3>Social & genussvoll</h3>
+            <ul class="meal-options">
+              <li>Restaurant? Protein + Salat als Basis wählen</li>
+              <li>Apéro mit Freunden: Käse, Rohkost, 1–2 Gläser Wein ok</li>
+              <li>Selbst kochen: etwas Aufwändigeres, das Spass macht</li>
+            </ul>
+            <span class="meal-tag orange">🥂 Bewusst geniessen</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALKOHOL HINWEIS -->
+    <div class="highlight-box">
+      <h4>Alkohol – die realistische Regel</h4>
+      <p>Kein totaler Verzicht, kein schlechtes Gewissen. <strong>Bis zu 2x pro Woche bewusst</strong> – mit Essen, nicht auf nüchternem Magen. Das reduziert den Effekt massiv, ohne Frust zu erzeugen. Ein Apéro mit Freunden gehört zum Leben – und zu einem nachhaltigen Plan.</p>
+    </div>
+  </div>
+
+  <!-- BATCH COOKING -->
+  <div class="section">
+    <div class="section-label">Sunday Reset</div>
+    <div class="section-title">Batch Cooking – 60 Min für die ganze Woche</div>
+    <div class="batch-grid">
+      <div class="batch-card">
+        <span class="batch-icon">🍗</span>
+        <h4>Ofenhühnchen</h4>
+        <p>500g Brust würzen, 25 Min bei 200°. Für 3 Abendessen und Znüni portionieren.</p>
+        <div class="duration">⏱ 30 Min · hält 4 Tage</div>
+      </div>
+      <div class="batch-card">
+        <span class="batch-icon">🥗</span>
+        <h4>Ofengemüse</h4>
+        <p>Zucchini, Paprika, Karotten, Zwiebeln – alles auf ein Blech, 200°, 25 Min.</p>
+        <div class="duration">⏱ 5 Min Prep · hält 5 Tage</div>
+      </div>
+      <div class="batch-card">
+        <span class="batch-icon">🍛</span>
+        <h4>Kichererbsen-Curry</h4>
+        <p>Dose Kichererbsen + Kokosmilch (laktosefrei) + Gewürze. Einfach & sättigend.</p>
+        <div class="duration">⏱ 20 Min · einfrierbar</div>
+      </div>
+      <div class="batch-card">
+        <span class="batch-icon">🌾</span>
+        <h4>Reis / Quinoa</h4>
+        <p>200g trockener Reis oder Quinoa kochen, portionieren. Passt zu allem.</p>
+        <div class="duration">⏱ 15 Min · hält 4 Tage</div>
+      </div>
+      <div class="batch-card">
+        <span class="batch-icon">🥣</span>
+        <h4>Overnight Oats ×3</h4>
+        <p>3 Gläser vorbereiten: GF-Haferflocken + Hafermilch + Beeren + Leinsamen.</p>
+        <div class="duration">⏱ 10 Min · 3 Frühstücke</div>
+      </div>
+      <div class="batch-card">
+        <span class="batch-icon">🥚</span>
+        <h4>Hartgekochte Eier</h4>
+        <p>6 Eier kochen, schälen, in Box lagern. Perfekter Büro-Znüni für die Woche.</p>
+        <div class="duration">⏱ 10 Min · hält 5 Tage</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUPPLEMENTIERUNG -->
+  <div class="section">
+    <div class="section-label">Supplements</div>
+    <div class="section-title">Was wirklich sinnvoll ist</div>
+    <div class="supp-grid">
+      <div class="supp-row">
+        <div class="supp-name">☀️ Vitamin D3 + K2</div>
+        <div class="supp-why">Hormonsystem & Energie – ab 40 besonders relevant, v.a. im Winter</div>
+        <div class="supp-prio">WICHTIG</div>
+      </div>
+      <div class="supp-row">
+        <div class="supp-name">🐟 Omega-3</div>
+        <div class="supp-why">Entzündungshemmend, Haut, Bindegewebe, Stoffwechsel</div>
+        <div class="supp-prio">WICHTIG</div>
+      </div>
+      <div class="supp-row">
+        <div class="supp-name">🌙 Magnesium (abends)</div>
+        <div class="supp-why">Besserer Schlaf, Regeneration, Stressabbau – Fettabbau passiert nachts</div>
+        <div class="supp-prio">WICHTIG</div>
+      </div>
+      <div class="supp-row">
+        <div class="supp-name">💪 Protein-Shake</div>
+        <div class="supp-why">Wenn eine Mahlzeit knapp wird – kein Ersatz, nur Lückenfüller</div>
+        <div class="supp-prio mid">SINNVOLL</div>
+      </div>
+      <div class="supp-row">
+        <div class="supp-name">✨ Kollagen</div>
+        <div class="supp-why">Bindegewebe & Haut – ab 40 nachweislich wirksam, morgens ins Wasser</div>
+        <div class="supp-prio mid">SINNVOLL</div>
+      </div>
+      <div class="supp-row">
+        <div class="supp-name">🌿 Ashwagandha</div>
+        <div class="supp-why">Cortisol regulieren bei Stress – gut für Schlaf und emotionale Balance</div>
+        <div class="supp-prio mid">OPTIONAL</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROUTINEN -->
+  <div class="section">
+    <div class="section-label">Routinen</div>
+    <div class="section-title">Neue Gewohnheiten festigen</div>
+
+    <div class="rule-card">
+      <div class="rule-number">1</div>
+      <div>
+        <h4>Zwei Anker pro Tag – nicht mehr</h4>
+        <p>Nicht jede Mahlzeit perfekt planen. Frühstück und Abendessen als feste Rituale etablieren. Der Rest ergibt sich. Weniger Entscheidungen = weniger Frust.</p>
+      </div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-number">2</div>
+      <div>
+        <h4>Sunday Reset – 60 Minuten die Woche regeln</h4>
+        <p>Jeden Sonntag: Batch Cooking, Einkaufsliste, Woche gedanklich sortieren. Wer vorbereitet ist, trifft unter Stress bessere Entscheidungen.</p>
+      </div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-number">3</div>
+      <div>
+        <h4>Nach dem Ziel: weiterleben – nicht feiern mit Rückfall</h4>
+        <p>Das Ziel ist keine Finish Line. Wenn du eine Kleidergrösse erreichst oder dich wohlfühlst – das ist der Beginn, nicht das Ende. Das Leben danach sieht genauso aus wie davor: strukturiert, entspannt, du selbst.</p>
+      </div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-number">4</div>
+      <div>
+        <h4>Wöchentliches Check-in – mit dir selbst</h4>
+        <p>Jeden Sonntag kurz innehalten: Wie war meine Energie diese Woche? Wie habe ich geschlafen? Wie hat sich mein Körper angefühlt? Nicht Gewicht – sondern Wohlbefinden als Massstab.</p>
+      </div>
+    </div>
+    <div class="rule-card">
+      <div class="rule-number">5</div>
+      <div>
+        <h4>Bewegung als Freude – nicht als Strafe</h4>
+        <p>Sport nicht als Ausgleich für "schlechtes Essen". Sondern weil du danach besser schläfst, mehr Energie hast, dich stärker fühlst. Diese Haltung hält ein Leben lang.</p>
+      </div>
+    </div>
+
+    <!-- WOCHENRHYTHMUS -->
+    <div style="margin-top: 32px;">
+      <h4 style="font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 400; margin-bottom: 6px;">Dein Wochenrhythmus</h4>
+      <p style="font-size: 13px; color: var(--warm-grey); margin-bottom: 16px;">Sonntag ist dein Reset-Tag – der Rest folgt von selbst.</p>
+      <div class="routine-week">
+        <div class="day-pill">
+          <span class="day-name">Mo</span>
+          <span class="day-icon">💪</span>
+          <span class="day-desc">Training + Batch aufwärmen</span>
+        </div>
+        <div class="day-pill">
+          <span class="day-name">Di</span>
+          <span class="day-icon">🧘</span>
+          <span class="day-desc">Spazieren oder Yoga</span>
+        </div>
+        <div class="day-pill">
+          <span class="day-name">Mi</span>
+          <span class="day-icon">💪</span>
+          <span class="day-desc">Training</span>
+        </div>
+        <div class="day-pill">
+          <span class="day-name">Do</span>
+          <span class="day-icon">🚶</span>
+          <span class="day-desc">Aktive Pause, Spazieren</span>
+        </div>
+        <div class="day-pill">
+          <span class="day-name">Fr</span>
+          <span class="day-icon">💪</span>
+          <span class="day-desc">Training</span>
+        </div>
+        <div class="day-pill">
+          <span class="day-name">Sa</span>
+          <span class="day-icon">🥂</span>
+          <span class="day-desc">Social, bewusst geniessen</span>
+        </div>
+        <div class="day-pill reset-day">
+          <span class="day-name">So</span>
+          <span class="day-icon">🔄</span>
+          <span class="day-desc">Sunday Reset</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WÖCHENTLICHER CHECK-IN -->
+  <div class="section">
+    <div class="section-label">Weekly Check-in</div>
+    <div class="section-title">Wie war deine Woche?</div>
+    <p style="font-size: 14px; color: var(--warm-grey); margin-bottom: 4px;">Kein Gewicht. Kein Kalorien zählen. Nur: wie habe ich mich gefühlt?</p>
+    <div class="tracker-grid">
+      <div class="tracker-card">
+        <span class="tracker-emoji">⚡</span>
+        <span class="tracker-label">Energie</span>
+        <div class="tracker-stars" id="stars-energie">
+          <div class="star" onclick="rateStar('energie',1)">✓</div>
+          <div class="star" onclick="rateStar('energie',2)">✓</div>
+          <div class="star" onclick="rateStar('energie',3)">✓</div>
+          <div class="star" onclick="rateStar('energie',4)">✓</div>
+          <div class="star" onclick="rateStar('energie',5)">✓</div>
+        </div>
+        <div class="tracker-note" id="note-energie"></div>
+      </div>
+      <div class="tracker-card">
+        <span class="tracker-emoji">😴</span>
+        <span class="tracker-label">Schlaf</span>
+        <div class="tracker-stars" id="stars-schlaf">
+          <div class="star" onclick="rateStar('schlaf',1)">✓</div>
+          <div class="star" onclick="rateStar('schlaf',2)">✓</div>
+          <div class="star" onclick="rateStar('schlaf',3)">✓</div>
+          <div class="star" onclick="rateStar('schlaf',4)">✓</div>
+          <div class="star" onclick="rateStar('schlaf',5)">✓</div>
+        </div>
+        <div class="tracker-note" id="note-schlaf"></div>
+      </div>
+      <div class="tracker-card">
+        <span class="tracker-emoji">😊</span>
+        <span class="tracker-label">Stimmung</span>
+        <div class="tracker-stars" id="stars-stimmung">
+          <div class="star" onclick="rateStar('stimmung',1)">✓</div>
+          <div class="star" onclick="rateStar('stimmung',2)">✓</div>
+          <div class="star" onclick="rateStar('stimmung',3)">✓</div>
+          <div class="star" onclick="rateStar('stimmung',4)">✓</div>
+          <div class="star" onclick="rateStar('stimmung',5)">✓</div>
+        </div>
+        <div class="tracker-note" id="note-stimmung"></div>
+      </div>
+      <div class="tracker-card">
+        <span class="tracker-emoji">🏋️</span>
+        <span class="tracker-label">Bewegung</span>
+        <div class="tracker-stars" id="stars-bewegung">
+          <div class="star" onclick="rateStar('bewegung',1)">✓</div>
+          <div class="star" onclick="rateStar('bewegung',2)">✓</div>
+          <div class="star" onclick="rateStar('bewegung',3)">✓</div>
+          <div class="star" onclick="rateStar('bewegung',4)">✓</div>
+          <div class="star" onclick="rateStar('bewegung',5)">✓</div>
+        </div>
+        <div class="tracker-note" id="note-bewegung"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MANTRA -->
+  <div class="mantra">
+    <h2>Das Ziel ist nicht<br><em>die Ziellinie.</em></h2>
+    <p>Es ist das Leben, das du danach lebst. Aufgebaut aus kleinen, ehrlichen Gewohnheiten – nicht aus Verboten.</p>
+  </div>
+
+</div>
+
+<script>
+  function switchTab(id) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  const notes = {
+    energie: ['Schau auf Schlaf & Mahlzeiten', 'Da ist noch Luft', 'Solide Woche', 'Sehr gut!', 'Top-Woche! ⚡'],
+    schlaf: ['Mehr Routine abends', 'Magnesium ausprobieren', 'Ganz ok', 'Erholsam!', 'Perfekte Nächte 🌙'],
+    stimmung: ['Was hat dich belastet?', 'Schwierige Woche', 'Ausgeglichen', 'Positiv unterwegs', 'Strahlend! ✨'],
+    bewegung: ['Morgen neu starten', 'Wenig – ok, weiter', '3× war gut', 'Aktiv & stark', 'Volle Energie! 💪']
+  };
+
+  function rateStar(category, value) {
+    const container = document.getElementById('stars-' + category);
+    const stars = container.querySelectorAll('.star');
+    stars.forEach((s, i) => {
+      s.classList.toggle('filled', i < value);
+    });
+    document.getElementById('note-' + category).textContent = notes[category][value - 1];
+  }
+</script>
+
+</body>
+</html>
