@@ -226,7 +226,7 @@
   }
   .tabs::-webkit-scrollbar { display: none; }
   .tab {
-    padding: 8px 20px;
+    padding: 10px 20px;
     border-radius: 100px;
     border: 1.5px solid var(--border);
     background: white;
@@ -236,6 +236,12 @@
     color: var(--warm-grey);
     cursor: pointer;
     transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+    line-height: 1.2;
   }
   .tab:hover { border-color: var(--sage); color: var(--sage); }
   .tab.active { background: var(--sage); border-color: var(--sage); color: white; }
@@ -713,6 +719,41 @@
   }
   .toast.show { transform: translateX(-50%) translateY(0); }
 
+  /* SHOPPING LIST */
+  .shop-category { margin-bottom: 20px; }
+  .shop-cat-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 8px;
+    padding-left: 4px;
+  }
+  .shop-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    background: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--charcoal);
+    transition: opacity 0.2s;
+    user-select: none;
+    margin-bottom: 6px;
+    border: 1px solid var(--border);
+  }
+  .shop-item input[type="checkbox"] {
+    width: 20px; height: 20px;
+    accent-color: var(--sage);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .shop-item.checked { opacity: 0.45; }
+  .shop-item.checked span { text-decoration: line-through; }
+
   /* MANTRA */
   .mantra {
     background: var(--charcoal);
@@ -774,6 +815,7 @@
   <button class="nav-tag active" onclick="showSection('ernaehrung', this)">🥗 Ernährung</button>
   <button class="nav-tag" onclick="showSection('mealprep', this)">📦 Meal-Prep</button>
   <button class="nav-tag" onclick="showSection('supplements', this)">💊 Supplements</button>
+  <button class="nav-tag" onclick="showSection('einkauf', this)">🛒 Einkaufsliste</button>
   <button class="nav-tag" onclick="showSection('routinen', this)">🔄 Routinen</button>
   <button class="nav-tag" onclick="showSection('checkin', this)">📊 Weekly Check-in</button>
 </div>
@@ -787,9 +829,9 @@
       <div class="section-title">Was du wann isst</div>
 
       <div class="tabs">
-        <button class="tab active" onclick="switchTab('buerotag', event)">📋 Bürotag (Di–Do)</button>
-        <button class="tab" onclick="switchTab('hotag', event)">🏠 H/O-Tag (Mo)</button>
-        <button class="tab" onclick="switchTab('wochenende', event)">☀️ Wochenende</button>
+        <button class="tab active" onclick="switchTab('buerotag', event)"><span>📋</span><span>Bürotag (Di–Do)</span></button>
+        <button class="tab" onclick="switchTab('hotag', event)"><span>🏠</span><span>H/O-Tag (Mo)</span></button>
+        <button class="tab" onclick="switchTab('wochenende', event)"><span>☀️</span><span>Wochenende</span></button>
       </div>
 
       <!-- BÜROTAG -->
@@ -797,7 +839,7 @@
         <div class="sport-badge">🧘 Di: Yoga 20:30–21:30 · Mi: Yoga unterrichten 18:15–19:15 · Do: freier Abend → Abendessen flexibler</div>
         <div class="meal-grid">
           <div class="meal-card">
-            <div class="meal-time"><span class="time">06:30</span><span class="label">Frühstück</span></div>
+            <div class="meal-time"><span class="time">06:30</span><span class="label">Morgen</span></div>
             <div class="meal-content">
               <h3>Schnell & sättigend – max. 5 Min</h3>
               <ul class="meal-options">
@@ -837,7 +879,7 @@
           </div>
 
           <div class="meal-card">
-            <div class="meal-time"><span class="time">18:00</span><span class="label">Abendessen</span></div>
+            <div class="meal-time"><span class="time">18:00</span><span class="label">Abend</span></div>
             <div class="meal-content">
               <h3>Nach Hause kommen → aufwärmen</h3>
               <ul class="meal-options">
@@ -869,7 +911,7 @@
         <div class="sport-badge">💪 Mo: Yoga unterrichten 20:30–21:30 → danach nur leichter Snack</div>
         <div class="meal-grid">
           <div class="meal-card">
-            <div class="meal-time"><span class="time">07:00</span><span class="label">Frühstück</span></div>
+            <div class="meal-time"><span class="time">07:00</span><span class="label">Morgen</span></div>
             <div class="meal-content">
               <h3>Etwas entspannter starten</h3>
               <ul class="meal-options">
@@ -893,7 +935,7 @@
             </div>
           </div>
           <div class="meal-card">
-            <div class="meal-time"><span class="time">18:00</span><span class="label">Abendessen</span></div>
+            <div class="meal-time"><span class="time">18:00</span><span class="label">Abend</span></div>
             <div class="meal-content">
               <h3>Vor dem Training – nicht zu schwer</h3>
               <ul class="meal-options">
@@ -984,7 +1026,7 @@
         <div class="batch-card">
           <span class="batch-icon">🍗</span>
           <h4>Airfryer-Hühnchen</h4>
-          <p>500g Brust würzen (Olivenöl, Salz, Kräuter), 18–20 Min bei 190° im Airfryer. Knusprig, saftig, schneller als Ofen. Portionieren für 3 Abendessen und Znüni.</p>
+          <p>500g Brust würzen (Olivenöl, Salz, Kräuter), 18–20 Min bei 190° im Airfryer. Knusprig, saftig, schneller als Ofen. Portionieren für 3 Abendessen.</p>
           <div class="duration">⏱ 20 Min · hält 4 Tage</div>
         </div>
         <div class="batch-card">
@@ -1021,7 +1063,16 @@
 
       <div class="highlight-box" style="margin-top:32px;">
         <h4>Einkaufsprinzip: Simple Rotation</h4>
-        <p>Jede Woche dieselbe Basis einkaufen: Protein (Hühnchen, Lachs, Eier), Gemüse der Saison, Reis/Quinoa, Hülsenfrüchte, Beeren. Nicht jede Woche neu erfinden – Routine beim Einkauf spart Zeit und Entscheidungsenergie.</p>
+        <p style="margin-bottom:16px;">Jede Woche dieselbe Basis – nicht neu erfinden. Routine beim Einkauf spart Zeit und Entscheidungsenergie.</p>
+        <div id="shoppingList" style="display:flex; flex-direction:column; gap:8px; margin-bottom:16px;">
+          <label class="shop-item" id="shop-0"><input type="checkbox" onchange="styleShopItem(this)"><span>🍗 Protein – Hühnchen, Lachs, Eier</span></label>
+          <label class="shop-item" id="shop-1"><input type="checkbox" onchange="styleShopItem(this)"><span>🥦 Gemüse der Saison</span></label>
+          <label class="shop-item" id="shop-2"><input type="checkbox" onchange="styleShopItem(this)"><span>🌾 Reis / Quinoa</span></label>
+          <label class="shop-item" id="shop-3"><input type="checkbox" onchange="styleShopItem(this)"><span>🫘 Hülsenfrüchte</span></label>
+          <label class="shop-item" id="shop-4"><input type="checkbox" onchange="styleShopItem(this)"><span>🫐 Beeren</span></label>
+          <label class="shop-item" id="shop-5"><input type="checkbox" onchange="styleShopItem(this)"><span>🥜 Nüsse</span></label>
+        </div>
+        <button class="btn btn-secondary btn-sm" onclick="resetShopping()" style="border-color:var(--terracotta); color:var(--terracotta);">↺ Zurücksetzen</button>
       </div>
     </div>
   </div>
@@ -1069,6 +1120,95 @@
           <div class="supp-prio opt">OPTIONAL</div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ EINKAUFSLISTE ═══════════════════════════════ -->
+  <div class="page-section" id="sec-einkauf">
+    <div class="section">
+      <div class="section-label">Einkaufsliste</div>
+      <div class="section-title">Wocheneinkauf – alles auf einen Blick</div>
+      <p style="font-size:14px; color:var(--warm-grey); margin-bottom:24px;">Abhaken beim Einkaufen, danach zurücksetzen für die nächste Woche.</p>
+
+      <!-- PROTEIN -->
+      <div class="shop-category">
+        <div class="shop-cat-label">🍗 Protein</div>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Hühnchenbrust (500g+)</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Lachsfilet (2× pro Woche)</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Putenbrust</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Eier (Packung 10–12 Stk.)</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Thunfisch in Wasser (Dose)</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Rindfleisch (1× pro Woche)</span></label>
+      </div>
+
+      <!-- MILCHERSATZ & JOGHURT -->
+      <div class="shop-category">
+        <div class="shop-cat-label">🥛 Milchersatz & Joghurt</div>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Griechischer Joghurt laktosefrei</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Hafermilch (laktosefrei)</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Kokos-Joghurt (laktosefrei)</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Kokosmilch (Dose, laktosefrei)</span></label>
+      </div>
+
+      <!-- KOHLENHYDRATE -->
+      <div class="shop-category">
+        <div class="shop-cat-label">🌾 Kohlenhydrate & Hülsenfrüchte</div>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Reis (glutenfrei)</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Quinoa</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Haferflocken (glutenfrei)</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Kichererbsen (Dose)</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Linsen (Dose oder trocken)</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Süsskartoffeln</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Reiswaffeln (glutenfrei)</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>GF-Brot</span></label>
+      </div>
+
+      <!-- GEMÜSE -->
+      <div class="shop-category">
+        <div class="shop-cat-label">🥦 Gemüse</div>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Zucchini</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Paprika</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Spinat (frisch oder TK)</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Karotten</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Cherrytomaten</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Gurke</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Spargel</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Eisbergsalat / Rucola</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Zwiebeln</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Tiefkühlgemüse (Backup)</span></label>
+      </div>
+
+      <!-- FRÜCHTE -->
+      <div class="shop-category">
+        <div class="shop-cat-label">🫐 Früchte</div>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Beeren (frisch oder TK)</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Avocado</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Banane</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Zitrone</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Äpfel / saisonale Früchte</span></label>
+      </div>
+
+      <!-- FETTE & NÜSSE -->
+      <div class="shop-category">
+        <div class="shop-cat-label">🥜 Fette & Nüsse</div>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Nüsse (Mandeln, Walnüsse)</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Olivenöl</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Leinsamen</span></label>
+      </div>
+
+      <!-- SUPPLEMENTS -->
+      <div class="shop-category">
+        <div class="shop-cat-label">💊 Supplements</div>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Whey / Pflanzenprotein (Shake)</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Vitamin D3 + K2</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Omega-3 (Fischöl-Kapseln)</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Magnesium (abends)</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Kollagen Peptide (Pulver)</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Kreatin Monohydrat</span></label>
+        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Ashwagandha (optional)</span></label>
+      </div>
+
+      <button class="btn btn-secondary" onclick="resetAllShopping()" style="margin-top:8px; border-color:var(--terracotta); color:var(--terracotta); width:100%;">↺ Gesamte Liste zurücksetzen</button>
     </div>
   </div>
 
@@ -1527,6 +1667,24 @@ function showToast(msg) {
   t.textContent = msg;
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ── SHOPPING LIST ─────────────────────────────────────────────
+function styleShopItem(checkbox) {
+  checkbox.closest('label').classList.toggle('checked', checkbox.checked);
+}
+function resetShopping() {
+  document.querySelectorAll('#shoppingList input[type="checkbox"]').forEach(cb => {
+    cb.checked = false;
+    cb.closest('label').classList.remove('checked');
+  });
+}
+function resetAllShopping() {
+  document.querySelectorAll('#sec-einkauf input[type="checkbox"]').forEach(cb => {
+    cb.checked = false;
+    cb.closest('label').classList.remove('checked');
+  });
+  showToast('↺ Liste zurückgesetzt');
 }
 
 // ── INIT ──────────────────────────────────────────────────────
