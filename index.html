@@ -2,1862 +2,968 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Angela – Dein nachhaltiger Lifestyle-Plan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Angela – Lifestyle Plan</title>
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="icon.svg">
+<link rel="manifest" href="manifest.json">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --sage: #7A9E7E;
-    --sage-light: #EEF4EE;
-    --sand: #F5EFE6;
-    --terracotta: #C97B5A;
-    --terracotta-light: #FAF0EB;
-    --charcoal: #2C2C2C;
-    --warm-grey: #6B6B6B;
-    --white: #FDFCFB;
-    --border: #E2DDD8;
-  }
+:root {
+  --sage: #7A9E7E; --sage-light: #EEF4EE;
+  --sand: #F5EFE6; --terracotta: #C97B5A; --terracotta-light: #FAF0EB;
+  --charcoal: #2C2C2C; --warm-grey: #6B6B6B; --white: #FDFCFB; --border: #E2DDD8;
+  --lavender: #8B7BA8; --sky: #5A9EC9;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; }
+body { font-family: 'DM Sans', sans-serif; background: var(--sand); color: var(--charcoal); line-height: 1.6; -webkit-text-size-adjust: 100%; }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+/* HERO */
+.hero { background: var(--charcoal); color: var(--white); padding: 48px 24px 40px; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 30%, rgba(122,158,126,0.25) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(201,123,90,0.2) 0%, transparent 50%); }
+.hero-icon { width: 56px; height: 56px; margin: 0 auto 16px; position: relative; display: block; }
+.hero-eyebrow { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--sage); margin-bottom: 10px; position: relative; }
+.hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(28px, 7vw, 48px); font-weight: 400; line-height: 1.15; position: relative; margin-bottom: 12px; }
+.hero h1 em { font-style: italic; color: var(--terracotta); }
+.hero-sub { font-size: 14px; color: rgba(255,255,255,0.6); max-width: 420px; margin: 0 auto; position: relative; }
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--sand);
-    color: var(--charcoal);
-    line-height: 1.6;
-  }
+/* BURGER */
+.burger-btn { position: absolute; top: 16px; right: 16px; width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.12); border: 1.5px solid rgba(255,255,255,0.2); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; z-index: 100; }
+.burger-btn span { display: block; width: 15px; height: 1.5px; background: white; border-radius: 2px; transition: all 0.25s; }
+.burger-btn.open span:nth-child(1) { transform: translateY(5.5px) rotate(45deg); }
+.burger-btn.open span:nth-child(2) { opacity: 0; }
+.burger-btn.open span:nth-child(3) { transform: translateY(-5.5px) rotate(-45deg); }
+.burger-menu { position: absolute; top: 62px; right: 12px; background: white; border-radius: 14px; box-shadow: 0 8px 40px rgba(0,0,0,0.18); min-width: 210px; z-index: 200; overflow: hidden; display: none; border: 1px solid var(--border); }
+.burger-menu.open { display: block; }
+.burger-menu-header { padding: 12px 16px 8px; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--warm-grey); font-weight: 600; border-bottom: 1px solid var(--border); }
+.burger-menu-item { display: flex; align-items: center; gap: 10px; padding: 12px 16px; font-size: 13px; font-weight: 500; color: var(--charcoal); cursor: pointer; border: none; background: none; width: 100%; text-align: left; font-family: 'DM Sans', sans-serif; border-bottom: 1px solid var(--border); }
+.burger-menu-item:last-child { border-bottom: none; }
+.burger-menu-item:hover { background: var(--sand); }
+.burger-menu-item.danger { color: var(--terracotta); }
+.burger-overlay { position: fixed; inset: 0; z-index: 99; display: none; }
+.burger-overlay.open { display: block; }
 
-  /* HERO */
-  .hero {
-    background: var(--charcoal);
-    color: var(--white);
-    padding: 64px 24px 52px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 70% 30%, rgba(122,158,126,0.25) 0%, transparent 60%),
-                radial-gradient(ellipse at 20% 80%, rgba(201,123,90,0.2) 0%, transparent 50%);
-  }
-  .hero-eyebrow {
-    font-weight: 500;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--sage);
-    margin-bottom: 16px;
-    position: relative;
-  }
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(32px, 6vw, 52px);
-    font-weight: 400;
-    line-height: 1.15;
-    position: relative;
-    margin-bottom: 16px;
-  }
-  .hero h1 em { font-style: italic; color: var(--terracotta); }
-  .hero-sub {
-    font-size: 15px;
-    color: rgba(255,255,255,0.65);
-    max-width: 480px;
-    margin: 0 auto;
-    position: relative;
-  }
+/* NAV */
+.nav-wrap { background: var(--sand); border-bottom: 1px solid var(--border); padding: 14px 16px 0; }
+.nav-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; padding-bottom: 14px; }
+.nav-tag { padding: 8px 16px; border-radius: 100px; border: 1.5px solid var(--border); background: white; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: var(--warm-grey); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.nav-tag:hover { border-color: var(--sage); color: var(--sage); }
+.nav-tag.active { background: var(--sage); border-color: var(--sage); color: white; }
 
-  /* BURGER MENU */
-  .burger-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.12);
-    border: 1.5px solid rgba(255,255,255,0.2);
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    z-index: 100;
-    transition: background 0.2s;
-  }
-  .burger-btn:hover { background: rgba(255,255,255,0.2); }
-  .burger-btn span {
-    display: block;
-    width: 16px;
-    height: 1.5px;
-    background: white;
-    border-radius: 2px;
-    transition: all 0.25s;
-  }
-  .burger-btn.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-  .burger-btn.open span:nth-child(2) { opacity: 0; }
-  .burger-btn.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+/* SUB-NAV */
+.sub-nav { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; padding: 14px 16px; background: white; border-bottom: 1px solid var(--border); }
+.sub-tag { padding: 6px 16px; border-radius: 100px; border: 1.5px solid var(--border); background: var(--sand); font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: var(--warm-grey); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.sub-tag:hover { border-color: var(--sage); color: var(--sage); }
+.sub-tag.active { background: var(--charcoal); border-color: var(--charcoal); color: white; }
+.sub-nav-wrap { display: none; }
+.sub-nav-wrap.active { display: block; }
 
-  .burger-menu {
-    position: absolute;
-    top: 68px;
-    right: 16px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.18);
-    min-width: 220px;
-    z-index: 200;
-    overflow: hidden;
-    display: none;
-    border: 1px solid var(--border);
-  }
-  .burger-menu.open { display: block; }
-  .burger-menu-header {
-    padding: 14px 18px 10px;
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--warm-grey);
-    font-weight: 600;
-    border-bottom: 1px solid var(--border);
-  }
-  .burger-menu-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 18px;
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--charcoal);
-    cursor: pointer;
-    border: none;
-    background: none;
-    width: 100%;
-    text-align: left;
-    font-family: 'DM Sans', sans-serif;
-    transition: background 0.15s;
-    border-bottom: 1px solid var(--border);
-  }
-  .burger-menu-item:last-child { border-bottom: none; }
-  .burger-menu-item:hover { background: var(--sand); }
-  .burger-menu-item .bm-icon { font-size: 18px; width: 24px; text-align: center; }
-  .burger-menu-item.danger { color: var(--terracotta); }
-  .burger-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 99;
-    display: none;
-  }
-  .burger-overlay.open { display: block; }
+/* CONTAINER */
+.container { max-width: 860px; margin: 0 auto; padding: 0 16px 80px; }
+.page-section { display: none; }
+.page-section.active { display: block; }
+.sub-section { display: none; }
+.sub-section.active { display: block; }
 
-  /* NAV TAGS */
-  .nav-tags {
-    background: var(--sand);
-    padding: 20px 24px 4px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    position: relative;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 0;
-  }
-  .nav-tag {
-    padding: 8px 20px;
-    border-radius: 100px;
-    border: 1.5px solid var(--border);
-    background: white;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--warm-grey);
-    cursor: pointer;
-    transition: all 0.2s;
-    letter-spacing: 0.3px;
-    margin-bottom: 16px;
-  }
-  .nav-tag:hover { border-color: var(--sage); color: var(--sage); }
-  .nav-tag.active {
-    background: var(--sage);
-    border-color: var(--sage);
-    color: white;
-  }
+/* SECTION HEADER */
+.section { margin-top: 40px; }
+.section-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--sage); font-weight: 500; margin-bottom: 6px; }
+.section-title { font-family: 'Playfair Display', serif; font-size: clamp(22px, 5vw, 28px); font-weight: 400; margin-bottom: 18px; }
 
-  /* MAIN LAYOUT */
-  .container {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 0 20px 80px;
-  }
+/* INNER TABS */
+.tabs { display: flex; gap: 8px; margin-bottom: 20px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; padding-bottom: 2px; }
+.tabs::-webkit-scrollbar { display: none; }
+.tab { padding: 10px 16px; border-radius: 100px; border: 1.5px solid var(--border); background: white; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; color: var(--warm-grey); cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 3px; white-space: nowrap; flex-shrink: 0; }
+.tab:hover { border-color: var(--sage); color: var(--sage); }
+.tab.active { background: var(--sage); border-color: var(--sage); color: white; }
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
 
-  /* SECTIONS */
-  .page-section { display: none; }
-  .page-section.active { display: block; }
+/* MEAL CARDS */
+.meal-grid { display: flex; flex-direction: column; gap: 10px; }
+.meal-card { background: white; border-radius: 14px; padding: 16px 18px; border: 1px solid var(--border); display: grid; grid-template-columns: 72px 1fr; gap: 14px; align-items: start; }
+.meal-card.training-note { border-left: 3px solid var(--terracotta); }
+.meal-time { text-align: center; }
+.meal-time .time { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--charcoal); display: block; }
+.meal-time .label { font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--warm-grey); display: block; margin-top: 2px; }
+.meal-content h3 { font-size: 14px; font-weight: 500; margin-bottom: 6px; }
+.meal-options { list-style: none; display: flex; flex-direction: column; gap: 3px; }
+.meal-options li { font-size: 13px; color: var(--warm-grey); padding-left: 12px; position: relative; }
+.meal-options li::before { content: '–'; position: absolute; left: 0; color: var(--sage); }
+.meal-tag { display: inline-block; margin-top: 8px; font-size: 11px; padding: 3px 10px; border-radius: 100px; background: var(--sage-light); color: var(--sage); font-weight: 500; }
+.meal-tag.orange { background: var(--terracotta-light); color: var(--terracotta); }
+.sport-badge { display: flex; align-items: flex-start; gap: 6px; background: var(--terracotta-light); color: var(--terracotta); border-radius: 10px; padding: 8px 12px; font-size: 12px; font-weight: 500; margin-bottom: 14px; line-height: 1.4; }
 
-  .section { margin-top: 48px; }
-  .section-label {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--sage);
-    font-weight: 500;
-    margin-bottom: 8px;
-  }
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 26px;
-    font-weight: 400;
-    margin-bottom: 20px;
-    color: var(--charcoal);
-  }
+/* BATCH */
+.batch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+.batch-card { background: white; border-radius: 14px; padding: 18px; border: 1px solid var(--border); }
+.batch-icon { font-size: 26px; margin-bottom: 8px; display: block; }
+.batch-card h4 { font-weight: 500; font-size: 14px; margin-bottom: 4px; }
+.batch-card p { font-size: 13px; color: var(--warm-grey); line-height: 1.5; }
+.batch-card .duration { margin-top: 8px; font-size: 11px; color: var(--sage); font-weight: 500; }
 
-  /* INNER TABS */
-  .tabs {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 24px;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-  }
-  .tabs::-webkit-scrollbar { display: none; }
-  .tab {
-    padding: 10px 20px;
-    border-radius: 100px;
-    border: 1.5px solid var(--border);
-    background: white;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--warm-grey);
-    cursor: pointer;
-    transition: all 0.2s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    white-space: nowrap;
-    line-height: 1.2;
-  }
-  .tab:hover { border-color: var(--sage); color: var(--sage); }
-  .tab.active { background: var(--sage); border-color: var(--sage); color: white; }
-  .tab-panel { display: none; }
-  .tab-panel.active { display: block; }
+/* HIGHLIGHT BOX */
+.highlight-box { background: var(--terracotta-light); border-left: 3px solid var(--terracotta); border-radius: 0 12px 12px 0; padding: 18px 20px; margin-top: 20px; }
+.highlight-box h4 { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--terracotta); margin-bottom: 6px; }
+.highlight-box p { font-size: 13.5px; color: var(--charcoal); line-height: 1.6; }
 
-  /* MEAL CARDS */
-  .meal-grid { display: flex; flex-direction: column; gap: 12px; }
-  .meal-card {
-    background: white;
-    border-radius: 16px;
-    padding: 20px 24px;
-    border: 1px solid var(--border);
-    display: grid;
-    grid-template-columns: 80px 1fr;
-    gap: 16px;
-    align-items: start;
-    transition: box-shadow 0.2s;
-  }
-  .meal-card:hover { box-shadow: 0 4px 20px rgba(0,0,0,0.07); }
-  .meal-card.training-note { border-left: 3px solid var(--terracotta); }
-  .meal-time { text-align: center; }
-  .meal-time .time {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    color: var(--charcoal);
-    display: block;
-  }
-  .meal-time .label {
-    font-size: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--warm-grey);
-    display: block;
-    margin-top: 2px;
-  }
-  .meal-content h3 {
-    font-size: 15px;
-    font-weight: 500;
-    margin-bottom: 6px;
-    color: var(--charcoal);
-  }
-  .meal-options { list-style: none; display: flex; flex-direction: column; gap: 4px; }
-  .meal-options li {
-    font-size: 13.5px;
-    color: var(--warm-grey);
-    padding-left: 14px;
-    position: relative;
-  }
-  .meal-options li::before { content: '–'; position: absolute; left: 0; color: var(--sage); }
-  .meal-tag {
-    display: inline-block;
-    margin-top: 8px;
-    font-size: 11px;
-    padding: 3px 10px;
-    border-radius: 100px;
-    background: var(--sage-light);
-    color: var(--sage);
-    font-weight: 500;
-  }
-  .meal-tag.orange { background: var(--terracotta-light); color: var(--terracotta); }
+/* SUPPLEMENTS */
+.supp-grid { display: flex; flex-direction: column; gap: 10px; }
+.supp-row { background: white; border-radius: 14px; padding: 14px 18px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.supp-left { flex: 1; min-width: 0; }
+.supp-name { font-weight: 500; font-size: 14px; }
+.supp-why { font-size: 12px; color: var(--warm-grey); margin-top: 2px; display: none; }
+.supp-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.supp-when { font-size: 11px; font-weight: 500; color: var(--charcoal); background: var(--sand); border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; white-space: nowrap; }
+.supp-prio { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; color: var(--sage); white-space: nowrap; }
+.supp-prio.mid { color: var(--terracotta); }
+.supp-prio.opt { color: var(--warm-grey); }
 
-  /* SPORT BADGE */
-  .sport-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--terracotta-light);
-    color: var(--terracotta);
-    border-radius: 8px;
-    padding: 6px 12px;
-    font-size: 12px;
-    font-weight: 500;
-    margin-bottom: 16px;
-    width: 100%;
-  }
+/* SHOPPING */
+.shop-category { margin-bottom: 20px; }
+.shop-cat-label { font-size: 10px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--sage); margin-bottom: 8px; padding-left: 2px; }
+.shop-item { display: flex; align-items: center; gap: 12px; padding: 10px 14px; background: white; border-radius: 10px; cursor: pointer; font-size: 13.5px; color: var(--charcoal); margin-bottom: 6px; border: 1px solid var(--border); user-select: none; }
+.shop-item input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--sage); cursor: pointer; flex-shrink: 0; }
+.shop-item.checked { opacity: 0.45; }
+.shop-item.checked span { text-decoration: line-through; }
 
-  /* TAGESPLAN */
-  .tagesplan-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-    gap: 16px;
-    margin-bottom: 24px;
-  }
-  .tagesplan-card {
-    background: white;
-    border-radius: 16px;
-    padding: 20px;
-    border: 1px solid var(--border);
-  }
-  .tagesplan-card h4 {
-    font-weight: 600;
-    font-size: 13px;
-    margin-bottom: 12px;
-    color: var(--charcoal);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .tagesplan-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 7px 0;
-    border-bottom: 1px solid var(--border);
-    gap: 12px;
-  }
-  .tagesplan-row:last-child { border-bottom: none; }
-  .tplan-time {
-    font-size: 12px;
-    color: var(--sage);
-    font-weight: 600;
-    white-space: nowrap;
-    min-width: 44px;
-  }
-  .tplan-desc { font-size: 12.5px; color: var(--warm-grey); line-height: 1.4; }
-  .tplan-sport { color: var(--terracotta); font-size: 11px; font-weight: 500; }
+/* ROUTINEN */
+.rule-card { background: white; border-radius: 14px; padding: 18px 20px; border: 1px solid var(--border); display: flex; gap: 14px; align-items: flex-start; margin-bottom: 10px; }
+.rule-number { flex-shrink: 0; width: 34px; height: 34px; border-radius: 50%; background: var(--sage-light); color: var(--sage); font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+.rule-card h4 { font-weight: 500; font-size: 14px; margin-bottom: 3px; }
+.rule-card p { font-size: 13px; color: var(--warm-grey); line-height: 1.55; }
+.routine-week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-top: 16px; }
+.day-pill { background: white; border: 1px solid var(--border); border-radius: 10px; padding: 10px 4px; text-align: center; }
+.day-pill.reset-day { background: var(--sage); border-color: var(--sage); color: white; }
+.day-name { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; display: block; }
+.day-icon { font-size: 18px; display: block; margin: 4px 0; }
+.day-desc { font-size: 8px; color: var(--warm-grey); line-height: 1.3; display: block; }
+.day-pill.reset-day .day-desc { color: rgba(255,255,255,0.75); }
 
-  /* HIGHLIGHT BOX */
-  .highlight-box {
-    background: var(--terracotta-light);
-    border-left: 3px solid var(--terracotta);
-    border-radius: 0 12px 12px 0;
-    padding: 20px 24px;
-    margin-top: 24px;
-  }
-  .highlight-box h4 {
-    font-family: 'Playfair Display', serif;
-    font-size: 18px;
-    color: var(--terracotta);
-    margin-bottom: 8px;
-  }
-  .highlight-box p { font-size: 14px; color: var(--charcoal); line-height: 1.6; }
+/* TRACKING */
+.tracking-banner { border-radius: 10px; padding: 10px 16px; font-size: 13px; font-weight: 500; margin-bottom: 18px; border: 1.5px solid; display: none; }
+.tracker-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 18px; }
+.tracker-card { background: var(--sand); border: 1px solid var(--border); border-radius: 12px; padding: 14px; text-align: center; }
+.tracker-emoji { font-size: 24px; display: block; margin-bottom: 5px; }
+.tracker-label { font-size: 11px; color: var(--warm-grey); display: block; margin-bottom: 8px; font-weight: 500; }
+.tracker-stars { display: flex; gap: 5px; justify-content: center; }
+.star { width: 28px; height: 28px; border-radius: 50%; border: 1.5px solid var(--border); cursor: pointer; background: white; display: flex; align-items: center; justify-content: center; font-size: 12px; color: transparent; transition: all 0.15s; user-select: none; }
+.star.filled { background: var(--sage); border-color: var(--sage); color: white; }
+.tracker-note { margin-top: 6px; font-size: 11px; color: var(--warm-grey); font-style: italic; min-height: 14px; }
+.week-note-area { margin-bottom: 16px; }
+.week-note-area label { font-size: 13px; font-weight: 500; display: block; margin-bottom: 6px; }
+.week-note-area textarea { width: 100%; border: 1.5px solid var(--border); border-radius: 10px; padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--charcoal); background: var(--sand); resize: none; outline: none; transition: border-color 0.2s; line-height: 1.5; }
+.week-note-area textarea:focus { border-color: var(--sage); }
+.checkin-actions { display: flex; gap: 10px; flex-wrap: wrap; }
 
-  /* BATCH */
-  .batch-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
-  }
-  .batch-card { background: white; border-radius: 16px; padding: 20px; border: 1px solid var(--border); }
-  .batch-icon { font-size: 28px; margin-bottom: 10px; display: block; }
-  .batch-card h4 { font-weight: 500; font-size: 14px; margin-bottom: 4px; }
-  .batch-card p { font-size: 13px; color: var(--warm-grey); line-height: 1.5; }
-  .batch-card .duration { margin-top: 10px; font-size: 11px; color: var(--sage); font-weight: 500; letter-spacing: 0.5px; }
+/* BUTTONS */
+.btn { padding: 10px 20px; border-radius: 100px; border: none; font-family: 'DM Sans', sans-serif; font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.2s; }
+.btn-primary { background: var(--sage); color: white; }
+.btn-primary:hover { background: #6a8e6e; }
+.btn-secondary { background: white; color: var(--charcoal); border: 1.5px solid var(--border); }
+.btn-secondary:hover { border-color: var(--charcoal); }
+.btn-danger { background: white; color: var(--terracotta); border: 1.5px solid var(--terracotta); }
+.btn-sm { padding: 7px 14px; font-size: 12px; }
 
-  /* SUPPLEMENTS */
-  .supp-grid { display: flex; flex-direction: column; gap: 10px; }
-  .supp-row {
-    background: white;
-    border-radius: 14px;
-    padding: 16px 20px;
-    border: 1px solid var(--border);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .supp-left { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
-  .supp-name { font-weight: 500; font-size: 14px; }
-  .supp-why { font-size: 13px; color: var(--warm-grey); }
-  .supp-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
-  .supp-when {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--charcoal);
-    background: var(--sand);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 4px 12px;
-    white-space: nowrap;
-  }
-  .supp-prio { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; color: var(--sage); white-space: nowrap; }
-  .supp-prio.mid { color: var(--terracotta); }
-  .supp-prio.opt { color: var(--warm-grey); }
+/* HISTORY */
+.history-section { background: white; border-radius: 16px; padding: 22px; border: 1px solid var(--border); margin-top: 20px; }
+.history-section h3 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 400; margin-bottom: 16px; }
+.legend { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 16px; }
+.legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--warm-grey); }
+.legend-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+.chart-wrap { position: relative; height: 180px; margin-bottom: 16px; }
+.no-history { text-align: center; padding: 32px 0; color: var(--warm-grey); font-size: 13px; }
+.io-row { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; align-items: center; }
+.io-row label.btn { display: inline-block; }
 
-  /* ROUTINEN */
-  .rule-card {
-    background: white;
-    border-radius: 16px;
-    padding: 22px 24px;
-    border: 1px solid var(--border);
-    display: flex;
-    gap: 16px;
-    align-items: flex-start;
-    margin-bottom: 12px;
-  }
-  .rule-number {
-    flex-shrink: 0;
-    width: 36px; height: 36px;
-    border-radius: 50%;
-    background: var(--sage-light);
-    color: var(--sage);
-    font-weight: 700;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .rule-card h4 { font-weight: 500; font-size: 15px; margin-bottom: 4px; }
-  .rule-card p { font-size: 13.5px; color: var(--warm-grey); line-height: 1.55; }
+/* ARCHIV */
+.archiv-monat { margin-bottom: 24px; }
+.archiv-monat-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--sage); font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+.archiv-monat-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+.archiv-entry { background: var(--sand); border-radius: 12px; padding: 12px 14px; margin-bottom: 8px; border: 1px solid var(--border); display: flex; gap: 12px; align-items: flex-start; }
+.archiv-kw { flex-shrink: 0; text-align: center; min-width: 40px; }
+.archiv-kw .kw-num { font-family: 'Playfair Display', serif; font-size: 18px; color: var(--charcoal); display: block; line-height: 1; }
+.archiv-kw .kw-label { font-size: 9px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--warm-grey); display: block; margin-top: 2px; }
+.archiv-divider { width: 1px; background: var(--border); align-self: stretch; flex-shrink: 0; }
+.archiv-content { flex: 1; min-width: 0; }
+.archiv-scores { display: flex; gap: 6px; margin-bottom: 5px; flex-wrap: wrap; }
+.archiv-score-pill { display: flex; align-items: center; gap: 3px; font-size: 11px; color: var(--warm-grey); }
+.archiv-score-dot { width: 17px; height: 17px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 700; color: white; flex-shrink: 0; }
+.archiv-note-text { font-size: 12px; color: var(--charcoal); line-height: 1.5; font-style: italic; }
+.archiv-note-empty { font-size: 12px; color: var(--border); font-style: italic; }
+.archiv-delete { flex-shrink: 0; background: none; border: none; color: var(--border); font-size: 15px; cursor: pointer; padding: 0; transition: color 0.15s; }
+.archiv-delete:hover { color: var(--terracotta); }
 
-  /* WOCHENRHYTHMUS */
-  .routine-week {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
-    margin-top: 20px;
-  }
-  .day-pill {
-    background: white;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 12px 6px;
-    text-align: center;
-  }
-  .day-pill.reset-day { background: var(--sage); border-color: var(--sage); color: white; }
-  .day-name { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; display: block; }
-  .day-icon { font-size: 20px; display: block; margin: 6px 0; }
-  .day-desc { font-size: 9px; color: var(--warm-grey); line-height: 1.3; display: block; }
-  .day-pill.reset-day .day-desc { color: rgba(255,255,255,0.75); }
+/* GEWICHT */
+.weight-input-card { background: white; border-radius: 16px; padding: 22px; border: 1px solid var(--border); margin-bottom: 16px; }
+.weight-input-card h3 { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 400; margin-bottom: 6px; }
+.weight-input-card .sub { font-size: 13px; color: var(--warm-grey); margin-bottom: 20px; }
+.weight-fields { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 16px; }
+.weight-field { flex: 1; min-width: 140px; }
+.weight-field label { font-size: 12px; font-weight: 500; display: block; margin-bottom: 6px; color: var(--warm-grey); text-transform: uppercase; letter-spacing: 0.5px; }
+.weight-field input { width: 100%; border: 1.5px solid var(--border); border-radius: 10px; padding: 10px 14px; font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 500; color: var(--charcoal); background: var(--sand); outline: none; transition: border-color 0.2s; }
+.weight-field input:focus { border-color: var(--sage); }
+.weight-goal-line { display: flex; align-items: center; gap: 8px; margin-bottom: 16px; background: var(--sand); border-radius: 10px; padding: 10px 14px; }
+.weight-goal-line span { font-size: 13px; color: var(--warm-grey); }
+.weight-goal-line strong { color: var(--terracotta); }
+.weight-delta { display: inline-block; margin-top: 4px; font-size: 12px; padding: 3px 10px; border-radius: 20px; font-weight: 500; }
+.weight-delta.good { background: var(--sage-light); color: var(--sage); }
+.weight-delta.neutral { background: var(--sand); color: var(--warm-grey); }
 
-  /* WEEKLY CHECK-IN */
-  .checkin-layout { display: flex; flex-direction: column; gap: 24px; }
+/* YOGA NIDRA */
+.yoga-week-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 20px; }
+.yoga-day { background: white; border: 1.5px solid var(--border); border-radius: 10px; padding: 10px 4px; text-align: center; cursor: pointer; transition: all 0.15s; user-select: none; }
+.yoga-day.done { background: var(--sage); border-color: var(--sage); }
+.yoga-day .yd-name { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; display: block; }
+.yoga-day .yd-icon { font-size: 18px; display: block; margin: 4px 0; }
+.yoga-day.done .yd-name { color: white; }
+.yoga-day .yd-check { font-size: 10px; color: var(--warm-grey); display: block; }
+.yoga-day.done .yd-check { color: rgba(255,255,255,0.8); }
+.yoga-summary { background: white; border-radius: 14px; padding: 18px; border: 1px solid var(--border); margin-bottom: 16px; }
+.yoga-summary h4 { font-weight: 500; font-size: 14px; margin-bottom: 12px; }
+.yoga-bar { background: var(--sand); border-radius: 100px; height: 10px; width: 100%; overflow: hidden; margin-bottom: 6px; }
+.yoga-bar-fill { height: 100%; border-radius: 100px; background: var(--sage); transition: width 0.4s ease; }
+.yoga-bar-label { font-size: 12px; color: var(--warm-grey); display: flex; justify-content: space-between; }
+.yoga-history-entry { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+.yoga-history-entry:last-child { border-bottom: none; }
+.yoga-dots { display: flex; gap: 4px; }
+.yoga-dot { width: 20px; height: 20px; border-radius: 50%; font-size: 9px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; }
+.yoga-dot.done { background: var(--sage); }
+.yoga-dot.miss { background: var(--border); }
 
-  .checkin-form {
-    background: white;
-    border-radius: 20px;
-    padding: 28px;
-    border: 1px solid var(--border);
-  }
-  .checkin-form h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 400;
-    margin-bottom: 6px;
-  }
-  .checkin-form .sub { font-size: 13px; color: var(--warm-grey); margin-bottom: 24px; }
+/* SKINCARE */
+.skincare-step { background: white; border-radius: 14px; padding: 16px 18px; border: 1px solid var(--border); margin-bottom: 10px; display: flex; gap: 14px; align-items: flex-start; }
+.step-num { flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%; background: var(--sage-light); color: var(--sage); font-weight: 700; font-size: 13px; display: flex; align-items: center; justify-content: center; }
+.step-num.evening { background: #EEE8F5; color: var(--lavender); }
+.step-content h4 { font-weight: 500; font-size: 14px; margin-bottom: 3px; }
+.step-content p { font-size: 13px; color: var(--warm-grey); line-height: 1.5; }
+.step-tag { display: inline-block; margin-top: 6px; font-size: 11px; padding: 2px 10px; border-radius: 100px; background: var(--sage-light); color: var(--sage); font-weight: 500; }
+.step-tag.eve { background: #EEE8F5; color: var(--lavender); }
 
-  .tracker-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    margin-bottom: 20px;
-  }
-  .tracker-card {
-    background: var(--sand);
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 16px;
-    text-align: center;
-  }
-  .tracker-emoji { font-size: 26px; display: block; margin-bottom: 6px; }
-  .tracker-label { font-size: 12px; color: var(--warm-grey); display: block; margin-bottom: 10px; font-weight: 500; }
-  .tracker-stars { display: flex; gap: 6px; justify-content: center; }
-  .star {
-    width: 30px; height: 30px;
-    border-radius: 50%;
-    border: 1.5px solid var(--border);
-    cursor: pointer;
-    background: white;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px;
-    transition: all 0.15s;
-    color: transparent;
-    user-select: none;
-  }
-  .star.filled { background: var(--sage); border-color: var(--sage); color: white; }
-  .star:hover { border-color: var(--sage); }
-  .tracker-note { margin-top: 8px; font-size: 11px; color: var(--warm-grey); font-style: italic; min-height: 16px; }
+/* TOAST */
+.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--charcoal); color: white; padding: 10px 22px; border-radius: 100px; font-size: 13px; font-weight: 500; z-index: 999; transition: transform 0.3s ease; white-space: nowrap; }
+.toast.show { transform: translateX(-50%) translateY(0); }
 
-  .week-note-area {
-    margin-top: 4px;
-    margin-bottom: 20px;
-  }
-  .week-note-area label { font-size: 13px; font-weight: 500; display: block; margin-bottom: 8px; color: var(--charcoal); }
-  .week-note-area textarea {
-    width: 100%;
-    border: 1.5px solid var(--border);
-    border-radius: 12px;
-    padding: 12px 16px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    color: var(--charcoal);
-    background: var(--sand);
-    resize: none;
-    outline: none;
-    transition: border-color 0.2s;
-    line-height: 1.5;
-  }
-  .week-note-area textarea:focus { border-color: var(--sage); }
+/* MANTRA */
+.mantra { background: var(--charcoal); color: white; border-radius: 18px; padding: 36px 28px; text-align: center; margin-top: 48px; }
+.mantra h2 { font-family: 'Playfair Display', serif; font-size: clamp(22px, 5vw, 28px); font-weight: 400; line-height: 1.3; margin-bottom: 10px; }
+.mantra h2 em { color: var(--sage); font-style: italic; }
+.mantra p { font-size: 13px; color: rgba(255,255,255,0.6); max-width: 380px; margin: 0 auto; }
 
-  .checkin-actions { display: flex; gap: 10px; flex-wrap: wrap; }
-  .btn {
-    padding: 10px 22px;
-    border-radius: 100px;
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .btn-primary { background: var(--sage); color: white; }
-  .btn-primary:hover { background: #6a8e6e; }
-  .btn-secondary { background: white; color: var(--charcoal); border: 1.5px solid var(--border); }
-  .btn-secondary:hover { border-color: var(--charcoal); }
-  .btn-danger { background: white; color: var(--terracotta); border: 1.5px solid var(--terracotta); }
-  .btn-sm { padding: 7px 16px; font-size: 12px; }
-
-  /* HISTORY */
-  .history-section {
-    background: white;
-    border-radius: 20px;
-    padding: 28px;
-    border: 1px solid var(--border);
-  }
-  .history-section h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    font-weight: 400;
-    margin-bottom: 20px;
-  }
-
-  /* NOTIZ ARCHIV */
-  .archiv-monat { margin-bottom: 28px; }
-  .archiv-monat-label {
-    font-size: 10px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--sage);
-    font-weight: 600;
-    margin-bottom: 12px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .archiv-monat-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
-  .archiv-entry {
-    background: var(--sand);
-    border-radius: 14px;
-    padding: 14px 16px;
-    margin-bottom: 10px;
-    border: 1px solid var(--border);
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-  }
-  .archiv-kw {
-    flex-shrink: 0;
-    text-align: center;
-    min-width: 44px;
-  }
-  .archiv-kw .kw-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px;
-    color: var(--charcoal);
-    display: block;
-    line-height: 1;
-  }
-  .archiv-kw .kw-label {
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    color: var(--warm-grey);
-    display: block;
-    margin-top: 2px;
-  }
-  .archiv-divider {
-    width: 1px;
-    background: var(--border);
-    align-self: stretch;
-    flex-shrink: 0;
-  }
-  .archiv-content { flex: 1; min-width: 0; }
-  .archiv-scores {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 6px;
-    flex-wrap: wrap;
-  }
-  .archiv-score-pill {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 11px;
-    color: var(--warm-grey);
-  }
-  .archiv-score-dot {
-    width: 18px; height: 18px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 10px;
-    font-weight: 700;
-    color: white;
-    flex-shrink: 0;
-  }
-  .archiv-note-text {
-    font-size: 13px;
-    color: var(--charcoal);
-    line-height: 1.5;
-    font-style: italic;
-  }
-  .archiv-note-empty {
-    font-size: 12px;
-    color: var(--border);
-    font-style: italic;
-  }
-  .archiv-delete {
-    flex-shrink: 0;
-    background: none;
-    border: none;
-    color: var(--border);
-    font-size: 16px;
-    cursor: pointer;
-    padding: 0 2px;
-    line-height: 1;
-    align-self: flex-start;
-    transition: color 0.15s;
-  }
-  .archiv-delete:hover { color: var(--terracotta); }
-
-  /* CHART */
-  .chart-wrap { position: relative; height: 200px; margin-bottom: 24px; }
-  canvas#historyChart { width: 100% !important; height: 100% !important; }
-
-  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
-  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--warm-grey); }
-  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-
-  /* HISTORY TABLE */
-  .history-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  .history-table th {
-    text-align: left;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: var(--warm-grey);
-    font-weight: 500;
-    padding: 8px 0;
-    border-bottom: 1px solid var(--border);
-  }
-  .history-table td {
-    padding: 10px 0;
-    border-bottom: 1px solid var(--border);
-    color: var(--charcoal);
-    vertical-align: middle;
-  }
-  .history-table tr:last-child td { border-bottom: none; }
-  .dot-row { display: flex; gap: 3px; }
-  .dot {
-    width: 16px; height: 16px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 9px;
-    color: white;
-    font-weight: 700;
-  }
-  .history-note-cell { font-size: 11px; color: var(--warm-grey); font-style: italic; max-width: 160px; }
-  .no-history { text-align: center; padding: 40px 0; color: var(--warm-grey); font-size: 14px; }
-
-  /* IO BUTTONS */
-  .io-row { display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap; align-items: center; }
-  .io-row label.btn { display: inline-block; }
-  #importInput { display: none; }
-
-  /* TOAST */
-  .toast {
-    position: fixed;
-    bottom: 28px;
-    left: 50%;
-    transform: translateX(-50%) translateY(80px);
-    background: var(--charcoal);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 100px;
-    font-size: 13px;
-    font-weight: 500;
-    z-index: 999;
-    transition: transform 0.3s ease;
-    white-space: nowrap;
-  }
-  .toast.show { transform: translateX(-50%) translateY(0); }
-
-  /* SHOPPING LIST */
-  .shop-category { margin-bottom: 20px; }
-  .shop-cat-label {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--sage);
-    margin-bottom: 8px;
-    padding-left: 4px;
-  }
-  .shop-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 14px;
-    background: white;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 14px;
-    color: var(--charcoal);
-    transition: opacity 0.2s;
-    user-select: none;
-    margin-bottom: 6px;
-    border: 1px solid var(--border);
-  }
-  .shop-item input[type="checkbox"] {
-    width: 20px; height: 20px;
-    accent-color: var(--sage);
-    cursor: pointer;
-    flex-shrink: 0;
-  }
-  .shop-item.checked { opacity: 0.45; }
-  .shop-item.checked span { text-decoration: line-through; }
-
-  /* MANTRA */
-  .mantra {
-    background: var(--charcoal);
-    color: white;
-    border-radius: 20px;
-    padding: 40px 32px;
-    text-align: center;
-    margin-top: 48px;
-  }
-  .mantra h2 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 400; line-height: 1.3; margin-bottom: 12px; }
-  .mantra h2 em { color: var(--sage); font-style: italic; }
-  .mantra p { font-size: 14px; color: rgba(255,255,255,0.6); max-width: 400px; margin: 0 auto; }
-
-  @media (max-width: 600px) {
-    .supp-why { display: none; }
-    .routine-week { grid-template-columns: repeat(4, 1fr); }
-    .meal-card { grid-template-columns: 64px 1fr; }
-    .tagesplan-grid { grid-template-columns: 1fr; }
-    .tracker-grid { grid-template-columns: 1fr 1fr; }
-    .history-note-cell { display: none; }
-  }
+@media (min-width: 600px) {
+  .supp-why { display: block; }
+  .supp-row { display: grid; grid-template-columns: 1fr 2fr auto auto; }
+}
 </style>
 </head>
 <body>
 
-<!-- BURGER OVERLAY -->
 <div class="burger-overlay" id="burgerOverlay" onclick="closeBurger()"></div>
 
 <!-- HERO -->
 <div class="hero">
+  <svg class="hero-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+    <rect width="512" height="512" rx="114" fill="rgba(255,255,255,0.08)"/>
+    <circle cx="256" cy="195" r="85" fill="none" stroke="#7A9E7E" stroke-width="16"/>
+    <path d="M256 110 Q286 138 286 195 Q286 252 256 280 Q226 252 226 195 Q226 138 256 110Z" fill="#7A9E7E" opacity="0.4"/>
+    <line x1="256" y1="110" x2="256" y2="280" stroke="#7A9E7E" stroke-width="9" stroke-linecap="round"/>
+    <line x1="171" y1="195" x2="341" y2="195" stroke="#7A9E7E" stroke-width="9" stroke-linecap="round"/>
+    <path d="M188 143 Q256 112 324 143" fill="none" stroke="#7A9E7E" stroke-width="7" stroke-linecap="round"/>
+    <path d="M188 247 Q256 278 324 247" fill="none" stroke="#7A9E7E" stroke-width="7" stroke-linecap="round"/>
+    <line x1="256" y1="284" x2="256" y2="326" stroke="#C97B5A" stroke-width="13" stroke-linecap="round"/>
+    <ellipse cx="256" cy="342" rx="34" ry="11" fill="#C97B5A" opacity="0.5"/>
+    <text x="256" y="420" text-anchor="middle" font-family="Georgia,serif" font-size="48" font-style="italic" fill="#F5EFE6" opacity="0.85">angela</text>
+  </svg>
   <div class="hero-eyebrow">Dein persönlicher Lifestyle-Plan</div>
   <h1>Kein Extrem.<br><em>Nur Rhythmus.</em></h1>
-  <p class="hero-sub">Ein Plan, der zu deinem Alltag passt – nicht umgekehrt. Struktur ohne Strenge, Genuss ohne Schuldgefühle.</p>
-
-  <!-- BURGER BUTTON -->
-  <button class="burger-btn" id="burgerBtn" onclick="toggleBurger()">
-    <span></span><span></span><span></span>
-  </button>
-
-  <!-- DROPDOWN MENU -->
+  <p class="hero-sub">Ein Plan, der zu deinem Alltag passt – nicht umgekehrt.</p>
+  <button class="burger-btn" id="burgerBtn" onclick="toggleBurger()"><span></span><span></span><span></span></button>
   <div class="burger-menu" id="burgerMenu">
     <div class="burger-menu-header">Daten verwalten</div>
-    <button class="burger-menu-item" onclick="exportData(); closeBurger()">
-      <span class="bm-icon">⬇️</span> Daten exportieren
-    </button>
-    <label class="burger-menu-item" for="importInputBurger" onclick="closeBurger()">
-      <span class="bm-icon">⬆️</span> Daten importieren
-    </label>
+    <button class="burger-menu-item" onclick="exportData();closeBurger()"><span>⬇️</span> Daten exportieren</button>
+    <label class="burger-menu-item" for="importInputBurger" onclick="closeBurger()"><span>⬆️</span> Daten importieren</label>
     <input type="file" id="importInputBurger" accept=".json" style="display:none" onchange="importData(event)">
-    <button class="burger-menu-item danger" onclick="clearAllData(); closeBurger()">
-      <span class="bm-icon">🗑</span> Alle Daten löschen
-    </button>
+    <button class="burger-menu-item danger" onclick="clearAllData();closeBurger()"><span>🗑</span> Alle Daten löschen</button>
   </div>
 </div>
 
-<!-- NAV TAGS -->
-<div class="nav-tags">
-  <button class="nav-tag active" onclick="showSection('ernaehrung', this)">🥗 Ernährung</button>
-  <button class="nav-tag" onclick="showSection('mealprep', this)">📦 Meal-Prep</button>
-  <button class="nav-tag" onclick="showSection('supplements', this)">💊 Supplements</button>
-  <button class="nav-tag" onclick="showSection('einkauf', this)">🛒 Einkaufsliste</button>
-  <button class="nav-tag" onclick="showSection('routinen', this)">🔄 Routinen</button>
-  <button class="nav-tag" onclick="showSection('checkin', this)">📊 Weekly Check-in</button>
+<!-- NAV -->
+<div class="nav-wrap">
+  <div class="nav-row">
+    <button class="nav-tag active" onclick="showSection('ernaehrung',this)">🥗 Ernährung</button>
+    <button class="nav-tag" onclick="showSection('mealprep',this)">📦 Meal-Prep</button>
+    <button class="nav-tag" onclick="showSection('supplements',this)">💊 Supplements</button>
+    <button class="nav-tag" onclick="showSection('einkauf',this)">🛒 Einkaufsliste</button>
+    <button class="nav-tag" onclick="showSection('skincare',this)">✨ Skincare</button>
+    <button class="nav-tag" onclick="showSection('yoga',this)">🧘 Yoga</button>
+    <button class="nav-tag" onclick="showSection('routinen',this)">🔄 Routinen</button>
+    <button class="nav-tag" onclick="showSection('tracking',this)">📊 Tracking</button>
+  </div>
+</div>
+
+<!-- SUB-NAV TRACKING -->
+<div class="sub-nav-wrap" id="subnav-tracking">
+  <div class="sub-nav">
+    <button class="sub-tag active" onclick="showSub('tracking','checkin',this)">📋 Weekly Check-in</button>
+    <button class="sub-tag" onclick="showSub('tracking','gewicht',this)">⚖️ Gewicht</button>
+  </div>
+</div>
+
+<!-- SUB-NAV SKINCARE -->
+<div class="sub-nav-wrap" id="subnav-skincare">
+  <div class="sub-nav">
+    <button class="sub-tag active" onclick="showSub('skincare','morgens',this)">🌅 Morgens</button>
+    <button class="sub-tag" onclick="showSub('skincare','abends',this)">🌙 Abends</button>
+  </div>
+</div>
+
+<!-- SUB-NAV YOGA -->
+<div class="sub-nav-wrap" id="subnav-yoga">
+  <div class="sub-nav">
+    <button class="sub-tag active" onclick="showSub('yoga','nidra',this)">🌙 Yoga Nidra</button>
+    <button class="sub-tag" onclick="showSub('yoga','info',this)">ℹ️ Info</button>
+  </div>
 </div>
 
 <div class="container">
 
-  <!-- ═══════════════════════════════ ERNÄHRUNG ═══════════════════════════════ -->
-  <div class="page-section active" id="sec-ernaehrung">
+<!-- ══════════ ERNÄHRUNG ══════════ -->
+<div class="page-section active" id="sec-ernaehrung">
+  <div class="section">
+    <div class="section-label">Ernährung</div>
+    <div class="section-title">Was du wann isst</div>
+    <div class="tabs">
+      <button class="tab active" onclick="switchTab('buerotag',event)"><span>📋</span><span>Bürotag (Di–Do)</span></button>
+      <button class="tab" onclick="switchTab('hotag',event)"><span>🏠</span><span>H/O-Tag (Mo & Fr)</span></button>
+      <button class="tab" onclick="switchTab('wochenende',event)"><span>☀️</span><span>Wochenende</span></button>
+    </div>
+    <div class="tab-panel active" id="tab-buerotag">
+      <div class="sport-badge">🧘 Di: Yoga 20:30–21:30 · Mi: Yoga unterrichten 18:15–19:15 · Do: freier Abend</div>
+      <div class="meal-grid">
+        <div class="meal-card"><div class="meal-time"><span class="time">06:30</span><span class="label">Morgen</span></div><div class="meal-content"><h3>Schnell & sättigend</h3><ul class="meal-options"><li>Griechischer Joghurt (laktosefrei) + Beeren + Nüsse</li><li>2 hartgekochte Eier + Reiswaffel + Avocado</li><li>Overnight Oats (GF) – Vorabend vorbereitet</li></ul><span class="meal-tag">⏱ Max. 5 Min</span></div></div>
+        <div class="meal-card"><div class="meal-time"><span class="time">10:00</span><span class="label">Znüni</span></div><div class="meal-content"><h3>Ins Büro mitbringen</h3><ul class="meal-options"><li>Handvoll Nüsse + 1 Frucht</li><li>Hartgekochtes Ei + Gemüsesticks</li><li>Kleines Glas Proteinshake</li></ul><span class="meal-tag">🎒 Box mitnehmen</span></div></div>
+        <div class="meal-card"><div class="meal-time"><span class="time">12:00</span><span class="label">Mittag</span></div><div class="meal-content"><h3>Restaurant oder mitgebracht</h3><ul class="meal-options"><li>Salat mit Protein (Hühnchen, Ei, Thunfisch, Lachs)</li><li>Sushi – Nigiri/Sashimi</li><li>Bowl mit Reis, Gemüse, Protein</li><li><strong>Business Lunch:</strong> Protein + Salat als Basis</li></ul><span class="meal-tag orange">🍱 Restaurant & Business Lunch ok</span></div></div>
+        <div class="meal-card"><div class="meal-time"><span class="time">18:00</span><span class="label">Abend</span></div><div class="meal-content"><h3>Nach Hause kommen → aufwärmen</h3><ul class="meal-options"><li>Batch-Gericht vom Sonntag – 5 Min</li><li>Lachs + Tiefkühlgemüse im Airfryer – 10 Min</li><li>Rührei mit Spinat + Reis</li></ul><span class="meal-tag">🔥 Batch Cooking spart Zeit</span></div></div>
+        <div class="meal-card training-note"><div class="meal-time"><span class="time">21:30</span><span class="label">Nach Yoga</span></div><div class="meal-content"><h3>Leichter Abschluss</h3><ul class="meal-options"><li>Kleiner Proteinshake</li><li>Handvoll Nüsse + 1 hartgekochtes Ei</li><li>Oder: gar nichts – auf den Körper hören</li></ul><span class="meal-tag orange">🧘 Nach 20:30: leicht bleiben</span></div></div>
+      </div>
+    </div>
+    <div class="tab-panel" id="tab-hotag">
+      <div class="sport-badge">💪 Mo: Yoga unterrichten 20:30–21:30 · Fr: BodyPump 19h (optional)</div>
+      <div class="meal-grid">
+        <div class="meal-card"><div class="meal-time"><span class="time">07:00</span><span class="label">Morgen</span></div><div class="meal-content"><h3>Entspannter starten</h3><ul class="meal-options"><li>Rührei (2–3 Eier) mit Spinat + Cherrytomaten</li><li>Smoothie Bowl: Beeren, Banane, Proteinpulver</li><li>Warme GF-Haferflocken mit Nüssen</li></ul><span class="meal-tag">☕ Zeit zum Geniessen</span></div></div>
+        <div class="meal-card"><div class="meal-time"><span class="time">12:30</span><span class="label">Mittag</span></div><div class="meal-content"><h3>Warm & sättigend</h3><ul class="meal-options"><li>Hühnchen-Gemüsepfanne mit Reis oder Quinoa</li><li>Linsensuppe mit GF-Brot</li><li>Grosser Salat + Ei oder Thunfisch + Avocado</li></ul><span class="meal-tag">🏠 Selbst gekocht</span></div></div>
+        <div class="meal-card"><div class="meal-time"><span class="time">18:00</span><span class="label">Abend</span></div><div class="meal-content"><h3>Vor Training – nicht zu schwer</h3><ul class="meal-options"><li>Lachsfilet mit Airfryer-Gemüse</li><li>Pute mit Spargel und kleinem Reis</li><li>Rindfleisch-Gemüsepfanne mit Süsskartoffel</li></ul><span class="meal-tag orange">⏱ Mind. 2h vor Training</span></div></div>
+        <div class="meal-card training-note"><div class="meal-time"><span class="time">21:30</span><span class="label">Nach Yoga</span></div><div class="meal-content"><h3>Leichter Abschluss</h3><ul class="meal-options"><li>Kleiner Proteinshake</li><li>Oder: direkt schlafen gehen</li></ul><span class="meal-tag orange">🌙 Kein grosses Essen nach 21h</span></div></div>
+      </div>
+    </div>
+    <div class="tab-panel" id="tab-wochenende">
+      <div class="sport-badge">💪 Sa: Personal Training 9–10h · So: Sunday Reset</div>
+      <div class="meal-grid">
+        <div class="meal-card"><div class="meal-time"><span class="time">09:00</span><span class="label">Sa-Brunch</span></div><div class="meal-content"><h3>Nach Personal Training – gut tanken</h3><ul class="meal-options"><li>Avocado-Toast (GF) + 2 Eier</li><li>Ausgiebiges Rührei mit viel Gemüse</li><li>Joghurt-Bowl mit GF-Granola, Früchten, Honig</li></ul><span class="meal-tag">🏋️ Post-Training: gut essen</span></div></div>
+        <div class="meal-card"><div class="meal-time"><span class="time">19:00</span><span class="label">Abend</span></div><div class="meal-content"><h3>Social & genussvoll</h3><ul class="meal-options"><li>Restaurant: Protein + Salat als Basis</li><li>Apéro: Käse, Rohkost – 1–2 Gläser Wein ok</li><li>Selbst kochen: etwas Aufwändigeres</li></ul><span class="meal-tag orange">🥂 Bewusst geniessen</span></div></div>
+        <div class="meal-card"><div class="meal-time"><span class="time">So</span><span class="label">Reset-Tag</span></div><div class="meal-content"><h3>Sunday Reset</h3><ul class="meal-options"><li>Batch Cooking: 60 Min für 4–5 Abendessen</li><li>Overnight Oats für 3 Morgen vorbereiten</li><li>Eier kochen, Gemüse schneiden</li></ul><span class="meal-tag">📦 Vorbereitet = weniger Stress</span></div></div>
+      </div>
+      <div class="highlight-box"><h4>Alkohol – die realistische Regel</h4><p>Bis zu 2× pro Woche bewusst – mit Essen, nicht nüchtern. Ein Apéro gehört zum Leben.</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ MEAL-PREP ══════════ -->
+<div class="page-section" id="sec-mealprep">
+  <div class="section">
+    <div class="section-label">Meal-Prep</div>
+    <div class="section-title">Sunday Reset – 60 Min für die ganze Woche</div>
+    <p style="font-size:13px;color:var(--warm-grey);margin-bottom:20px;">Einmal vorbereiten, jeden Abend entspannt aufwärmen.</p>
+    <div class="batch-grid">
+      <div class="batch-card"><span class="batch-icon">🍗</span><h4>Airfryer-Hühnchen</h4><p>500g Brust würzen, 18–20 Min bei 190° im Airfryer. Portionieren für 3 Abendessen.</p><div class="duration">⏱ 20 Min · hält 4 Tage</div></div>
+      <div class="batch-card"><span class="batch-icon">🥗</span><h4>Airfryer-Gemüse</h4><p>Zucchini, Paprika, Karotten, Zwiebeln – 180°, 12–15 Min, einmal schütteln.</p><div class="duration">⏱ 5 Min Prep · hält 5 Tage</div></div>
+      <div class="batch-card"><span class="batch-icon">🍛</span><h4>Kichererbsen-Curry</h4><p>Dose Kichererbsen + Kokosmilch + Gewürze + Spinat. Einfrierbar.</p><div class="duration">⏱ 20 Min · einfrierbar</div></div>
+      <div class="batch-card"><span class="batch-icon">🌾</span><h4>Reis / Quinoa</h4><p>200g kochen, portionieren. Passt zu jedem Abendessen.</p><div class="duration">⏱ 15 Min · hält 4 Tage</div></div>
+      <div class="batch-card"><span class="batch-icon">🥣</span><h4>Overnight Oats ×3</h4><p>3 Gläser: GF-Haferflocken + Hafermilch + Beeren + Leinsamen.</p><div class="duration">⏱ 10 Min · 3 Frühstücke</div></div>
+      <div class="batch-card"><span class="batch-icon">🥚</span><h4>Hartgekochte Eier</h4><p>6 Eier kochen, schälen, Box lagern. Znüni & schnelle Protein-Ergänzung.</p><div class="duration">⏱ 10 Min · hält 5 Tage</div></div>
+    </div>
+    <div class="highlight-box"><h4>Einkaufsprinzip: Simple Rotation</h4><p>Jede Woche dieselbe Basis – nicht neu erfinden. Routine beim Einkauf spart Zeit und Entscheidungsenergie. Die detaillierte Liste findest du unter <strong>🛒 Einkaufsliste</strong>.</p></div>
+  </div>
+</div>
+
+<!-- ══════════ SUPPLEMENTS ══════════ -->
+<div class="page-section" id="sec-supplements">
+  <div class="section">
+    <div class="section-label">Supplements</div>
+    <div class="section-title">Was wirklich sinnvoll ist</div>
+    <div class="supp-grid">
+      <div class="supp-row"><div class="supp-left"><div class="supp-name">☀️ Vitamin D3 + K2</div><div class="supp-why">Hormonsystem & Energie – ab 40 besonders relevant</div></div><div class="supp-right"><div class="supp-when">🌅 Morgens</div><div class="supp-prio">WICHTIG</div></div></div>
+      <div class="supp-row"><div class="supp-left"><div class="supp-name">🐟 Omega-3</div><div class="supp-why">Entzündungshemmend, Haut, Bindegewebe, Stoffwechsel</div></div><div class="supp-right"><div class="supp-when">🍽 Zur Mahlzeit</div><div class="supp-prio">WICHTIG</div></div></div>
+      <div class="supp-row"><div class="supp-left"><div class="supp-name">🌙 Magnesium</div><div class="supp-why">Schlaf, Regeneration, Stressabbau</div></div><div class="supp-right"><div class="supp-when">🌙 Abends</div><div class="supp-prio">WICHTIG</div></div></div>
+      <div class="supp-row"><div class="supp-left"><div class="supp-name">✨ Kollagen</div><div class="supp-why">Bindegewebe & Haut – ab 40 nachweislich wirksam</div></div><div class="supp-right"><div class="supp-when">🌅 Morgens nüchtern</div><div class="supp-prio mid">SINNVOLL</div></div></div>
+      <div class="supp-row"><div class="supp-left"><div class="supp-name">💪 Protein-Shake</div><div class="supp-why">Lückenfüller wenn Mahlzeit knapp – kein Ersatz</div></div><div class="supp-right"><div class="supp-when">🏋️ Nach Training</div><div class="supp-prio mid">SINNVOLL</div></div></div>
+      <div class="supp-row"><div class="supp-left"><div class="supp-name">⚡ Kreatin (Monohydrat)</div><div class="supp-why">Muskelaufbau & Kraft – 3–5g täglich, auch Ruhetage</div></div><div class="supp-right"><div class="supp-when">🕐 Täglich, egal wann</div><div class="supp-prio mid">SINNVOLL</div></div></div>
+      <div class="supp-row"><div class="supp-left"><div class="supp-name">🌿 Ashwagandha</div><div class="supp-why">Cortisol regulieren bei Stress und vollem Alltag</div></div><div class="supp-right"><div class="supp-when">🌙 Abends</div><div class="supp-prio opt">OPTIONAL</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ EINKAUFSLISTE ══════════ -->
+<div class="page-section" id="sec-einkauf">
+  <div class="section">
+    <div class="section-label">Einkaufsliste</div>
+    <div class="section-title">Wocheneinkauf – alles auf einen Blick</div>
+    <p style="font-size:13px;color:var(--warm-grey);margin-bottom:20px;">Abhaken beim Einkaufen, danach zurücksetzen.</p>
+    <div class="shop-category"><div class="shop-cat-label">🍗 Protein</div>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Hühnchenbrust (500g+)</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Lachsfilet (2× pro Woche)</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Putenbrust</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Eier (Packung 10–12 Stk.)</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Thunfisch in Wasser (Dose)</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Rindfleisch (1× pro Woche)</span></label>
+    </div>
+    <div class="shop-category"><div class="shop-cat-label">🥛 Milchersatz & Joghurt</div>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Griechischer Joghurt laktosefrei</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Hafermilch (laktosefrei)</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Kokos-Joghurt (laktosefrei)</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Kokosmilch (Dose)</span></label>
+    </div>
+    <div class="shop-category"><div class="shop-cat-label">🌾 Kohlenhydrate & Hülsenfrüchte</div>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Reis (glutenfrei)</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Quinoa</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Haferflocken (glutenfrei)</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Kichererbsen (Dose)</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Linsen</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Süsskartoffeln</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>GF-Brot / Reiswaffeln</span></label>
+    </div>
+    <div class="shop-category"><div class="shop-cat-label">🥦 Gemüse</div>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Zucchini</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Paprika</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Spinat (frisch oder TK)</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Karotten</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Cherrytomaten</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Gurke</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Spargel</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Eisbergsalat / Rucola</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Zwiebeln</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Tiefkühlgemüse (Backup)</span></label>
+    </div>
+    <div class="shop-category"><div class="shop-cat-label">🫐 Früchte</div>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Beeren (frisch oder TK)</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Avocado</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Banane</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Zitrone / saisonale Früchte</span></label>
+    </div>
+    <div class="shop-category"><div class="shop-cat-label">🥜 Fette & Nüsse</div>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Nüsse (Mandeln, Walnüsse)</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Olivenöl</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Leinsamen</span></label>
+    </div>
+    <div class="shop-category"><div class="shop-cat-label">💊 Supplements</div>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Whey / Pflanzenprotein</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Vitamin D3 + K2</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Omega-3 (Fischöl-Kapseln)</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Magnesium</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Kollagen Peptide (Pulver)</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Kreatin Monohydrat</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Ashwagandha (optional)</span></label>
+    </div>
+    <button class="btn btn-secondary" onclick="resetAllShopping()" style="margin-top:8px;border-color:var(--terracotta);color:var(--terracotta);width:100%;">↺ Gesamte Liste zurücksetzen</button>
+  </div>
+</div>
+
+<!-- ══════════ SKINCARE ══════════ -->
+<div class="page-section" id="sec-skincare">
+  <div class="sub-section active" id="sub-skincare-morgens">
     <div class="section">
-      <div class="section-label">Ernährung</div>
-      <div class="section-title">Was du wann isst</div>
+      <div class="section-label">Skincare · Morgens</div>
+      <div class="section-title">Morgenroutine</div>
+      <div class="skincare-step"><div class="step-num">1</div><div class="step-content"><h4>Cleanse</h4><p>Vitamin C Cleanser – als Milk, Balm, Gel oder Foam. Sanft aber effektiv.</p><span class="step-tag">☀️ Vitamin C</span></div></div>
+      <div class="skincare-step"><div class="step-num">2</div><div class="step-content"><h4>Exfoliate</h4><p>Acid Toner mit AHA, BHA oder PHA – verfeinert die Haut und fördert die Zellerneuerung.</p><span class="step-tag">🧪 AHA / BHA / PHA</span></div></div>
+      <div class="skincare-step"><div class="step-num">3</div><div class="step-content"><h4>Hydrate</h4><p>Hyaluron Spray oder Niacinamid 3–5% – sofortige Feuchtigkeit und Porenverfeinerung.</p><span class="step-tag">💧 Hyaluron / Niacinamid</span></div></div>
+      <div class="skincare-step"><div class="step-num">4</div><div class="step-content"><h4>Eye Product</h4><p>Spezielles Augenpflegeprodukt – keine reichhaltigen Cremes unter die Augen.</p><span class="step-tag">👁 Keine rich creams</span></div></div>
+      <div class="skincare-step"><div class="step-num">5</div><div class="step-content"><h4>Hyaluron Serum</h4><p>Serum zur Behandlung des individuellen Hautbildes – aufpolstern und glätten.</p><span class="step-tag">✨ Behandlung Hautzustand</span></div></div>
+      <div class="skincare-step"><div class="step-num">6</div><div class="step-content"><h4>Moisturizer</h4><p>Feuchtigkeitspflege passend zum Hauttyp – einschliessen der vorherigen Schritte.</p><span class="step-tag">🌿 Nach Hauttyp</span></div></div>
+      <div class="skincare-step"><div class="step-num">7</div><div class="step-content"><h4>SPF 50</h4><p>Sonnenschutz ist Pflicht – jeden Tag, auch im Winter und bei bewölktem Himmel.</p><span class="step-tag" style="background:#FFF8E8;color:#C4942A;">☀️ TÄGLICH – kein Ausnahme!</span></div></div>
+    </div>
+  </div>
+  <div class="sub-section" id="sub-skincare-abends">
+    <div class="section">
+      <div class="section-label">Skincare · Abends</div>
+      <div class="section-title">Abendroutine</div>
+      <div class="skincare-step"><div class="step-num evening">1</div><div class="step-content"><h4>Double Cleanse</h4><p>Wenn Make-up oder SPF: zuerst Eye-Makeup Remover, dann Oil/Balm Cleanser + Milk/Gel Cleanser. Micellar Water für ersten Schritt ok – gleichen Flanell verwenden.</p><span class="step-tag eve">🌙 Nur bei Make-up / SPF</span></div></div>
+      <div class="skincare-step"><div class="step-num evening">2</div><div class="step-content"><h4>Vitamin A – Retinol</h4><p>Retinol für Zellerneuerung, Anti-Aging und Hauterneuerung. Langsam einführen – 1–2× pro Woche starten.</p><span class="step-tag eve">⚠️ Langsam einführen</span></div></div>
+      <div class="skincare-step"><div class="step-num evening">3</div><div class="step-content"><h4>Eye Product</h4><p>Augenpflegeprodukt abends – reparierend und pflegend für die empfindliche Augenpartie.</p><span class="step-tag eve">👁 Abends reparierend</span></div></div>
+      <div class="skincare-step"><div class="step-num evening">4</div><div class="step-content"><h4>Serum oder Facial Oil oder Night Treatment</h4><p>Nicht alle drei gleichzeitig – ein Produkt wählen, das zur aktuellen Hautbedürfnis passt.</p><span class="step-tag eve">✨ Eines davon – nicht alle 3</span></div></div>
+    </div>
+  </div>
+</div>
 
-      <div class="tabs">
-        <button class="tab active" onclick="switchTab('buerotag', event)"><span>📋</span><span>Bürotag (Di–Do)</span></button>
-        <button class="tab" onclick="switchTab('hotag', event)"><span>🏠</span><span>H/O-Tag (Mo & Fr)</span></button>
-        <button class="tab" onclick="switchTab('wochenende', event)"><span>☀️</span><span>Wochenende</span></button>
+<!-- ══════════ YOGA ══════════ -->
+<div class="page-section" id="sec-yoga">
+  <div class="sub-section active" id="sub-yoga-nidra">
+    <div class="section">
+      <div class="section-label">Yoga Nidra</div>
+      <div class="section-title">Diese Woche</div>
+      <div class="yoga-summary">
+        <h4>Fortschritt diese Woche</h4>
+        <div class="yoga-bar"><div class="yoga-bar-fill" id="yogaBarFill" style="width:0%"></div></div>
+        <div class="yoga-bar-label"><span id="yogaBarCount">0 von 7 Tagen</span><span id="yogaBarPct">0%</span></div>
       </div>
-
-      <!-- BÜROTAG -->
-      <div class="tab-panel active" id="tab-buerotag">
-        <div class="sport-badge">🧘 Di: Yoga 20:30–21:30 · Mi: Yoga unterrichten 18:15–19:15 · Do: freier Abend → Abendessen flexibler</div>
-        <div class="meal-grid">
-          <div class="meal-card">
-            <div class="meal-time"><span class="time">06:30</span><span class="label">Morgen</span></div>
-            <div class="meal-content">
-              <h3>Schnell & sättigend – max. 5 Min</h3>
-              <ul class="meal-options">
-                <li>Griechischer Joghurt (laktosefrei) + Beeren + Nüsse</li>
-                <li>2 hartgekochte Eier + Reiswaffel + Avocado (Vorabend vorbereitet)</li>
-                <li>Overnight Oats (GF) – am Vorabend angesetzt</li>
-              </ul>
-              <span class="meal-tag">⏱ Vorabend vorbereiten</span>
-            </div>
-          </div>
-
-          <div class="meal-card">
-            <div class="meal-time"><span class="time">10:00</span><span class="label">Znüni</span></div>
-            <div class="meal-content">
-              <h3>Ins Büro mitbringen</h3>
-              <ul class="meal-options">
-                <li>Handvoll Nüsse + 1 Frucht</li>
-                <li>Hartgekochtes Ei + Gemüsesticks</li>
-                <li>Kleines Glas Proteinshake wenn's schnell gehen muss</li>
-              </ul>
-              <span class="meal-tag">🎒 Box mitnehmen</span>
-            </div>
-          </div>
-
-          <div class="meal-card">
-            <div class="meal-time"><span class="time">12:00</span><span class="label">Mittag</span></div>
-            <div class="meal-content">
-              <h3>Restaurant oder mitgebracht</h3>
-              <ul class="meal-options">
-                <li>Salat mit Protein (Hühnchen, Ei, Thunfisch, Lachs)</li>
-                <li>Sushi – Nigiri/Sashimi: proteinreich, kein Gluten</li>
-                <li>Bowl mit Reis, Gemüse, Protein</li>
-                <li><strong>Business Lunch:</strong> Protein + Salat als Basis wählen, Sauce separat</li>
-              </ul>
-              <span class="meal-tag orange">🍱 Restaurant & Business Lunch ok</span>
-            </div>
-          </div>
-
-          <div class="meal-card">
-            <div class="meal-time"><span class="time">18:00</span><span class="label">Abend</span></div>
-            <div class="meal-content">
-              <h3>Nach Hause kommen → aufwärmen</h3>
-              <ul class="meal-options">
-                <li>Batch-Gericht vom Sonntag – 5 Min in der Pfanne</li>
-                <li>Lachs + Tiefkühlgemüse im Airfryer – 10 Min</li>
-                <li>Rührei mit Spinat + Reis aus dem Kühlschrank</li>
-              </ul>
-              <span class="meal-tag">🔥 Batch Cooking spart Zeit</span>
-            </div>
-          </div>
-
-          <div class="meal-card training-note">
-            <div class="meal-time"><span class="time">21:30</span><span class="label">Nach Yoga</span></div>
-            <div class="meal-content">
-              <h3>Kein grosses Essen mehr – leichter Abschluss</h3>
-              <ul class="meal-options">
-                <li>Kleiner Proteinshake mit Wasser</li>
-                <li>Handvoll Nüsse + 1 hartgekochtes Ei</li>
-                <li>Oder: gar nichts – auf den Körper hören</li>
-              </ul>
-              <span class="meal-tag orange">🧘 Nach 20:30 Training: leicht bleiben</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- H/O TAG -->
-      <div class="tab-panel" id="tab-hotag">
-        <div class="sport-badge">💪 Mo: Yoga unterrichten 20:30–21:30 · Fr: BodyPump 19h (optional) → danach nur leichter Snack</div>
-        <div class="meal-grid">
-          <div class="meal-card">
-            <div class="meal-time"><span class="time">07:00</span><span class="label">Morgen</span></div>
-            <div class="meal-content">
-              <h3>Etwas entspannter starten</h3>
-              <ul class="meal-options">
-                <li>Rührei (2–3 Eier) mit Spinat + Cherrytomaten</li>
-                <li>Smoothie Bowl: Beeren, Banane, Proteinpulver, Nüsse</li>
-                <li>Warme GF-Haferflocken mit Nüssen und Früchten</li>
-              </ul>
-              <span class="meal-tag">☕ Zeit zum Geniessen</span>
-            </div>
-          </div>
-          <div class="meal-card">
-            <div class="meal-time"><span class="time">12:30</span><span class="label">Mittag</span></div>
-            <div class="meal-content">
-              <h3>Warm & sättigend</h3>
-              <ul class="meal-options">
-                <li>Hühnchen-Gemüsepfanne mit Reis oder Quinoa</li>
-                <li>Linsensuppe mit GF-Brot</li>
-                <li>Grosser Salat + Ei oder Thunfisch + Avocado</li>
-              </ul>
-              <span class="meal-tag">🏠 Selbst gekocht</span>
-            </div>
-          </div>
-          <div class="meal-card">
-            <div class="meal-time"><span class="time">18:00</span><span class="label">Abend</span></div>
-            <div class="meal-content">
-              <h3>Vor dem Training – nicht zu schwer</h3>
-              <ul class="meal-options">
-                <li>Lachsfilet mit Airfryer-Gemüse</li>
-                <li>Pute mit Spargel und kleinem Reis</li>
-                <li>Rindfleisch-Gemüsepfanne mit Süsskartoffel</li>
-              </ul>
-              <span class="meal-tag orange">⏱ Mind. 2h vor Training</span>
-            </div>
-          </div>
-          <div class="meal-card training-note">
-            <div class="meal-time"><span class="time">21:30</span><span class="label">Nach Yoga</span></div>
-            <div class="meal-content">
-              <h3>Leichter Abschluss</h3>
-              <ul class="meal-options">
-                <li>Kleiner Proteinshake</li>
-                <li>Oder: direkt schlafen gehen – kein Hunger = kein Essen nötig</li>
-              </ul>
-              <span class="meal-tag orange">🌙 Kein grosses Essen nach 21h</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- WOCHENENDE -->
-      <div class="tab-panel" id="tab-wochenende">
-        <div class="sport-badge">💪 Fr: BodyPump 19–20h (wenn Energie da) · Sa: Personal Training 9–10h · So: Sunday Reset</div>
-        <div class="meal-grid">
-          <div class="meal-card">
-            <div class="meal-time"><span class="time">09:00</span><span class="label">Sa-Brunch</span></div>
-            <div class="meal-content">
-              <h3>Nach Personal Training – gut tanken</h3>
-              <ul class="meal-options">
-                <li>Avocado-Toast (GF-Brot) + 2 Eier nach Wahl</li>
-                <li>Ausgiebiges Rührei-Menü mit viel Gemüse</li>
-                <li>Joghurt-Bowl mit GF-Granola, Früchten, Honig</li>
-              </ul>
-              <span class="meal-tag">🏋️ Post-Training: gut essen</span>
-            </div>
-          </div>
-          <div class="meal-card">
-            <div class="meal-time"><span class="time">19:00</span><span class="label">Abend</span></div>
-            <div class="meal-content">
-              <h3>Social & genussvoll</h3>
-              <ul class="meal-options">
-                <li>Restaurant: Protein + Salat als Basis, gerne auch mal Pasta (GF)</li>
-                <li>Apéro mit Freunden: Käse, Rohkost – 1–2 Gläser Wein ok</li>
-                <li>Selbst kochen: etwas Aufwändigeres, das Spass macht</li>
-              </ul>
-              <span class="meal-tag orange">🥂 Bewusst geniessen – kein Schuldgefühl</span>
-            </div>
-          </div>
-          <div class="meal-card">
-            <div class="meal-time"><span class="time">So</span><span class="label">Reset-Tag</span></div>
-            <div class="meal-content">
-              <h3>Sunday Reset – die Woche vorbereiten</h3>
-              <ul class="meal-options">
-                <li>Batch Cooking: 60 Min für 4–5 Abendessen</li>
-                <li>Overnight Oats für 3 Morgen vorbereiten</li>
-                <li>Eier kochen, Gemüse schneiden</li>
-              </ul>
-              <span class="meal-tag">📦 Vorbereitet = weniger Stress</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="highlight-box">
-          <h4>Fr: BodyPump – auf den Körper hören</h4>
-          <p>BodyPump Freitagabend ist optional – wenn die Woche lang war und die Energie fehlt, ist das kein Versagen. Einen ruhigen Abend einzuplanen ist genauso wertvoll wie das Training. Danach: leichtes Abendessen oder Snack.</p>
-        </div>
-      </div>
-
-      <div class="highlight-box" style="margin-top: 24px;">
-        <h4>Alkohol – die realistische Regel</h4>
-        <p>Kein totaler Verzicht, kein schlechtes Gewissen. <strong>Bis zu 2× pro Woche bewusst</strong> – mit Essen, nicht auf nüchternem Magen. Ein Apéro am Wochenende gehört zum Leben und zu einem nachhaltigen Plan.</p>
+      <div class="yoga-week-grid" id="yogaWeekGrid"></div>
+      <button class="btn btn-secondary btn-sm" onclick="resetYogaWeek()" style="margin-top:4px;margin-bottom:24px;">↺ Woche zurücksetzen</button>
+      <div class="history-section">
+        <h3>Verlauf</h3>
+        <div id="yogaHistoryBody"><div class="no-history">Noch keine vergangenen Wochen.</div></div>
       </div>
     </div>
   </div>
-
-  <!-- ═══════════════════════════════ MEAL-PREP ═══════════════════════════════ -->
-  <div class="page-section" id="sec-mealprep">
+  <div class="sub-section" id="sub-yoga-info">
     <div class="section">
-      <div class="section-label">Meal-Prep</div>
-      <div class="section-title">Sunday Reset – 60 Min für die ganze Woche</div>
-      <p style="font-size:14px; color:var(--warm-grey); margin-bottom:24px;">Einmal vorbereiten, jeden Abend entspannt nach Hause kommen und einfach aufwärmen. Das ist der Game-Changer.</p>
-      <div class="batch-grid">
-        <div class="batch-card">
-          <span class="batch-icon">🍗</span>
-          <h4>Airfryer-Hühnchen</h4>
-          <p>500g Brust würzen (Olivenöl, Salz, Kräuter), 18–20 Min bei 190° im Airfryer. Knusprig, saftig, schneller als Ofen. Portionieren für 3 Abendessen.</p>
-          <div class="duration">⏱ 20 Min · hält 4 Tage</div>
-        </div>
-        <div class="batch-card">
-          <span class="batch-icon">🥗</span>
-          <h4>Airfryer-Gemüse</h4>
-          <p>Zucchini, Paprika, Karotten, Zwiebeln – in den Airfryer-Korb, 180°, 12–15 Min. Kurz schütteln nach der Hälfte. Knuspriger als im Ofen, viel schneller.</p>
-          <div class="duration">⏱ 5 Min Prep · hält 5 Tage</div>
-        </div>
-        <div class="batch-card">
-          <span class="batch-icon">🍛</span>
-          <h4>Kichererbsen-Curry</h4>
-          <p>Dose Kichererbsen + Kokosmilch (laktosefrei) + Gewürze + Spinat. Einfach, sättigend, einfrierbar.</p>
-          <div class="duration">⏱ 20 Min · einfrierbar</div>
-        </div>
-        <div class="batch-card">
-          <span class="batch-icon">🌾</span>
-          <h4>Reis / Quinoa</h4>
-          <p>200g trockener Reis oder Quinoa kochen, portionieren in Boxen. Passt zu jedem Abendessen.</p>
-          <div class="duration">⏱ 15 Min · hält 4 Tage</div>
-        </div>
-        <div class="batch-card">
-          <span class="batch-icon">🥣</span>
-          <h4>Overnight Oats ×3</h4>
-          <p>3 Gläser: GF-Haferflocken + Hafermilch + Beeren + Leinsamen. Morgen einfach aus dem Kühlschrank.</p>
-          <div class="duration">⏱ 10 Min · 3 Frühstücke</div>
-        </div>
-        <div class="batch-card">
-          <span class="batch-icon">🥚</span>
-          <h4>Hartgekochte Eier</h4>
-          <p>6 Eier kochen, schälen, in Box lagern. Perfekter Büro-Znüni und schnelle Protein-Ergänzung.</p>
-          <div class="duration">⏱ 10 Min · hält 5 Tage</div>
-        </div>
-      </div>
+      <div class="section-label">Yoga Nidra</div>
+      <div class="section-title">Was ist Yoga Nidra?</div>
+      <div class="rule-card"><div class="rule-number">🌙</div><div><h4>Yogischer Schlaf</h4><p>Yoga Nidra ist eine geführte Entspannungstechnik zwischen Wachen und Schlafen. 20–30 Minuten entsprechen etwa 2–3 Stunden Tiefschlaf.</p></div></div>
+      <div class="rule-card"><div class="rule-number">⚡</div><div><h4>Warum es hilft</h4><p>Reduziert Cortisol, verbessert Schlafqualität, unterstützt Regeneration nach Training und hilft bei emotionalem Gleichgewicht.</p></div></div>
+      <div class="rule-card"><div class="rule-number">🎯</div><div><h4>Empfehlung</h4><p>Ideal nach dem Abendessen oder vor dem Schlafen. Besonders an Trainingstagen wertvoll. Auch kurze 10-Minuten-Sessions wirken.</p></div></div>
+    </div>
+  </div>
+</div>
 
-      <div class="highlight-box" style="margin-top:32px;">
-        <h4>Einkaufsprinzip: Simple Rotation</h4>
-        <p>Jede Woche dieselbe Basis einkaufen – nicht neu erfinden. Wer immer dasselbe im Kühlschrank hat, trifft unter Stress automatisch bessere Entscheidungen. Die detaillierte Einkaufsliste findest du unter <strong>🛒 Einkaufsliste</strong>.</p>
+<!-- ══════════ ROUTINEN ══════════ -->
+<div class="page-section" id="sec-routinen">
+  <div class="section">
+    <div class="section-label">Routinen</div>
+    <div class="section-title">Neue Gewohnheiten festigen</div>
+    <div class="rule-card"><div class="rule-number">1</div><div><h4>Zwei Anker pro Tag</h4><p>Nicht jede Mahlzeit perfekt planen. Frühstück und Abendessen als feste Rituale. Weniger Entscheidungen = weniger Frust.</p></div></div>
+    <div class="rule-card"><div class="rule-number">2</div><div><h4>Sunday Reset – 60 Min</h4><p>Batch Cooking, Woche gedanklich sortieren. Wer vorbereitet ist, trifft unter Stress bessere Entscheidungen.</p></div></div>
+    <div class="rule-card"><div class="rule-number">3</div><div><h4>Nach Training: leicht bleiben</h4><p>Nach Yoga um 21:30 kein grosses Essen. Ein kleiner Snack oder direkt schlafen – der Körper braucht Erholung.</p></div></div>
+    <div class="rule-card"><div class="rule-number">4</div><div><h4>Nach dem Ziel: weiterleben</h4><p>Das Ziel ist keine Finish Line. Das Leben danach sieht genauso aus wie davor: strukturiert, entspannt, du selbst.</p></div></div>
+    <div class="rule-card"><div class="rule-number">5</div><div><h4>80/20 – nicht 100%</h4><p>80% der Zeit bewusst, 20% geniessen. 100% führt nachweislich zum Abbruch. Dranbleiben schlägt perfekt sein.</p></div></div>
+    <div style="margin-top:28px;">
+      <h4 style="font-family:'Playfair Display',serif;font-size:18px;font-weight:400;margin-bottom:14px;">Dein Wochenrhythmus</h4>
+      <div class="routine-week">
+        <div class="day-pill"><span class="day-name">Mo</span><span class="day-icon">🧘</span><span class="day-desc">H/O · Yoga 20:30</span></div>
+        <div class="day-pill"><span class="day-name">Di</span><span class="day-icon">🏢</span><span class="day-desc">Büro · Yoga 20:30</span></div>
+        <div class="day-pill"><span class="day-name">Mi</span><span class="day-icon">🧘</span><span class="day-desc">Büro · Yoga 18:15</span></div>
+        <div class="day-pill"><span class="day-name">Do</span><span class="day-icon">🏢</span><span class="day-desc">Büro · frei</span></div>
+        <div class="day-pill"><span class="day-name">Fr</span><span class="day-icon">💪</span><span class="day-desc">H/O · BodyPump</span></div>
+        <div class="day-pill"><span class="day-name">Sa</span><span class="day-icon">🏋️</span><span class="day-desc">PT 9–10h</span></div>
+        <div class="day-pill reset-day"><span class="day-name">So</span><span class="day-icon">🔄</span><span class="day-desc">Sunday Reset</span></div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- ═══════════════════════════════ SUPPLEMENTS ═══════════════════════════════ -->
-  <div class="page-section" id="sec-supplements">
+<!-- ══════════ TRACKING ══════════ -->
+<div class="page-section" id="sec-tracking">
+
+  <!-- WEEKLY CHECK-IN -->
+  <div class="sub-section active" id="sub-tracking-checkin">
     <div class="section">
-      <div class="section-label">Supplements</div>
-      <div class="section-title">Was wirklich sinnvoll ist</div>
-      <p style="font-size:14px; color:var(--warm-grey); margin-bottom:24px;"></p>
-      <div class="supp-grid">
-        <div class="supp-row">
-          <div class="supp-left">
-            <div class="supp-name">☀️ Vitamin D3 + K2</div>
-            <div class="supp-why">Hormonsystem & Energie – ab 40 besonders relevant, v.a. im Winter in der Schweiz</div>
-          </div>
-          <div class="supp-right">
-            <div class="supp-when">🌅 Morgens</div>
-            <div class="supp-prio">WICHTIG</div>
-          </div>
-        </div>
-        <div class="supp-row">
-          <div class="supp-left">
-            <div class="supp-name">🐟 Omega-3</div>
-            <div class="supp-why">Entzündungshemmend, Haut, Bindegewebe, Stoffwechsel – täglich</div>
-          </div>
-          <div class="supp-right">
-            <div class="supp-when">🍽 Zur Mahlzeit</div>
-            <div class="supp-prio">WICHTIG</div>
-          </div>
-        </div>
-        <div class="supp-row">
-          <div class="supp-left">
-            <div class="supp-name">🌙 Magnesium</div>
-            <div class="supp-why">Besserer Schlaf, Regeneration, Stressabbau – gerade bei viel Yoga sinnvoll</div>
-          </div>
-          <div class="supp-right">
-            <div class="supp-when">🌙 Abends</div>
-            <div class="supp-prio">WICHTIG</div>
-          </div>
-        </div>
-        <div class="supp-row">
-          <div class="supp-left">
-            <div class="supp-name">✨ Kollagen</div>
-            <div class="supp-why">Bindegewebe & Haut – ab 40 nachweislich wirksam, morgens ins Wasser</div>
-          </div>
-          <div class="supp-right">
-            <div class="supp-when">🌅 Morgens nüchtern</div>
-            <div class="supp-prio mid">SINNVOLL</div>
-          </div>
-        </div>
-        <div class="supp-row">
-          <div class="supp-left">
-            <div class="supp-name">💪 Protein-Shake</div>
-            <div class="supp-why">Wenn eine Mahlzeit knapp wird oder nach Abendtraining – kein Ersatz, nur Lückenfüller</div>
-          </div>
-          <div class="supp-right">
-            <div class="supp-when">🏋️ Nach Training</div>
-            <div class="supp-prio mid">SINNVOLL</div>
-          </div>
-        </div>
-        <div class="supp-row">
-          <div class="supp-left">
-            <div class="supp-name">⚡ Kreatin (Monohydrat)</div>
-            <div class="supp-why">Muskelaufbau & Kraft – 3–5g täglich, auch an Ruhetagen. Besonders sinnvoll bei BodyPump & Personal Training</div>
-          </div>
-          <div class="supp-right">
-            <div class="supp-when">🕐 Täglich, egal wann</div>
-            <div class="supp-prio mid">SINNVOLL</div>
-          </div>
-        </div>
-        <div class="supp-row">
-          <div class="supp-left">
-            <div class="supp-name">🌿 Ashwagandha</div>
-            <div class="supp-why">Cortisol regulieren bei Stress – bei vollem Alltag und viel Training kann das helfen</div>
-          </div>
-          <div class="supp-right">
-            <div class="supp-when">🌙 Abends</div>
-            <div class="supp-prio opt">OPTIONAL</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════ EINKAUFSLISTE ═══════════════════════════════ -->
-  <div class="page-section" id="sec-einkauf">
-    <div class="section">
-      <div class="section-label">Einkaufsliste</div>
-      <div class="section-title">Wocheneinkauf – alles auf einen Blick</div>
-      <p style="font-size:14px; color:var(--warm-grey); margin-bottom:24px;">Abhaken beim Einkaufen, danach zurücksetzen für die nächste Woche.</p>
-
-      <!-- PROTEIN -->
-      <div class="shop-category">
-        <div class="shop-cat-label">🍗 Protein</div>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Hühnchenbrust (500g+)</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Lachsfilet (2× pro Woche)</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Putenbrust</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Eier (Packung 10–12 Stk.)</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Thunfisch in Wasser (Dose)</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Rindfleisch (1× pro Woche)</span></label>
-      </div>
-
-      <!-- MILCHERSATZ & JOGHURT -->
-      <div class="shop-category">
-        <div class="shop-cat-label">🥛 Milchersatz & Joghurt</div>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Griechischer Joghurt laktosefrei</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Hafermilch (laktosefrei)</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Kokos-Joghurt (laktosefrei)</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Kokosmilch (Dose, laktosefrei)</span></label>
-      </div>
-
-      <!-- KOHLENHYDRATE -->
-      <div class="shop-category">
-        <div class="shop-cat-label">🌾 Kohlenhydrate & Hülsenfrüchte</div>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Reis (glutenfrei)</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Quinoa</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Haferflocken (glutenfrei)</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Kichererbsen (Dose)</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Linsen (Dose oder trocken)</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Süsskartoffeln</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Reiswaffeln (glutenfrei)</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>GF-Brot</span></label>
-      </div>
-
-      <!-- GEMÜSE -->
-      <div class="shop-category">
-        <div class="shop-cat-label">🥦 Gemüse</div>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Zucchini</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Paprika</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Spinat (frisch oder TK)</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Karotten</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Cherrytomaten</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Gurke</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Spargel</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Eisbergsalat / Rucola</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Zwiebeln</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Tiefkühlgemüse (Backup)</span></label>
-      </div>
-
-      <!-- FRÜCHTE -->
-      <div class="shop-category">
-        <div class="shop-cat-label">🫐 Früchte</div>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Beeren (frisch oder TK)</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Avocado</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Banane</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Zitrone</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Äpfel / saisonale Früchte</span></label>
-      </div>
-
-      <!-- FETTE & NÜSSE -->
-      <div class="shop-category">
-        <div class="shop-cat-label">🥜 Fette & Nüsse</div>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Nüsse (Mandeln, Walnüsse)</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Olivenöl</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Leinsamen</span></label>
-      </div>
-
-      <!-- SUPPLEMENTS -->
-      <div class="shop-category">
-        <div class="shop-cat-label">💊 Supplements</div>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Whey / Pflanzenprotein (Shake)</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Vitamin D3 + K2</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Omega-3 (Fischöl-Kapseln)</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Magnesium (abends)</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Kollagen Peptide (Pulver)</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Kreatin Monohydrat</span></label>
-        <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Ashwagandha (optional)</span></label>
-      </div>
-
-      <button class="btn btn-secondary" onclick="resetAllShopping()" style="margin-top:8px; border-color:var(--terracotta); color:var(--terracotta); width:100%;">↺ Gesamte Liste zurücksetzen</button>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════ ROUTINEN ═══════════════════════════════ -->
-  <div class="page-section" id="sec-routinen">
-    <div class="section">
-      <div class="section-label">Routinen</div>
-      <div class="section-title">Neue Gewohnheiten festigen</div>
-
-      <div class="rule-card">
-        <div class="rule-number">1</div>
-        <div>
-          <h4>Zwei Anker pro Tag – nicht mehr</h4>
-          <p>Nicht jede Mahlzeit perfekt planen. Frühstück und Abendessen als feste Rituale etablieren. Der Rest ergibt sich. Weniger Entscheidungen = weniger Frust.</p>
-        </div>
-      </div>
-      <div class="rule-card">
-        <div class="rule-number">2</div>
-        <div>
-          <h4>Sunday Reset – 60 Minuten die Woche regeln</h4>
-          <p>Jeden Sonntag: Batch Cooking, Einkauf, Woche gedanklich sortieren. Wer vorbereitet ist, trifft unter Stress bessere Entscheidungen – auch am Mittwoch um 19 Uhr nach dem Unterrichten.</p>
-        </div>
-      </div>
-      <div class="rule-card">
-        <div class="rule-number">3</div>
-        <div>
-          <h4>Nach dem Training-Abend: Leicht bleiben</h4>
-          <p>Nach Yoga um 21:30 kein grosses Essen mehr. Du isst bereits NACH dem Training – das ist gut so. Nur: wenn das Training spät ist, reicht ein kleiner Snack. Der Körper braucht dann Erholung, kein Verdauen.</p>
-        </div>
-      </div>
-      <div class="rule-card">
-        <div class="rule-number">4</div>
-        <div>
-          <h4>Nach dem Ziel: weiterleben – nicht feiern mit Rückfall</h4>
-          <p>Das Ziel ist keine Finish Line. Wenn du eine Kleidergrösse erreichst – das ist der Beginn, nicht das Ende. Das Leben danach sieht genauso aus wie davor: strukturiert, entspannt, du selbst.</p>
-        </div>
-      </div>
-      <div class="rule-card">
-        <div class="rule-number">5</div>
-        <div>
-          <h4>80/20 – nicht 100</h4>
-          <p>80% der Zeit bewusst essen, 20% geniessen ohne Schuldgefühle. 100% führt nachweislich zum Abbruch. Du musst nicht perfekt sein – du musst nur dranbleiben.</p>
-        </div>
-      </div>
-
-      <div style="margin-top: 36px;">
-        <h4 style="font-family:'Playfair Display',serif; font-size:20px; font-weight:400; margin-bottom:6px;">Dein Wochenrhythmus</h4>
-        <p style="font-size:13px; color:var(--warm-grey); margin-bottom:16px;">Basierend auf deinem echten Alltag.</p>
-        <div class="routine-week">
-          <div class="day-pill">
-            <span class="day-name">Mo</span>
-            <span class="day-icon">🧘</span>
-            <span class="day-desc">H/O · Yoga unterrichten 20:30</span>
-          </div>
-          <div class="day-pill">
-            <span class="day-name">Di</span>
-            <span class="day-icon">🏢</span>
-            <span class="day-desc">Büro · Yoga 20:30</span>
-          </div>
-          <div class="day-pill">
-            <span class="day-name">Mi</span>
-            <span class="day-icon">🧘</span>
-            <span class="day-desc">Büro · Yoga unterrichten 18:15</span>
-          </div>
-          <div class="day-pill">
-            <span class="day-name">Do</span>
-            <span class="day-icon">🏢</span>
-            <span class="day-desc">Büro · freier Abend</span>
-          </div>
-          <div class="day-pill">
-            <span class="day-name">Fr</span>
-            <span class="day-icon">💪</span>
-            <span class="day-desc">Büro · BodyPump 19h (optional)</span>
-          </div>
-          <div class="day-pill">
-            <span class="day-name">Sa</span>
-            <span class="day-icon">🏋️</span>
-            <span class="day-desc">Personal Training 9–10h</span>
-          </div>
-          <div class="day-pill reset-day">
-            <span class="day-name">So</span>
-            <span class="day-icon">🔄</span>
-            <span class="day-desc">Sunday Reset</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- ═══════════════════════════════ WEEKLY CHECK-IN ═══════════════════════════════ -->
-  <div class="page-section" id="sec-checkin">
-    <div class="section">
-      <div class="section-label">Weekly Check-in</div>
+      <div class="section-label">Tracking · Weekly Check-in</div>
       <div class="section-title">Wie war deine Woche?</div>
-
-      <div class="checkin-layout">
-
-        <!-- FORM -->
-        <div class="checkin-form">
-          <!-- STATUS BANNER -->
-          <div id="checkinBanner" style="display:none; border-radius:10px; padding:10px 16px; font-size:13px; font-weight:500; margin-bottom:20px; border:1.5px solid;"></div>
-          <h3>Diese Woche bewerten</h3>
-          <div class="sub">Kein Gewicht, keine Kalorien – nur: wie habe ich mich gefühlt?</div>
-
-          <div class="tracker-grid">
-            <div class="tracker-card">
-              <span class="tracker-emoji">⚡</span>
-              <span class="tracker-label">Energie</span>
-              <div class="tracker-stars" id="stars-energie">
-                <div class="star" onclick="rateStar('energie',1)">✓</div>
-                <div class="star" onclick="rateStar('energie',2)">✓</div>
-                <div class="star" onclick="rateStar('energie',3)">✓</div>
-                <div class="star" onclick="rateStar('energie',4)">✓</div>
-                <div class="star" onclick="rateStar('energie',5)">✓</div>
-              </div>
-              <div class="tracker-note" id="note-energie"></div>
-            </div>
-            <div class="tracker-card">
-              <span class="tracker-emoji">😴</span>
-              <span class="tracker-label">Schlaf</span>
-              <div class="tracker-stars" id="stars-schlaf">
-                <div class="star" onclick="rateStar('schlaf',1)">✓</div>
-                <div class="star" onclick="rateStar('schlaf',2)">✓</div>
-                <div class="star" onclick="rateStar('schlaf',3)">✓</div>
-                <div class="star" onclick="rateStar('schlaf',4)">✓</div>
-                <div class="star" onclick="rateStar('schlaf',5)">✓</div>
-              </div>
-              <div class="tracker-note" id="note-schlaf"></div>
-            </div>
-            <div class="tracker-card">
-              <span class="tracker-emoji">😊</span>
-              <span class="tracker-label">Stimmung</span>
-              <div class="tracker-stars" id="stars-stimmung">
-                <div class="star" onclick="rateStar('stimmung',1)">✓</div>
-                <div class="star" onclick="rateStar('stimmung',2)">✓</div>
-                <div class="star" onclick="rateStar('stimmung',3)">✓</div>
-                <div class="star" onclick="rateStar('stimmung',4)">✓</div>
-                <div class="star" onclick="rateStar('stimmung',5)">✓</div>
-              </div>
-              <div class="tracker-note" id="note-stimmung"></div>
-            </div>
-            <div class="tracker-card">
-              <span class="tracker-emoji">🏋️</span>
-              <span class="tracker-label">Bewegung</span>
-              <div class="tracker-stars" id="stars-bewegung">
-                <div class="star" onclick="rateStar('bewegung',1)">✓</div>
-                <div class="star" onclick="rateStar('bewegung',2)">✓</div>
-                <div class="star" onclick="rateStar('bewegung',3)">✓</div>
-                <div class="star" onclick="rateStar('bewegung',4)">✓</div>
-                <div class="star" onclick="rateStar('bewegung',5)">✓</div>
-              </div>
-              <div class="tracker-note" id="note-bewegung"></div>
-            </div>
-          </div>
-
-          <div class="week-note-area">
-            <label>Was war diese Woche besonders? (optional)</label>
-            <textarea id="weekNote" rows="2" placeholder="z.B. Guter Schlaf, Business Lunch war entspannt, BodyPump war top..."></textarea>
-          </div>
-
-          <div class="checkin-actions">
-            <button class="btn btn-primary" onclick="saveCheckin()">✓ Woche speichern</button>
-            <button class="btn btn-secondary" onclick="resetForm()">Zurücksetzen</button>
-          </div>
+      <div style="background:white;border-radius:16px;padding:22px;border:1px solid var(--border);">
+        <div class="tracking-banner" id="checkinBanner"></div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:18px;font-weight:400;margin-bottom:6px;">Diese Woche bewerten</h3>
+        <div style="font-size:13px;color:var(--warm-grey);margin-bottom:18px;">Kein Gewicht, keine Kalorien – nur: wie habe ich mich gefühlt?</div>
+        <div class="tracker-grid">
+          <div class="tracker-card"><span class="tracker-emoji">⚡</span><span class="tracker-label">Energie</span><div class="tracker-stars" id="stars-energie"><div class="star" onclick="rateStar('energie',1)">✓</div><div class="star" onclick="rateStar('energie',2)">✓</div><div class="star" onclick="rateStar('energie',3)">✓</div><div class="star" onclick="rateStar('energie',4)">✓</div><div class="star" onclick="rateStar('energie',5)">✓</div></div><div class="tracker-note" id="note-energie"></div></div>
+          <div class="tracker-card"><span class="tracker-emoji">😴</span><span class="tracker-label">Schlaf</span><div class="tracker-stars" id="stars-schlaf"><div class="star" onclick="rateStar('schlaf',1)">✓</div><div class="star" onclick="rateStar('schlaf',2)">✓</div><div class="star" onclick="rateStar('schlaf',3)">✓</div><div class="star" onclick="rateStar('schlaf',4)">✓</div><div class="star" onclick="rateStar('schlaf',5)">✓</div></div><div class="tracker-note" id="note-schlaf"></div></div>
+          <div class="tracker-card"><span class="tracker-emoji">😊</span><span class="tracker-label">Stimmung</span><div class="tracker-stars" id="stars-stimmung"><div class="star" onclick="rateStar('stimmung',1)">✓</div><div class="star" onclick="rateStar('stimmung',2)">✓</div><div class="star" onclick="rateStar('stimmung',3)">✓</div><div class="star" onclick="rateStar('stimmung',4)">✓</div><div class="star" onclick="rateStar('stimmung',5)">✓</div></div><div class="tracker-note" id="note-stimmung"></div></div>
+          <div class="tracker-card"><span class="tracker-emoji">🏋️</span><span class="tracker-label">Bewegung</span><div class="tracker-stars" id="stars-bewegung"><div class="star" onclick="rateStar('bewegung',1)">✓</div><div class="star" onclick="rateStar('bewegung',2)">✓</div><div class="star" onclick="rateStar('bewegung',3)">✓</div><div class="star" onclick="rateStar('bewegung',4)">✓</div><div class="star" onclick="rateStar('bewegung',5)">✓</div></div><div class="tracker-note" id="note-bewegung"></div></div>
         </div>
-
-        <!-- HISTORY: CHART -->
-        <div class="history-section">
-          <h3>Verlauf der letzten Wochen</h3>
-          <div class="legend">
-            <div class="legend-item"><div class="legend-dot" style="background:#7A9E7E"></div> Energie</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#C97B5A"></div> Schlaf</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#8B7BA8"></div> Stimmung</div>
-            <div class="legend-item"><div class="legend-dot" style="background:#5A9EC9"></div> Bewegung</div>
-          </div>
-          <div class="chart-wrap">
-            <canvas id="historyChart"></canvas>
-          </div>
-          <div class="no-history" id="noHistoryMsg">Noch keine Einträge – speichere deine erste Woche!</div>
-
-          <div class="io-row">
-            <button class="btn btn-secondary btn-sm" onclick="exportData()">⬇ Export JSON</button>
-            <label class="btn btn-secondary btn-sm" for="importInput">⬆ Import JSON</label>
-            <input type="file" id="importInput" accept=".json" onchange="importData(event)">
-            <button class="btn btn-danger btn-sm" onclick="clearAllData()">🗑 Alle Daten löschen</button>
-          </div>
+        <div class="week-note-area"><label>Was war diese Woche besonders? (optional)</label><textarea id="weekNote" rows="2" placeholder="z.B. Guter Schlaf, Business Lunch war entspannt..."></textarea></div>
+        <div class="checkin-actions">
+          <button class="btn btn-primary" onclick="saveCheckin()">✓ Woche speichern</button>
+          <button class="btn btn-secondary" onclick="resetForm()">Zurücksetzen</button>
         </div>
-
-        <!-- HISTORY: NOTIZ-ARCHIV -->
-        <div class="history-section" id="notizArchivWrap" style="display:none">
-          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:8px;">
-            <h3 style="margin-bottom:0">📓 Notiz-Archiv</h3>
-            <span style="font-size:12px; color:var(--warm-grey)">Gruppiert nach Monat</span>
-          </div>
-          <div id="notizArchivBody"></div>
+      </div>
+      <div class="history-section">
+        <h3>Verlauf</h3>
+        <div class="legend">
+          <div class="legend-item"><div class="legend-dot" style="background:#7A9E7E"></div>Energie</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#C97B5A"></div>Schlaf</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#8B7BA8"></div>Stimmung</div>
+          <div class="legend-item"><div class="legend-dot" style="background:#5A9EC9"></div>Bewegung</div>
         </div>
-
+        <div class="chart-wrap"><canvas id="historyChart"></canvas></div>
+        <div class="no-history" id="noHistoryMsg">Noch keine Einträge.</div>
+        <div class="io-row">
+          <button class="btn btn-secondary btn-sm" onclick="exportData()">⬇ Export</button>
+          <label class="btn btn-secondary btn-sm" for="importInput">⬆ Import</label>
+          <input type="file" id="importInput" accept=".json" onchange="importData(event)">
+          <button class="btn btn-danger btn-sm" onclick="clearAllData()">🗑 Löschen</button>
+        </div>
+      </div>
+      <div class="history-section" id="notizArchivWrap" style="display:none">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
+          <h3 style="margin-bottom:0">📓 Notiz-Archiv</h3>
+          <span style="font-size:12px;color:var(--warm-grey)">Nach Monat</span>
+        </div>
+        <div id="notizArchivBody"></div>
       </div>
     </div>
   </div>
 
-  <!-- MANTRA (always visible at bottom of each section) -->
-  <div class="mantra">
-    <h2>Das Ziel ist nicht<br><em>die Ziellinie.</em></h2>
-    <p>Es ist das Leben, das du danach lebst. Aufgebaut aus kleinen, ehrlichen Gewohnheiten – nicht aus Verboten.</p>
+  <!-- GEWICHT -->
+  <div class="sub-section" id="sub-tracking-gewicht">
+    <div class="section">
+      <div class="section-label">Tracking · Gewicht</div>
+      <div class="section-title">Gewichtsverlauf</div>
+      <div class="weight-input-card">
+        <h3>Eintrag dieser Woche</h3>
+        <div class="sub">Einmal wöchentlich eintragen – am besten Sonntagabend.</div>
+        <div class="weight-fields">
+          <div class="weight-field">
+            <label>Aktuelles Gewicht (kg)</label>
+            <input type="number" id="weightInput" placeholder="z.B. 62.0" step="0.1" min="30" max="200">
+          </div>
+          <div class="weight-field">
+            <label>Zielgewicht (kg)</label>
+            <input type="number" id="weightGoalInput" placeholder="z.B. 55.0" step="0.1" min="30" max="200">
+          </div>
+        </div>
+        <div id="weightGoalDisplay" style="display:none" class="weight-goal-line">
+          <span>Zielgewicht:</span><strong id="weightGoalVal">–</strong><span>·</span><span id="weightDelta"></span>
+        </div>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;">
+          <button class="btn btn-primary" onclick="saveWeight()">✓ Eintragen</button>
+          <button class="btn btn-secondary" onclick="saveWeightGoal()">Ziel speichern</button>
+        </div>
+      </div>
+      <div class="history-section">
+        <h3>Verlauf</h3>
+        <div class="chart-wrap"><canvas id="weightChart"></canvas></div>
+        <div class="no-history" id="noWeightMsg">Noch keine Einträge – trage dein Gewicht ein!</div>
+        <div id="weightHistoryBody"></div>
+        <div class="io-row" style="margin-top:12px;">
+          <button class="btn btn-danger btn-sm" onclick="clearWeightData()">🗑 Gewichtsdaten löschen</button>
+        </div>
+      </div>
+    </div>
   </div>
 
 </div>
 
-<!-- TOAST -->
-<div class="toast" id="toast"></div>
+<div class="container" style="padding-top:0">
+  <div class="mantra">
+    <h2>Das Ziel ist nicht<br><em>die Ziellinie.</em></h2>
+    <p>Es ist das Leben, das du danach lebst. Aufgebaut aus kleinen, ehrlichen Gewohnheiten.</p>
+  </div>
+</div>
 
+</div><!-- /container -->
+
+<div class="toast" id="toast"></div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
-// ── NAVIGATION ──────────────────────────────────────────────
+// ── NAV ──────────────────────────────────────────────────────
+const SUBNAVS = ['tracking','skincare','yoga'];
 function showSection(id, btn) {
-  document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-tag').forEach(t => t.classList.remove('active'));
-  document.getElementById('sec-' + id).classList.add('active');
+  document.querySelectorAll('.page-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tag').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.sub-nav-wrap').forEach(s=>s.classList.remove('active'));
+  document.getElementById('sec-'+id).classList.add('active');
+  btn.classList.add('active');
+  const sn = document.getElementById('subnav-'+id);
+  if(sn) sn.classList.add('active');
+}
+function showSub(section, sub, btn) {
+  document.querySelectorAll('#sec-'+section+' .sub-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('#subnav-'+section+' .sub-tag').forEach(t=>t.classList.remove('active'));
+  document.getElementById('sub-'+section+'-'+sub).classList.add('active');
   btn.classList.add('active');
 }
-
-function switchTab(id, e) {
-  const parent = e.target.closest('.section') || document.body;
-  parent.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  parent.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('tab-' + id).classList.add('active');
+function switchTab(id,e) {
+  const parent = e.target.closest('.section');
+  parent.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  parent.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
   e.target.classList.add('active');
 }
 
-// ── BURGER MENU ──────────────────────────────────────────────
-function toggleBurger() {
-  const btn = document.getElementById('burgerBtn');
-  const menu = document.getElementById('burgerMenu');
-  const overlay = document.getElementById('burgerOverlay');
-  const isOpen = menu.classList.contains('open');
-  btn.classList.toggle('open', !isOpen);
-  menu.classList.toggle('open', !isOpen);
-  overlay.classList.toggle('open', !isOpen);
+// ── BURGER ───────────────────────────────────────────────────
+function toggleBurger(){
+  const btn=document.getElementById('burgerBtn'),menu=document.getElementById('burgerMenu'),ov=document.getElementById('burgerOverlay'),o=menu.classList.contains('open');
+  btn.classList.toggle('open',!o);menu.classList.toggle('open',!o);ov.classList.toggle('open',!o);
 }
-function closeBurger() {
+function closeBurger(){
   document.getElementById('burgerBtn').classList.remove('open');
   document.getElementById('burgerMenu').classList.remove('open');
   document.getElementById('burgerOverlay').classList.remove('open');
 }
 
-// ── STAR RATINGS ─────────────────────────────────────────────
-const ratingNotes = {
-  energie: ['Schau auf Schlaf & Mahlzeiten', 'Da ist noch Luft nach oben', 'Solide Woche', 'Sehr gut!', 'Top-Woche! ⚡'],
-  schlaf: ['Mehr Abendroutine ausprobieren', 'Magnesium abends testen', 'Ganz ok', 'Erholsam!', 'Perfekte Nächte 🌙'],
-  stimmung: ['Was hat dich belastet?', 'Schwierige Woche – ok', 'Ausgeglichen', 'Positiv unterwegs', 'Strahlend! ✨'],
-  bewegung: ['Morgen neu starten', 'Wenig – ok, weiter so', '3× war gut', 'Aktiv & stark', 'Volle Energie! 💪']
-};
-const currentRatings = { energie: 0, schlaf: 0, stimmung: 0, bewegung: 0 };
-
-function rateStar(cat, val) {
-  currentRatings[cat] = val;
-  const stars = document.querySelectorAll(`#stars-${cat} .star`);
-  stars.forEach((s, i) => s.classList.toggle('filled', i < val));
-  document.getElementById('note-' + cat).textContent = ratingNotes[cat][val - 1];
-  saveDraft(); // auto-save draft on every rating change
+// ── WEEK LOGIC (MEZ) ─────────────────────────────────────────
+function toMEZ(d){return new Date(d.toLocaleString('en-US',{timeZone:'Europe/Berlin'}));}
+function getISOWeek(d){
+  const mez=toMEZ(d),dt=new Date(Date.UTC(mez.getFullYear(),mez.getMonth(),mez.getDate()));
+  const day=dt.getUTCDay()||7;dt.setUTCDate(dt.getUTCDate()+4-day);
+  const y=new Date(Date.UTC(dt.getUTCFullYear(),0,1));
+  return Math.ceil((((dt-y)/86400000)+1)/7);
 }
-
-function resetForm() {
-  ['energie','schlaf','stimmung','bewegung'].forEach(cat => {
-    currentRatings[cat] = 0;
-    document.querySelectorAll(`#stars-${cat} .star`).forEach(s => s.classList.remove('filled'));
-    document.getElementById('note-' + cat).textContent = '';
-  });
-  document.getElementById('weekNote').value = '';
+function getISOYear(d){
+  const mez=toMEZ(d),dt=new Date(Date.UTC(mez.getFullYear(),mez.getMonth(),mez.getDate()));
+  const day=dt.getUTCDay()||7;dt.setUTCDate(dt.getUTCDate()+4-day);return dt.getUTCFullYear();
+}
+function getWeekKey(d){return `${getISOYear(d)}-W${String(getISOWeek(d)).padStart(2,'0')}`;}
+function getWeekLabel(d){return `KW ${getISOWeek(d)} · ${getISOYear(d)}`;}
+function getWeekRange(){
+  const now=new Date(),mez=toMEZ(now),day=mez.getDay()||7;
+  const mon=new Date(mez);mon.setDate(mez.getDate()-(day-1));
+  const sun=new Date(mon);sun.setDate(mon.getDate()+6);
+  const f=d=>d.toLocaleDateString('de-CH',{day:'2-digit',month:'2-digit',timeZone:'Europe/Berlin'});
+  return `${f(mon)} – ${f(sun)}`;
 }
 
 // ── STORAGE ──────────────────────────────────────────────────
-function loadHistory() {
-  try { return JSON.parse(localStorage.getItem('angela_checkins') || '[]'); } catch { return []; }
+function ls(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch{return d;}}
+function lss(k,v){localStorage.setItem(k,JSON.stringify(v));}
+function loadHistory(){return ls('angela_checkins',[]);}
+function saveHistory(d){lss('angela_checkins',d);}
+function loadDraft(){return ls('angela_draft',null);}
+function saveDraft(){lss('angela_draft',{ratings:{...currentRatings},note:document.getElementById('weekNote').value.trim(),weekKey:getWeekKey(new Date())});}
+function clearDraft(){localStorage.removeItem('angela_draft');}
+
+// ── CHECK-IN ─────────────────────────────────────────────────
+const ratingNotes={
+  energie:['Schau auf Schlaf & Mahlzeiten','Da ist noch Luft','Solide Woche','Sehr gut!','Top-Woche! ⚡'],
+  schlaf:['Mehr Abendroutine','Magnesium abends testen','Ganz ok','Erholsam!','Perfekte Nächte 🌙'],
+  stimmung:['Was hat dich belastet?','Schwierige Woche','Ausgeglichen','Positiv unterwegs','Strahlend! ✨'],
+  bewegung:['Morgen neu starten','Wenig – ok','3× war gut','Aktiv & stark','Volle Energie! 💪']
+};
+const currentRatings={energie:0,schlaf:0,stimmung:0,bewegung:0};
+function rateStar(cat,val){
+  currentRatings[cat]=val;
+  document.querySelectorAll(`#stars-${cat} .star`).forEach((s,i)=>s.classList.toggle('filled',i<val));
+  document.getElementById('note-'+cat).textContent=ratingNotes[cat][val-1];
+  saveDraft();
 }
-function saveHistory(data) {
-  localStorage.setItem('angela_checkins', JSON.stringify(data));
+function resetForm(){
+  ['energie','schlaf','stimmung','bewegung'].forEach(cat=>{
+    currentRatings[cat]=0;
+    document.querySelectorAll(`#stars-${cat} .star`).forEach(s=>s.classList.remove('filled'));
+    document.getElementById('note-'+cat).textContent='';
+  });
+  document.getElementById('weekNote').value='';
 }
-function loadDraft() {
-  try { return JSON.parse(localStorage.getItem('angela_draft') || 'null'); } catch { return null; }
+function saveCheckin(){
+  if(Object.values(currentRatings).some(v=>v===0)){showToast('Bitte alle 4 Kategorien bewerten');return;}
+  const now=new Date(),key=getWeekKey(now),history=loadHistory();
+  const entry={date:now.toISOString(),week:getWeekLabel(now),weekKey:key,energie:currentRatings.energie,schlaf:currentRatings.schlaf,stimmung:currentRatings.stimmung,bewegung:currentRatings.bewegung,note:document.getElementById('weekNote').value.trim()};
+  const idx=history.findIndex(e=>e.weekKey===key);
+  if(idx>=0){history[idx]=entry;showToast('✓ Woche aktualisiert!');}
+  else{history.unshift(entry);showToast('✓ Woche gespeichert!');}
+  saveHistory(history);clearDraft();updateCheckinBanner();renderHistory();
 }
-function saveDraft() {
-  const draft = {
-    ratings: { ...currentRatings },
-    note: document.getElementById('weekNote').value.trim(),
-    weekKey: getCurrentWeekKey()
-  };
-  localStorage.setItem('angela_draft', JSON.stringify(draft));
+function updateCheckinBanner(){
+  const b=document.getElementById('checkinBanner');if(!b)return;
+  const saved=loadHistory().some(e=>e.weekKey===getWeekKey(new Date()));
+  const kw=getISOWeek(new Date()),range=getWeekRange();
+  if(saved){b.innerHTML=`✓ KW ${kw} (${range}) gespeichert – Eintrag bis Sonntag anpassbar`;b.style.cssText='display:block;background:var(--sage-light);color:var(--sage);border-color:var(--sage);';}
+  else{b.innerHTML=`📋 KW ${kw} (${range}) – noch nicht gespeichert`;b.style.cssText='display:block;background:var(--terracotta-light);color:var(--terracotta);border-color:var(--terracotta);';}
 }
-function clearDraft() {
-  localStorage.removeItem('angela_draft');
+function checkAndResetOnNewWeek(){
+  const cur=getWeekKey(new Date()),stored=localStorage.getItem('angela_last_week');
+  if(stored&&stored!==cur){resetForm();clearDraft();showToast('🗓 Neue Woche – Formular zurückgesetzt');}
+  localStorage.setItem('angela_last_week',cur);
+}
+function restoreDraft(){
+  const d=loadDraft();if(!d||d.weekKey!==getWeekKey(new Date())){clearDraft();return;}
+  ['energie','schlaf','stimmung','bewegung'].forEach(cat=>{
+    if(d.ratings[cat]){currentRatings[cat]=d.ratings[cat];document.querySelectorAll(`#stars-${cat} .star`).forEach((s,i)=>s.classList.toggle('filled',i<d.ratings[cat]));document.getElementById('note-'+cat).textContent=ratingNotes[cat][d.ratings[cat]-1];}
+  });
+  if(d.note)document.getElementById('weekNote').value=d.note;
 }
 
-// ── WEEK LOGIC (MEZ / Montag-Start) ──────────────────────────
-// Convert any Date to MEZ (UTC+1 winter, UTC+2 summer) local date string
-function toMEZDate(d) {
-  // Use Europe/Berlin timezone string
-  return new Date(d.toLocaleString('en-US', { timeZone: 'Europe/Berlin' }));
+// ── HISTORY CHART ────────────────────────────────────────────
+const MONTHS_DE=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+const SC={energie:'#7A9E7E',schlaf:'#C97B5A',stimmung:'#8B7BA8',bewegung:'#5A9EC9'};
+const SE={energie:'⚡',schlaf:'😴',stimmung:'😊',bewegung:'🏋️'};
+let histChart=null;
+function renderHistory(){
+  const history=loadHistory(),noMsg=document.getElementById('noHistoryMsg');
+  noMsg.style.display=history.length===0?'block':'none';
+  updateChart(history.length?history.slice(0,8).reverse():[]);
+  const archivWrap=document.getElementById('notizArchivWrap'),archivBody=document.getElementById('notizArchivBody');
+  if(history.length===0){archivWrap.style.display='none';return;}
+  archivWrap.style.display='block';
+  const grouped={};
+  history.forEach((e,i)=>{const d=new Date(e.date),k=`${MONTHS_DE[d.getMonth()]} ${d.getFullYear()}`;if(!grouped[k])grouped[k]=[];grouped[k].push({...e,idx:i});});
+  archivBody.innerHTML=Object.entries(grouped).map(([m,entries])=>`
+    <div class="archiv-monat"><div class="archiv-monat-label">${m}</div>
+    ${entries.map(e=>{
+      const kw=e.week.split(' · ')[0].replace('KW ','');
+      const scores=['energie','schlaf','stimmung','bewegung'].map(c=>`<div class="archiv-score-pill"><div class="archiv-score-dot" style="background:${SC[c]}">${e[c]}</div>${SE[c]}</div>`).join('');
+      const note=e.note?`<div class="archiv-note-text">"${e.note}"</div>`:`<div class="archiv-note-empty">Keine Notiz</div>`;
+      return `<div class="archiv-entry"><div class="archiv-kw"><span class="kw-num">${kw}</span><span class="kw-label">KW</span></div><div class="archiv-divider"></div><div class="archiv-content"><div class="archiv-scores">${scores}</div>${note}</div><button class="archiv-delete" onclick="deleteEntry(${e.idx})">✕</button></div>`;
+    }).join('')}</div>`).join('');
 }
-
-function getWeekNumber(d) {
-  // ISO week number, Monday-based
-  const mez = toMEZDate(d);
-  const date = new Date(Date.UTC(mez.getFullYear(), mez.getMonth(), mez.getDate()));
-  const dayNum = date.getUTCDay() || 7; // Mon=1 ... Sun=7
-  date.setUTCDate(date.getUTCDate() + 4 - dayNum);
-  const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
-  return Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
+function updateChart(data){
+  const ctx=document.getElementById('historyChart').getContext('2d');
+  if(histChart){histChart.destroy();histChart=null;}
+  if(!data.length)return;
+  histChart=new Chart(ctx,{type:'line',data:{labels:data.map(d=>d.week.split(' · ')[0]),datasets:[
+    {label:'Energie',data:data.map(d=>d.energie),borderColor:'#7A9E7E',tension:0.4,fill:false,pointRadius:4},
+    {label:'Schlaf',data:data.map(d=>d.schlaf),borderColor:'#C97B5A',tension:0.4,fill:false,pointRadius:4},
+    {label:'Stimmung',data:data.map(d=>d.stimmung),borderColor:'#8B7BA8',tension:0.4,fill:false,pointRadius:4},
+    {label:'Bewegung',data:data.map(d=>d.bewegung),borderColor:'#5A9EC9',tension:0.4,fill:false,pointRadius:4},
+  ]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:0,max:5,ticks:{stepSize:1,font:{size:11}},grid:{color:'#E2DDD8'}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
 }
+function deleteEntry(idx){const h=loadHistory();h.splice(idx,1);saveHistory(h);renderHistory();showToast('Eintrag gelöscht');}
 
-function getWeekYear(d) {
-  // ISO week year (can differ from calendar year at year boundaries)
-  const mez = toMEZDate(d);
-  const date = new Date(Date.UTC(mez.getFullYear(), mez.getMonth(), mez.getDate()));
-  const dayNum = date.getUTCDay() || 7;
-  date.setUTCDate(date.getUTCDate() + 4 - dayNum);
-  return date.getUTCFullYear();
+// ── GEWICHT ──────────────────────────────────────────────────
+function loadWeights(){return ls('angela_weights',[]);}
+function saveWeights(d){lss('angela_weights',d);}
+let weightChart=null;
+function saveWeightGoal(){
+  const g=parseFloat(document.getElementById('weightGoalInput').value);
+  if(!g||g<30||g>200){showToast('Bitte gültiges Zielgewicht eingeben');return;}
+  lss('angela_weight_goal',g);showToast('✓ Zielgewicht gespeichert');renderWeightGoal();renderWeightChart();
 }
-
-function getCurrentWeekKey() {
-  const now = new Date();
-  return `${getWeekYear(now)}-W${String(getWeekNumber(now)).padStart(2,'0')}`;
+function saveWeight(){
+  const w=parseFloat(document.getElementById('weightInput').value);
+  if(!w||w<30||w>200){showToast('Bitte gültiges Gewicht eingeben');return;}
+  const now=new Date(),key=getWeekKey(now),weights=loadWeights();
+  const entry={date:now.toISOString(),week:getWeekLabel(now),weekKey:key,weight:w};
+  const idx=weights.findIndex(e=>e.weekKey===key);
+  if(idx>=0){weights[idx]=entry;}else{weights.unshift(entry);}
+  saveWeights(weights);document.getElementById('weightInput').value='';
+  showToast('✓ Gewicht eingetragen');renderWeightChart();renderWeightGoal();
 }
-
-function getWeekLabel(d) {
-  return `KW ${getWeekNumber(d)} · ${getWeekYear(d)}`;
-}
-
-// Check if this week already has an entry
-function currentWeekAlreadySaved() {
-  const key = getCurrentWeekKey();
-  return loadHistory().some(e => e.weekKey === key);
-}
-
-// ── AUTO-RESET ON NEW WEEK ────────────────────────────────────
-function checkAndResetOnNewWeek() {
-  const stored = localStorage.getItem('angela_last_week');
-  const current = getCurrentWeekKey();
-  if (stored && stored !== current) {
-    // New week started – clear form and draft
-    resetForm();
-    clearDraft();
-    showToast('🗓 Neue Woche – Formular zurückgesetzt');
+function renderWeightGoal(){
+  const goal=ls('angela_weight_goal',null);
+  const gi=document.getElementById('weightGoalInput'),gd=document.getElementById('weightGoalDisplay');
+  if(goal){gi.value=goal;document.getElementById('weightGoalVal').textContent=goal+' kg';}
+  const weights=loadWeights();
+  if(goal&&weights.length>0){
+    const latest=weights[0].weight,diff=(latest-goal).toFixed(1);
+    const delta=document.getElementById('weightDelta');
+    if(Math.abs(diff)<0.1){delta.innerHTML='<span class="weight-delta good">🎯 Ziel erreicht!</span>';}
+    else if(diff<0){delta.innerHTML=`<span class="weight-delta good">↓ noch ${Math.abs(diff)} kg</span>`;}
+    else{delta.innerHTML=`<span class="weight-delta neutral">${diff} kg über Ziel</span>`;}
+    gd.style.display='flex';
   }
-  localStorage.setItem('angela_last_week', current);
 }
-
-// ── RESTORE DRAFT ─────────────────────────────────────────────
-function restoreDraftIfCurrentWeek() {
-  const draft = loadDraft();
-  if (!draft) return;
-  if (draft.weekKey !== getCurrentWeekKey()) { clearDraft(); return; }
-  // Restore ratings
-  ['energie','schlaf','stimmung','bewegung'].forEach(cat => {
-    if (draft.ratings[cat]) {
-      currentRatings[cat] = draft.ratings[cat];
-      const stars = document.querySelectorAll(`#stars-${cat} .star`);
-      stars.forEach((s, i) => s.classList.toggle('filled', i < draft.ratings[cat]));
-      document.getElementById('note-' + cat).textContent = ratingNotes[cat][draft.ratings[cat] - 1];
-    }
-  });
-  if (draft.note) document.getElementById('weekNote').value = draft.note;
+function renderWeightChart(){
+  const weights=loadWeights(),noMsg=document.getElementById('noWeightMsg'),body=document.getElementById('weightHistoryBody');
+  noMsg.style.display=weights.length===0?'block':'none';
+  const ctx=document.getElementById('weightChart').getContext('2d');
+  if(weightChart){weightChart.destroy();weightChart=null;}
+  if(!weights.length)return;
+  const goal=ls('angela_weight_goal',null);
+  const sorted=[...weights].reverse();
+  const datasets=[{label:'Gewicht',data:sorted.map(d=>d.weight),borderColor:'#C97B5A',backgroundColor:'rgba(201,123,90,0.1)',tension:0.4,fill:true,pointRadius:5}];
+  if(goal){datasets.push({label:'Ziel',data:sorted.map(()=>goal),borderColor:'#7A9E7E',borderDash:[6,4],pointRadius:0,fill:false});}
+  weightChart=new Chart(ctx,{type:'line',data:{labels:sorted.map(d=>d.week.split(' · ')[0]),datasets},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{font:{size:11},callback:v=>v+' kg'},grid:{color:'#E2DDD8'}},x:{ticks:{font:{size:11}},grid:{display:false}}}}});
+  body.innerHTML=`<table style="width:100%;border-collapse:collapse;font-size:13px;margin-top:12px;">
+    <thead><tr><th style="text-align:left;padding:6px 0;border-bottom:1px solid var(--border);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--warm-grey)">Woche</th><th style="text-align:right;padding:6px 0;border-bottom:1px solid var(--border);font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--warm-grey)">Gewicht</th><th style="text-align:right;padding:6px 0;border-bottom:1px solid var(--border);"></th></tr></thead>
+    <tbody>${weights.map((e,i)=>`<tr><td style="padding:8px 0;border-bottom:1px solid var(--border);color:var(--warm-grey)">${e.week}</td><td style="padding:8px 0;border-bottom:1px solid var(--border);text-align:right;font-weight:500">${e.weight} kg</td><td style="padding:8px 0;border-bottom:1px solid var(--border);text-align:right"><button onclick="deleteWeight(${i})" style="background:none;border:none;color:var(--border);cursor:pointer;font-size:13px;" onmouseover="this.style.color='var(--terracotta)'" onmouseout="this.style.color='var(--border)'">✕</button></td></tr>`).join('')}</tbody></table>`;
 }
+function deleteWeight(idx){const w=loadWeights();w.splice(idx,1);saveWeights(w);renderWeightChart();renderWeightGoal();showToast('Eintrag gelöscht');}
+function clearWeightData(){if(!confirm('Alle Gewichtsdaten löschen?'))return;localStorage.removeItem('angela_weights');renderWeightChart();renderWeightGoal();showToast('Gewichtsdaten gelöscht');}
 
-// ── SAVE CHECK-IN ─────────────────────────────────────────────
-function saveCheckin() {
-  const vals = Object.values(currentRatings);
-  if (vals.some(v => v === 0)) { showToast('Bitte alle 4 Kategorien bewerten'); return; }
-
-  const now = new Date();
-  const weekKey = getCurrentWeekKey();
-  const history = loadHistory();
-
-  // Check if this week was already saved – update instead of duplicate
-  const existingIdx = history.findIndex(e => e.weekKey === weekKey);
-  const entry = {
-    date: now.toISOString(),
-    week: getWeekLabel(now),
-    weekKey,
-    energie: currentRatings.energie,
-    schlaf: currentRatings.schlaf,
-    stimmung: currentRatings.stimmung,
-    bewegung: currentRatings.bewegung,
-    note: document.getElementById('weekNote').value.trim()
-  };
-
-  if (existingIdx >= 0) {
-    history[existingIdx] = entry; // Update existing entry
-    showToast('✓ Woche aktualisiert!');
-  } else {
-    history.unshift(entry);
-    showToast('✓ Woche gespeichert!');
+// ── YOGA NIDRA ───────────────────────────────────────────────
+const DAY_NAMES=['Mo','Di','Mi','Do','Fr','Sa','So'];
+function getYogaWeekKey(){return 'yoga_'+getWeekKey(new Date());}
+function loadYogaDays(){return ls(getYogaWeekKey(),[false,false,false,false,false,false,false]);}
+function saveYogaDays(d){lss(getYogaWeekKey(),d);}
+function renderYogaGrid(){
+  const days=loadYogaDays(),done=days.filter(Boolean).length;
+  const grid=document.getElementById('yogaWeekGrid');
+  grid.innerHTML=DAY_NAMES.map((n,i)=>`
+    <div class="yoga-day${days[i]?' done':''}" onclick="toggleYogaDay(${i})">
+      <span class="yd-name">${n}</span>
+      <span class="yd-icon">${days[i]?'🌙':'○'}</span>
+      <span class="yd-check">${days[i]?'✓':''}</span>
+    </div>`).join('');
+  const pct=Math.round((done/7)*100);
+  document.getElementById('yogaBarFill').style.width=pct+'%';
+  document.getElementById('yogaBarCount').textContent=`${done} von 7 Tagen`;
+  document.getElementById('yogaBarPct').textContent=pct+'%';
+  renderYogaHistory();
+}
+function toggleYogaDay(i){
+  const days=loadYogaDays();days[i]=!days[i];saveYogaDays(days);
+  // Archive previous weeks on toggle
+  archiveYogaIfNewWeek();
+  renderYogaGrid();showToast(days[i]?'🌙 Yoga Nidra eingetragen':'Tag zurückgesetzt');
+}
+function resetYogaWeek(){saveYogaDays([false,false,false,false,false,false,false]);renderYogaGrid();showToast('↺ Woche zurückgesetzt');}
+function archiveYogaIfNewWeek(){
+  // auto-saves current week to history when week changes
+  const stored=localStorage.getItem('angela_yoga_last_week');
+  const cur=getWeekKey(new Date());
+  if(stored&&stored!==cur){
+    const days=ls('yoga_'+stored,[false,false,false,false,false,false,false]);
+    const hist=ls('angela_yoga_history',[]);
+    hist.unshift({weekKey:stored,days});
+    if(hist.length>12)hist.pop();
+    lss('angela_yoga_history',hist);
   }
-
-  saveHistory(history);
-  clearDraft();
-  updateCheckinBanner();
-  renderHistory();
+  localStorage.setItem('angela_yoga_last_week',cur);
+}
+function renderYogaHistory(){
+  const hist=ls('angela_yoga_history',[]),body=document.getElementById('yogaHistoryBody');
+  if(!hist.length){body.innerHTML='<div class="no-history">Noch keine vergangenen Wochen.</div>';return;}
+  body.innerHTML=hist.map(e=>{
+    const done=e.days.filter(Boolean).length;
+    const dots=DAY_NAMES.map((n,i)=>`<div class="yoga-dot${e.days[i]?' done':' miss'}" title="${n}">${e.days[i]?'✓':''}</div>`).join('');
+    return `<div class="yoga-history-entry"><span style="color:var(--warm-grey);font-size:12px">${e.weekKey.replace('-W',' KW ')}</span><div class="yoga-dots">${dots}</div><span style="font-size:12px;font-weight:500;color:${done>=5?'var(--sage)':'var(--warm-grey)'}">${done}/7</span></div>`;
+  }).join('');
 }
 
-// ── CHECKIN BANNER ────────────────────────────────────────────
-function getMEZWeekRange() {
-  const now = new Date();
-  const mez = toMEZDate(now);
-  const day = mez.getDay() || 7; // Mon=1 ... Sun=7
-  const monday = new Date(mez);
-  monday.setDate(mez.getDate() - (day - 1));
-  const sunday = new Date(monday);
-  sunday.setDate(monday.getDate() + 6);
-
-  const fmt = (d) => d.toLocaleDateString('de-CH', { day: '2-digit', month: '2-digit', timeZone: 'Europe/Berlin' });
-  return `${fmt(monday)} – ${fmt(sunday)}`;
-}
-
-function updateCheckinBanner() {
-  const banner = document.getElementById('checkinBanner');
-  if (!banner) return;
-  const saved = currentWeekAlreadySaved();
-  const kw = getWeekNumber(new Date());
-  const range = getMEZWeekRange();
-  if (saved) {
-    banner.innerHTML = `✓ KW ${kw} (${range}) gespeichert – du kannst den Eintrag bis Sonntag noch anpassen`;
-    banner.style.background = 'var(--sage-light)';
-    banner.style.color = 'var(--sage)';
-    banner.style.borderColor = 'var(--sage)';
-  } else {
-    banner.innerHTML = `📋 KW ${kw} (${range}) – noch nicht gespeichert`;
-    banner.style.background = 'var(--terracotta-light)';
-    banner.style.color = 'var(--terracotta)';
-    banner.style.borderColor = 'var(--terracotta)';
-  }
-  banner.style.display = 'block';
-}
-
-// ── RENDER HISTORY ────────────────────────────────────────────
-let chart = null;
-
-const MONTHS_DE = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
-const SCORE_COLORS = { energie: '#7A9E7E', schlaf: '#C97B5A', stimmung: '#8B7BA8', bewegung: '#5A9EC9' };
-const SCORE_EMOJI  = { energie: '⚡', schlaf: '😴', stimmung: '😊', bewegung: '🏋️' };
-
-function renderHistory() {
-  const history = loadHistory();
-  const noMsg = document.getElementById('noHistoryMsg');
-  const archivWrap = document.getElementById('notizArchivWrap');
-  const archivBody = document.getElementById('notizArchivBody');
-
-  noMsg.style.display = history.length === 0 ? 'block' : 'none';
-  updateChart(history.length ? history.slice(0, 8).reverse() : []);
-
-  if (history.length === 0) {
-    archivWrap.style.display = 'none';
-    return;
-  }
-
-  archivWrap.style.display = 'block';
-
-  // Group by month+year
-  const grouped = {};
-  history.forEach((entry, idx) => {
-    const d = new Date(entry.date);
-    const key = `${MONTHS_DE[d.getMonth()]} ${d.getFullYear()}`;
-    if (!grouped[key]) grouped[key] = [];
-    grouped[key].push({ ...entry, idx });
-  });
-
-  archivBody.innerHTML = Object.entries(grouped).map(([monthLabel, entries]) => `
-    <div class="archiv-monat">
-      <div class="archiv-monat-label">${monthLabel}</div>
-      ${entries.map(e => {
-        const kw = e.week.split(' · ')[0].replace('KW ', '');
-        const scores = ['energie','schlaf','stimmung','bewegung'].map(cat => `
-          <div class="archiv-score-pill">
-            <div class="archiv-score-dot" style="background:${SCORE_COLORS[cat]}">${e[cat]}</div>
-            ${SCORE_EMOJI[cat]}
-          </div>
-        `).join('');
-        const noteHtml = e.note
-          ? `<div class="archiv-note-text">"${e.note}"</div>`
-          : `<div class="archiv-note-empty">Keine Notiz</div>`;
-        return `
-          <div class="archiv-entry">
-            <div class="archiv-kw">
-              <span class="kw-num">${kw}</span>
-              <span class="kw-label">KW</span>
-            </div>
-            <div class="archiv-divider"></div>
-            <div class="archiv-content">
-              <div class="archiv-scores">${scores}</div>
-              ${noteHtml}
-            </div>
-            <button class="archiv-delete" onclick="deleteEntry(${e.idx})" title="Löschen">✕</button>
-          </div>`;
-      }).join('')}
-    </div>
-  `).join('');
-}
-
-function deleteEntry(idx) {
-  const history = loadHistory();
-  history.splice(idx, 1);
-  saveHistory(history);
-  renderHistory();
-  showToast('Eintrag gelöscht');
-}
-
-function clearAllData() {
-  if (!confirm('Wirklich alle Check-in Daten löschen?')) return;
-  localStorage.removeItem('angela_checkins');
-  renderHistory();
-  showToast('Alle Daten gelöscht');
-}
-
-// ── CHART ─────────────────────────────────────────────────────
-function updateChart(data) {
-  const ctx = document.getElementById('historyChart').getContext('2d');
-  if (chart) { chart.destroy(); chart = null; }
-
-  if (data.length === 0) return;
-
-  const labels = data.map(d => d.week.split(' · ')[0]);
-  chart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [
-        { label: 'Energie', data: data.map(d => d.energie), borderColor: '#7A9E7E', backgroundColor: 'rgba(122,158,126,0.1)', tension: 0.4, fill: false, pointRadius: 4 },
-        { label: 'Schlaf', data: data.map(d => d.schlaf), borderColor: '#C97B5A', backgroundColor: 'rgba(201,123,90,0.1)', tension: 0.4, fill: false, pointRadius: 4 },
-        { label: 'Stimmung', data: data.map(d => d.stimmung), borderColor: '#8B7BA8', backgroundColor: 'rgba(139,123,168,0.1)', tension: 0.4, fill: false, pointRadius: 4 },
-        { label: 'Bewegung', data: data.map(d => d.bewegung), borderColor: '#5A9EC9', backgroundColor: 'rgba(90,158,201,0.1)', tension: 0.4, fill: false, pointRadius: 4 },
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        y: { min: 0, max: 5, ticks: { stepSize: 1, font: { size: 11 } }, grid: { color: '#E2DDD8' } },
-        x: { ticks: { font: { size: 11 } }, grid: { display: false } }
-      }
-    }
-  });
-}
-
-// ── EXPORT / IMPORT ───────────────────────────────────────────
-function exportData() {
-  const data = loadHistory();
-  if (data.length === 0) { showToast('Noch keine Daten zum Exportieren'); return; }
-  const blob = new Blob([JSON.stringify({ angela_plan_checkins: data }, null, 2)], { type: 'application/json' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `angela-checkins-${new Date().toISOString().slice(0,10)}.json`;
-  a.click();
-  showToast('✓ Export erfolgreich');
-}
-
-function importData(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = (ev) => {
-    try {
-      const parsed = JSON.parse(ev.target.result);
-      const data = parsed.angela_plan_checkins || parsed;
-      if (!Array.isArray(data)) throw new Error();
-      saveHistory(data);
-      renderHistory();
-      showToast(`✓ ${data.length} Einträge importiert`);
-    } catch {
-      showToast('Fehler: ungültige Datei');
-    }
-    e.target.value = '';
-  };
-  reader.readAsText(file);
-}
-
-// ── TOAST ─────────────────────────────────────────────────────
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2800);
-}
-
-// ── SHOPPING LIST ─────────────────────────────────────────────
-function styleShopItem(checkbox) {
-  checkbox.closest('label').classList.toggle('checked', checkbox.checked);
-}
-function resetShopping() {
-  document.querySelectorAll('#shoppingList input[type="checkbox"]').forEach(cb => {
-    cb.checked = false;
-    cb.closest('label').classList.remove('checked');
-  });
-}
-function resetAllShopping() {
-  document.querySelectorAll('#sec-einkauf input[type="checkbox"]').forEach(cb => {
-    cb.checked = false;
-    cb.closest('label').classList.remove('checked');
-  });
+// ── SHOPPING ─────────────────────────────────────────────────
+function styleShopItem(cb){cb.closest('label').classList.toggle('checked',cb.checked);}
+function resetAllShopping(){
+  document.querySelectorAll('#sec-einkauf input[type="checkbox"]').forEach(cb=>{cb.checked=false;cb.closest('label').classList.remove('checked');});
   showToast('↺ Liste zurückgesetzt');
 }
 
-// ── INIT ──────────────────────────────────────────────────────
-checkAndResetOnNewWeek();   // Reset form if new week started (MEZ)
-restoreDraftIfCurrentWeek(); // Restore unsaved draft from current week
-updateCheckinBanner();       // Show KW status
-renderHistory();
+// ── EXPORT / IMPORT ──────────────────────────────────────────
+function exportData(){
+  const data={angela_plan_checkins:loadHistory(),angela_weights:loadWeights(),angela_weight_goal:ls('angela_weight_goal',null),angela_yoga_history:ls('angela_yoga_history',[])};
+  if(!loadHistory().length&&!loadWeights().length){showToast('Noch keine Daten');return;}
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));
+  a.download=`angela-daten-${new Date().toISOString().slice(0,10)}.json`;a.click();
+  showToast('✓ Export erfolgreich');
+}
+function importData(e){
+  const file=e.target.files[0];if(!file)return;
+  const r=new FileReader();
+  r.onload=ev=>{
+    try{
+      const p=JSON.parse(ev.target.result);
+      if(p.angela_plan_checkins)saveHistory(p.angela_plan_checkins);
+      if(p.angela_weights)saveWeights(p.angela_weights);
+      if(p.angela_weight_goal)lss('angela_weight_goal',p.angela_weight_goal);
+      if(p.angela_yoga_history)lss('angela_yoga_history',p.angela_yoga_history);
+      renderHistory();renderWeightChart();renderWeightGoal();renderYogaGrid();
+      showToast('✓ Daten importiert');
+    }catch{showToast('Fehler: ungültige Datei');}
+    e.target.value='';
+  };r.readAsText(file);
+}
+function clearAllData(){
+  if(!confirm('Alle Daten löschen?'))return;
+  ['angela_checkins','angela_draft','angela_last_week','angela_weights','angela_weight_goal','angela_yoga_history'].forEach(k=>localStorage.removeItem(k));
+  resetForm();renderHistory();renderWeightChart();renderWeightGoal();renderYogaGrid();
+  showToast('Alle Daten gelöscht');
+}
 
-// Auto-save draft on textarea input
-document.getElementById('weekNote').addEventListener('input', saveDraft);
+// ── TOAST ────────────────────────────────────────────────────
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+// ── INIT ─────────────────────────────────────────────────────
+archiveYogaIfNewWeek();
+checkAndResetOnNewWeek();
+restoreDraft();
+updateCheckinBanner();
+renderHistory();
+renderWeightChart();
+renderWeightGoal();
+renderYogaGrid();
+document.getElementById('weekNote').addEventListener('input',saveDraft);
 </script>
 </body>
 </html>
