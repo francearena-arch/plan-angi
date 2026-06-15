@@ -31,7 +31,7 @@
   .hero {
     background: var(--charcoal);
     color: var(--white);
-    padding: 64px 24px 56px;
+    padding: 64px 24px 52px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -69,28 +69,115 @@
     position: relative;
   }
 
+  /* BURGER MENU */
+  .burger-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    z-index: 100;
+    transition: background 0.2s;
+  }
+  .burger-btn:hover { background: rgba(255,255,255,0.2); }
+  .burger-btn span {
+    display: block;
+    width: 16px;
+    height: 1.5px;
+    background: white;
+    border-radius: 2px;
+    transition: all 0.25s;
+  }
+  .burger-btn.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .burger-btn.open span:nth-child(2) { opacity: 0; }
+  .burger-btn.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .burger-menu {
+    position: absolute;
+    top: 68px;
+    right: 16px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+    min-width: 220px;
+    z-index: 200;
+    overflow: hidden;
+    display: none;
+    border: 1px solid var(--border);
+  }
+  .burger-menu.open { display: block; }
+  .burger-menu-header {
+    padding: 14px 18px 10px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--warm-grey);
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+  }
+  .burger-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--charcoal);
+    cursor: pointer;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.15s;
+    border-bottom: 1px solid var(--border);
+  }
+  .burger-menu-item:last-child { border-bottom: none; }
+  .burger-menu-item:hover { background: var(--sand); }
+  .burger-menu-item .bm-icon { font-size: 18px; width: 24px; text-align: center; }
+  .burger-menu-item.danger { color: var(--terracotta); }
+  .burger-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    display: none;
+  }
+  .burger-overlay.open { display: block; }
+
   /* NAV TAGS */
   .nav-tags {
-    background: var(--charcoal);
-    padding: 0 24px 28px;
+    background: var(--sand);
+    padding: 20px 24px 4px;
     display: flex;
     justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
     position: relative;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0;
   }
   .nav-tag {
     padding: 8px 20px;
     border-radius: 100px;
-    border: 1.5px solid rgba(255,255,255,0.15);
-    background: transparent;
+    border: 1.5px solid var(--border);
+    background: white;
     font-family: 'DM Sans', sans-serif;
     font-size: 12px;
     font-weight: 500;
-    color: rgba(255,255,255,0.6);
+    color: var(--warm-grey);
     cursor: pointer;
     transition: all 0.2s;
     letter-spacing: 0.3px;
+    margin-bottom: 16px;
   }
   .nav-tag:hover { border-color: var(--sage); color: var(--sage); }
   .nav-tag.active {
@@ -132,8 +219,12 @@
     display: flex;
     gap: 8px;
     margin-bottom: 24px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
+  .tabs::-webkit-scrollbar { display: none; }
   .tab {
     padding: 8px 20px;
     border-radius: 100px;
@@ -457,6 +548,109 @@
     margin-bottom: 20px;
   }
 
+  /* NOTIZ ARCHIV */
+  .archiv-monat { margin-bottom: 28px; }
+  .archiv-monat-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .archiv-monat-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .archiv-entry {
+    background: var(--sand);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    border: 1px solid var(--border);
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .archiv-kw {
+    flex-shrink: 0;
+    text-align: center;
+    min-width: 44px;
+  }
+  .archiv-kw .kw-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--charcoal);
+    display: block;
+    line-height: 1;
+  }
+  .archiv-kw .kw-label {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--warm-grey);
+    display: block;
+    margin-top: 2px;
+  }
+  .archiv-divider {
+    width: 1px;
+    background: var(--border);
+    align-self: stretch;
+    flex-shrink: 0;
+  }
+  .archiv-content { flex: 1; min-width: 0; }
+  .archiv-scores {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+  }
+  .archiv-score-pill {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--warm-grey);
+  }
+  .archiv-score-dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+  }
+  .archiv-note-text {
+    font-size: 13px;
+    color: var(--charcoal);
+    line-height: 1.5;
+    font-style: italic;
+  }
+  .archiv-note-empty {
+    font-size: 12px;
+    color: var(--border);
+    font-style: italic;
+  }
+  .archiv-delete {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: var(--border);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 0 2px;
+    line-height: 1;
+    align-self: flex-start;
+    transition: color 0.15s;
+  }
+  .archiv-delete:hover { color: var(--terracotta); }
+
   /* CHART */
   .chart-wrap { position: relative; height: 200px; margin-bottom: 24px; }
   canvas#historyChart { width: 100% !important; height: 100% !important; }
@@ -545,11 +739,34 @@
 </head>
 <body>
 
+<!-- BURGER OVERLAY -->
+<div class="burger-overlay" id="burgerOverlay" onclick="closeBurger()"></div>
+
 <!-- HERO -->
 <div class="hero">
   <div class="hero-eyebrow">Dein persönlicher Lifestyle-Plan</div>
   <h1>Kein Extrem.<br><em>Nur Rhythmus.</em></h1>
   <p class="hero-sub">Ein Plan, der zu deinem Alltag passt – nicht umgekehrt. Struktur ohne Strenge, Genuss ohne Schuldgefühle.</p>
+
+  <!-- BURGER BUTTON -->
+  <button class="burger-btn" id="burgerBtn" onclick="toggleBurger()">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- DROPDOWN MENU -->
+  <div class="burger-menu" id="burgerMenu">
+    <div class="burger-menu-header">Daten verwalten</div>
+    <button class="burger-menu-item" onclick="exportData(); closeBurger()">
+      <span class="bm-icon">⬇️</span> Daten exportieren
+    </button>
+    <label class="burger-menu-item" for="importInputBurger" onclick="closeBurger()">
+      <span class="bm-icon">⬆️</span> Daten importieren
+    </label>
+    <input type="file" id="importInputBurger" accept=".json" style="display:none" onchange="importData(event)">
+    <button class="burger-menu-item danger" onclick="clearAllData(); closeBurger()">
+      <span class="bm-icon">🗑</span> Alle Daten löschen
+    </button>
+  </div>
 </div>
 
 <!-- NAV TAGS -->
@@ -625,7 +842,7 @@
               <h3>Nach Hause kommen → aufwärmen</h3>
               <ul class="meal-options">
                 <li>Batch-Gericht vom Sonntag – 5 Min in der Pfanne</li>
-                <li>Lachs + Tiefkühlgemüse im Ofen – 15 Min</li>
+                <li>Lachs + Tiefkühlgemüse im Airfryer – 10 Min</li>
                 <li>Rührei mit Spinat + Reis aus dem Kühlschrank</li>
               </ul>
               <span class="meal-tag">🔥 Batch Cooking spart Zeit</span>
@@ -680,7 +897,7 @@
             <div class="meal-content">
               <h3>Vor dem Training – nicht zu schwer</h3>
               <ul class="meal-options">
-                <li>Lachsfilet mit Ofengemüse</li>
+                <li>Lachsfilet mit Airfryer-Gemüse</li>
                 <li>Pute mit Spargel und kleinem Reis</li>
                 <li>Rindfleisch-Gemüsepfanne mit Süsskartoffel</li>
               </ul>
@@ -766,14 +983,14 @@
       <div class="batch-grid">
         <div class="batch-card">
           <span class="batch-icon">🍗</span>
-          <h4>Ofenhühnchen</h4>
-          <p>500g Brust würzen (Olivenöl, Salz, Kräuter), 25 Min bei 200°. Portionieren für 3 Abendessen und Znüni.</p>
-          <div class="duration">⏱ 30 Min · hält 4 Tage</div>
+          <h4>Airfryer-Hühnchen</h4>
+          <p>500g Brust würzen (Olivenöl, Salz, Kräuter), 18–20 Min bei 190° im Airfryer. Knusprig, saftig, schneller als Ofen. Portionieren für 3 Abendessen und Znüni.</p>
+          <div class="duration">⏱ 20 Min · hält 4 Tage</div>
         </div>
         <div class="batch-card">
           <span class="batch-icon">🥗</span>
-          <h4>Ofengemüse</h4>
-          <p>Zucchini, Paprika, Karotten, Zwiebeln – alles auf ein Blech, 200°, 25 Min. Passt zu allem.</p>
+          <h4>Airfryer-Gemüse</h4>
+          <p>Zucchini, Paprika, Karotten, Zwiebeln – in den Airfryer-Korb, 180°, 12–15 Min. Kurz schütteln nach der Hälfte. Knuspriger als im Ofen, viel schneller.</p>
           <div class="duration">⏱ 5 Min Prep · hält 5 Tage</div>
         </div>
         <div class="batch-card">
@@ -839,6 +1056,11 @@
         <div class="supp-row">
           <div class="supp-name">💪 Protein-Shake</div>
           <div class="supp-why">Wenn eine Mahlzeit knapp wird oder nach Abendtraining – kein Ersatz, nur Lückenfüller</div>
+          <div class="supp-prio mid">SINNVOLL</div>
+        </div>
+        <div class="supp-row">
+          <div class="supp-name">⚡ Kreatin (Monohydrat)</div>
+          <div class="supp-why">Muskelaufbau & Kraft – 3–5g täglich, auch an Ruhetagen. Einer der am besten erforschten Supplements überhaupt, besonders sinnvoll bei BodyPump & Personal Training</div>
           <div class="supp-prio mid">SINNVOLL</div>
         </div>
         <div class="supp-row">
@@ -1011,38 +1233,19 @@
           </div>
         </div>
 
-        <!-- HISTORY -->
+        <!-- HISTORY: CHART -->
         <div class="history-section">
           <h3>Verlauf der letzten Wochen</h3>
-
           <div class="legend">
             <div class="legend-item"><div class="legend-dot" style="background:#7A9E7E"></div> Energie</div>
             <div class="legend-item"><div class="legend-dot" style="background:#C97B5A"></div> Schlaf</div>
             <div class="legend-item"><div class="legend-dot" style="background:#8B7BA8"></div> Stimmung</div>
             <div class="legend-item"><div class="legend-dot" style="background:#5A9EC9"></div> Bewegung</div>
           </div>
-
           <div class="chart-wrap">
             <canvas id="historyChart"></canvas>
           </div>
-
-          <div id="historyTableWrap">
-            <div class="no-history" id="noHistoryMsg">Noch keine Einträge – speichere deine erste Woche!</div>
-            <table class="history-table" id="historyTable" style="display:none">
-              <thead>
-                <tr>
-                  <th>Woche</th>
-                  <th>⚡</th>
-                  <th>😴</th>
-                  <th>😊</th>
-                  <th>🏋️</th>
-                  <th>Notiz</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody id="historyBody"></tbody>
-            </table>
-          </div>
+          <div class="no-history" id="noHistoryMsg">Noch keine Einträge – speichere deine erste Woche!</div>
 
           <div class="io-row">
             <button class="btn btn-secondary btn-sm" onclick="exportData()">⬇ Export JSON</button>
@@ -1050,6 +1253,15 @@
             <input type="file" id="importInput" accept=".json" onchange="importData(event)">
             <button class="btn btn-danger btn-sm" onclick="clearAllData()">🗑 Alle Daten löschen</button>
           </div>
+        </div>
+
+        <!-- HISTORY: NOTIZ-ARCHIV -->
+        <div class="history-section" id="notizArchivWrap" style="display:none">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap; gap:8px;">
+            <h3 style="margin-bottom:0">📓 Notiz-Archiv</h3>
+            <span style="font-size:12px; color:var(--warm-grey)">Gruppiert nach Monat</span>
+          </div>
+          <div id="notizArchivBody"></div>
         </div>
 
       </div>
@@ -1083,6 +1295,22 @@ function switchTab(id, e) {
   parent.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-' + id).classList.add('active');
   e.target.classList.add('active');
+}
+
+// ── BURGER MENU ──────────────────────────────────────────────
+function toggleBurger() {
+  const btn = document.getElementById('burgerBtn');
+  const menu = document.getElementById('burgerMenu');
+  const overlay = document.getElementById('burgerOverlay');
+  const isOpen = menu.classList.contains('open');
+  btn.classList.toggle('open', !isOpen);
+  menu.classList.toggle('open', !isOpen);
+  overlay.classList.toggle('open', !isOpen);
+}
+function closeBurger() {
+  document.getElementById('burgerBtn').classList.remove('open');
+  document.getElementById('burgerMenu').classList.remove('open');
+  document.getElementById('burgerOverlay').classList.remove('open');
 }
 
 // ── STAR RATINGS ─────────────────────────────────────────────
@@ -1154,41 +1382,65 @@ function getWeekNumber(d) {
 // ── RENDER HISTORY ────────────────────────────────────────────
 let chart = null;
 
+const MONTHS_DE = ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+const SCORE_COLORS = { energie: '#7A9E7E', schlaf: '#C97B5A', stimmung: '#8B7BA8', bewegung: '#5A9EC9' };
+const SCORE_EMOJI  = { energie: '⚡', schlaf: '😴', stimmung: '😊', bewegung: '🏋️' };
+
 function renderHistory() {
   const history = loadHistory();
   const noMsg = document.getElementById('noHistoryMsg');
-  const table = document.getElementById('historyTable');
-  const tbody = document.getElementById('historyBody');
+  const archivWrap = document.getElementById('notizArchivWrap');
+  const archivBody = document.getElementById('notizArchivBody');
+
+  noMsg.style.display = history.length === 0 ? 'block' : 'none';
+  updateChart(history.length ? history.slice(0, 8).reverse() : []);
 
   if (history.length === 0) {
-    noMsg.style.display = 'block';
-    table.style.display = 'none';
-    updateChart([]);
+    archivWrap.style.display = 'none';
     return;
   }
 
-  noMsg.style.display = 'none';
-  table.style.display = 'table';
+  archivWrap.style.display = 'block';
 
-  tbody.innerHTML = history.map((entry, idx) => `
-    <tr>
-      <td style="font-size:12px; color:var(--warm-grey)">${entry.week}</td>
-      <td>${dotBar(entry.energie, '#7A9E7E')}</td>
-      <td>${dotBar(entry.schlaf, '#C97B5A')}</td>
-      <td>${dotBar(entry.stimmung, '#8B7BA8')}</td>
-      <td>${dotBar(entry.bewegung, '#5A9EC9')}</td>
-      <td class="history-note-cell">${entry.note || '–'}</td>
-      <td><button class="btn btn-secondary btn-sm" style="padding:4px 10px;font-size:11px" onclick="deleteEntry(${idx})">✕</button></td>
-    </tr>
+  // Group by month+year
+  const grouped = {};
+  history.forEach((entry, idx) => {
+    const d = new Date(entry.date);
+    const key = `${MONTHS_DE[d.getMonth()]} ${d.getFullYear()}`;
+    if (!grouped[key]) grouped[key] = [];
+    grouped[key].push({ ...entry, idx });
+  });
+
+  archivBody.innerHTML = Object.entries(grouped).map(([monthLabel, entries]) => `
+    <div class="archiv-monat">
+      <div class="archiv-monat-label">${monthLabel}</div>
+      ${entries.map(e => {
+        const kw = e.week.split(' · ')[0].replace('KW ', '');
+        const scores = ['energie','schlaf','stimmung','bewegung'].map(cat => `
+          <div class="archiv-score-pill">
+            <div class="archiv-score-dot" style="background:${SCORE_COLORS[cat]}">${e[cat]}</div>
+            ${SCORE_EMOJI[cat]}
+          </div>
+        `).join('');
+        const noteHtml = e.note
+          ? `<div class="archiv-note-text">"${e.note}"</div>`
+          : `<div class="archiv-note-empty">Keine Notiz</div>`;
+        return `
+          <div class="archiv-entry">
+            <div class="archiv-kw">
+              <span class="kw-num">${kw}</span>
+              <span class="kw-label">KW</span>
+            </div>
+            <div class="archiv-divider"></div>
+            <div class="archiv-content">
+              <div class="archiv-scores">${scores}</div>
+              ${noteHtml}
+            </div>
+            <button class="archiv-delete" onclick="deleteEntry(${e.idx})" title="Löschen">✕</button>
+          </div>`;
+      }).join('')}
+    </div>
   `).join('');
-
-  updateChart(history.slice(0, 8).reverse());
-}
-
-function dotBar(val, color) {
-  return `<div class="dot-row">${[1,2,3,4,5].map(i =>
-    `<div class="dot" style="background:${i <= val ? color : '#E2DDD8'}">${i <= val ? i : ''}</div>`
-  ).join('')}</div>`;
 }
 
 function deleteEntry(idx) {
