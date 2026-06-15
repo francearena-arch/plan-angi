@@ -567,12 +567,6 @@ body { font-family: 'DM Sans', sans-serif; background: var(--sand); color: var(-
         </div>
         <div class="chart-wrap"><canvas id="historyChart"></canvas></div>
         <div class="no-history" id="noHistoryMsg">Noch keine Einträge.</div>
-        <div class="io-row">
-          <button class="btn btn-secondary btn-sm" onclick="exportData()">⬇ Export</button>
-          <label class="btn btn-secondary btn-sm" for="importInput">⬆ Import</label>
-          <input type="file" id="importInput" accept=".json" onchange="importData(event)">
-          <button class="btn btn-danger btn-sm" onclick="clearAllData()">🗑 Löschen</button>
-        </div>
       </div>
       <div class="history-section" id="notizArchivWrap" style="display:none">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
@@ -615,9 +609,6 @@ body { font-family: 'DM Sans', sans-serif; background: var(--sand); color: var(-
         <div class="chart-wrap"><canvas id="weightChart"></canvas></div>
         <div class="no-history" id="noWeightMsg">Noch keine Einträge – trage dein Gewicht ein!</div>
         <div id="weightHistoryBody"></div>
-        <div class="io-row" style="margin-top:12px;">
-          <button class="btn btn-danger btn-sm" onclick="clearWeightData()">🗑 Gewichtsdaten löschen</button>
-        </div>
       </div>
     </div>
   </div>
