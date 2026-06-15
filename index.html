@@ -395,24 +395,28 @@
     border-radius: 14px;
     padding: 16px 20px;
     border: 1px solid var(--border);
-    display: grid;
-    grid-template-columns: 1fr 2fr 90px 80px;
-    gap: 12px;
+    display: flex;
+    flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
   }
+  .supp-left { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
   .supp-name { font-weight: 500; font-size: 14px; }
   .supp-why { font-size: 13px; color: var(--warm-grey); }
+  .supp-right { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
   .supp-when {
     font-size: 11px;
     font-weight: 500;
     color: var(--charcoal);
     background: var(--sand);
+    border: 1px solid var(--border);
     border-radius: 20px;
-    padding: 4px 10px;
-    text-align: center;
+    padding: 4px 12px;
     white-space: nowrap;
   }
-  .supp-prio { text-align: right; font-size: 11px; font-weight: 600; letter-spacing: 0.5px; color: var(--sage); }
+  .supp-prio { font-size: 11px; font-weight: 600; letter-spacing: 0.5px; color: var(--sage); white-space: nowrap; }
   .supp-prio.mid { color: var(--terracotta); }
   .supp-prio.opt { color: var(--warm-grey); }
 
@@ -778,9 +782,7 @@
   .mantra p { font-size: 14px; color: rgba(255,255,255,0.6); max-width: 400px; margin: 0 auto; }
 
   @media (max-width: 600px) {
-    .supp-row { grid-template-columns: 1fr auto; }
     .supp-why { display: none; }
-    .supp-when { display: inline-flex; }
     .routine-week { grid-template-columns: repeat(4, 1fr); }
     .meal-card { grid-template-columns: 64px 1fr; }
     .tagesplan-grid { grid-template-columns: 1fr; }
@@ -1087,46 +1089,74 @@
       <p style="font-size:14px; color:var(--warm-grey); margin-bottom:24px;"></p>
       <div class="supp-grid">
         <div class="supp-row">
-          <div class="supp-name">☀️ Vitamin D3 + K2</div>
-          <div class="supp-why">Hormonsystem & Energie – ab 40 besonders relevant, v.a. im Winter in der Schweiz</div>
-          <div class="supp-when">🌅 Morgens</div>
-          <div class="supp-prio">WICHTIG</div>
+          <div class="supp-left">
+            <div class="supp-name">☀️ Vitamin D3 + K2</div>
+            <div class="supp-why">Hormonsystem & Energie – ab 40 besonders relevant, v.a. im Winter in der Schweiz</div>
+          </div>
+          <div class="supp-right">
+            <div class="supp-when">🌅 Morgens</div>
+            <div class="supp-prio">WICHTIG</div>
+          </div>
         </div>
         <div class="supp-row">
-          <div class="supp-name">🐟 Omega-3</div>
-          <div class="supp-why">Entzündungshemmend, Haut, Bindegewebe, Stoffwechsel – täglich</div>
-          <div class="supp-when">🍽 Zu einer Mahlzeit</div>
-          <div class="supp-prio">WICHTIG</div>
+          <div class="supp-left">
+            <div class="supp-name">🐟 Omega-3</div>
+            <div class="supp-why">Entzündungshemmend, Haut, Bindegewebe, Stoffwechsel – täglich</div>
+          </div>
+          <div class="supp-right">
+            <div class="supp-when">🍽 Zur Mahlzeit</div>
+            <div class="supp-prio">WICHTIG</div>
+          </div>
         </div>
         <div class="supp-row">
-          <div class="supp-name">🌙 Magnesium</div>
-          <div class="supp-why">Besserer Schlaf, Regeneration, Stressabbau – gerade bei viel Yoga sinnvoll</div>
-          <div class="supp-when">🌙 Abends</div>
-          <div class="supp-prio">WICHTIG</div>
+          <div class="supp-left">
+            <div class="supp-name">🌙 Magnesium</div>
+            <div class="supp-why">Besserer Schlaf, Regeneration, Stressabbau – gerade bei viel Yoga sinnvoll</div>
+          </div>
+          <div class="supp-right">
+            <div class="supp-when">🌙 Abends</div>
+            <div class="supp-prio">WICHTIG</div>
+          </div>
         </div>
         <div class="supp-row">
-          <div class="supp-name">✨ Kollagen</div>
-          <div class="supp-why">Bindegewebe & Haut – ab 40 nachweislich wirksam, morgens ins Wasser</div>
-          <div class="supp-when">🌅 Morgens nüchtern</div>
-          <div class="supp-prio mid">SINNVOLL</div>
+          <div class="supp-left">
+            <div class="supp-name">✨ Kollagen</div>
+            <div class="supp-why">Bindegewebe & Haut – ab 40 nachweislich wirksam, morgens ins Wasser</div>
+          </div>
+          <div class="supp-right">
+            <div class="supp-when">🌅 Morgens nüchtern</div>
+            <div class="supp-prio mid">SINNVOLL</div>
+          </div>
         </div>
         <div class="supp-row">
-          <div class="supp-name">💪 Protein-Shake</div>
-          <div class="supp-why">Wenn eine Mahlzeit knapp wird oder nach Abendtraining – kein Ersatz, nur Lückenfüller</div>
-          <div class="supp-when">🏋️ Nach Training</div>
-          <div class="supp-prio mid">SINNVOLL</div>
+          <div class="supp-left">
+            <div class="supp-name">💪 Protein-Shake</div>
+            <div class="supp-why">Wenn eine Mahlzeit knapp wird oder nach Abendtraining – kein Ersatz, nur Lückenfüller</div>
+          </div>
+          <div class="supp-right">
+            <div class="supp-when">🏋️ Nach Training</div>
+            <div class="supp-prio mid">SINNVOLL</div>
+          </div>
         </div>
         <div class="supp-row">
-          <div class="supp-name">⚡ Kreatin (Monohydrat)</div>
-          <div class="supp-why">Muskelaufbau & Kraft – 3–5g täglich, auch an Ruhetagen. Besonders sinnvoll bei BodyPump & Personal Training</div>
-          <div class="supp-when">🕐 Täglich, egal wann</div>
-          <div class="supp-prio mid">SINNVOLL</div>
+          <div class="supp-left">
+            <div class="supp-name">⚡ Kreatin (Monohydrat)</div>
+            <div class="supp-why">Muskelaufbau & Kraft – 3–5g täglich, auch an Ruhetagen. Besonders sinnvoll bei BodyPump & Personal Training</div>
+          </div>
+          <div class="supp-right">
+            <div class="supp-when">🕐 Täglich, egal wann</div>
+            <div class="supp-prio mid">SINNVOLL</div>
+          </div>
         </div>
         <div class="supp-row">
-          <div class="supp-name">🌿 Ashwagandha</div>
-          <div class="supp-why">Cortisol regulieren bei Stress – bei vollem Alltag und viel Training kann das helfen</div>
-          <div class="supp-when">🌙 Abends</div>
-          <div class="supp-prio opt">OPTIONAL</div>
+          <div class="supp-left">
+            <div class="supp-name">🌿 Ashwagandha</div>
+            <div class="supp-why">Cortisol regulieren bei Stress – bei vollem Alltag und viel Training kann das helfen</div>
+          </div>
+          <div class="supp-right">
+            <div class="supp-when">🌙 Abends</div>
+            <div class="supp-prio opt">OPTIONAL</div>
+          </div>
         </div>
       </div>
     </div>
@@ -1317,6 +1347,8 @@
 
         <!-- FORM -->
         <div class="checkin-form">
+          <!-- STATUS BANNER -->
+          <div id="checkinBanner" style="display:none; border-radius:10px; padding:10px 16px; font-size:13px; font-weight:500; margin-bottom:20px; border:1.5px solid;"></div>
           <h3>Diese Woche bewerten</h3>
           <div class="sub">Kein Gewicht, keine Kalorien – nur: wie habe ich mich gefühlt?</div>
 
@@ -1476,6 +1508,7 @@ function rateStar(cat, val) {
   const stars = document.querySelectorAll(`#stars-${cat} .star`);
   stars.forEach((s, i) => s.classList.toggle('filled', i < val));
   document.getElementById('note-' + cat).textContent = ratingNotes[cat][val - 1];
+  saveDraft(); // auto-save draft on every rating change
 }
 
 function resetForm() {
@@ -1494,38 +1527,146 @@ function loadHistory() {
 function saveHistory(data) {
   localStorage.setItem('angela_checkins', JSON.stringify(data));
 }
+function loadDraft() {
+  try { return JSON.parse(localStorage.getItem('angela_draft') || 'null'); } catch { return null; }
+}
+function saveDraft() {
+  const draft = {
+    ratings: { ...currentRatings },
+    note: document.getElementById('weekNote').value.trim(),
+    weekKey: getCurrentWeekKey()
+  };
+  localStorage.setItem('angela_draft', JSON.stringify(draft));
+}
+function clearDraft() {
+  localStorage.removeItem('angela_draft');
+}
+
+// ── WEEK LOGIC (MEZ / Montag-Start) ──────────────────────────
+// Convert any Date to MEZ (UTC+1 winter, UTC+2 summer) local date string
+function toMEZDate(d) {
+  // Use Europe/Berlin timezone string
+  return new Date(d.toLocaleString('en-US', { timeZone: 'Europe/Berlin' }));
+}
+
+function getWeekNumber(d) {
+  // ISO week number, Monday-based
+  const mez = toMEZDate(d);
+  const date = new Date(Date.UTC(mez.getFullYear(), mez.getMonth(), mez.getDate()));
+  const dayNum = date.getUTCDay() || 7; // Mon=1 ... Sun=7
+  date.setUTCDate(date.getUTCDate() + 4 - dayNum);
+  const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
+  return Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
+}
+
+function getWeekYear(d) {
+  // ISO week year (can differ from calendar year at year boundaries)
+  const mez = toMEZDate(d);
+  const date = new Date(Date.UTC(mez.getFullYear(), mez.getMonth(), mez.getDate()));
+  const dayNum = date.getUTCDay() || 7;
+  date.setUTCDate(date.getUTCDate() + 4 - dayNum);
+  return date.getUTCFullYear();
+}
+
+function getCurrentWeekKey() {
+  const now = new Date();
+  return `${getWeekYear(now)}-W${String(getWeekNumber(now)).padStart(2,'0')}`;
+}
+
+function getWeekLabel(d) {
+  return `KW ${getWeekNumber(d)} · ${getWeekYear(d)}`;
+}
+
+// Check if this week already has an entry
+function currentWeekAlreadySaved() {
+  const key = getCurrentWeekKey();
+  return loadHistory().some(e => e.weekKey === key);
+}
+
+// ── AUTO-RESET ON NEW WEEK ────────────────────────────────────
+function checkAndResetOnNewWeek() {
+  const stored = localStorage.getItem('angela_last_week');
+  const current = getCurrentWeekKey();
+  if (stored && stored !== current) {
+    // New week started – clear form and draft
+    resetForm();
+    clearDraft();
+    showToast('🗓 Neue Woche – Formular zurückgesetzt');
+  }
+  localStorage.setItem('angela_last_week', current);
+}
+
+// ── RESTORE DRAFT ─────────────────────────────────────────────
+function restoreDraftIfCurrentWeek() {
+  const draft = loadDraft();
+  if (!draft) return;
+  if (draft.weekKey !== getCurrentWeekKey()) { clearDraft(); return; }
+  // Restore ratings
+  ['energie','schlaf','stimmung','bewegung'].forEach(cat => {
+    if (draft.ratings[cat]) {
+      currentRatings[cat] = draft.ratings[cat];
+      const stars = document.querySelectorAll(`#stars-${cat} .star`);
+      stars.forEach((s, i) => s.classList.toggle('filled', i < draft.ratings[cat]));
+      document.getElementById('note-' + cat).textContent = ratingNotes[cat][draft.ratings[cat] - 1];
+    }
+  });
+  if (draft.note) document.getElementById('weekNote').value = draft.note;
+}
 
 // ── SAVE CHECK-IN ─────────────────────────────────────────────
 function saveCheckin() {
   const vals = Object.values(currentRatings);
   if (vals.some(v => v === 0)) { showToast('Bitte alle 4 Kategorien bewerten'); return; }
 
-  const history = loadHistory();
   const now = new Date();
-  const weekLabel = `KW ${getWeekNumber(now)} · ${now.getFullYear()}`;
+  const weekKey = getCurrentWeekKey();
+  const history = loadHistory();
 
-  history.unshift({
+  // Check if this week was already saved – update instead of duplicate
+  const existingIdx = history.findIndex(e => e.weekKey === weekKey);
+  const entry = {
     date: now.toISOString(),
-    week: weekLabel,
+    week: getWeekLabel(now),
+    weekKey,
     energie: currentRatings.energie,
     schlaf: currentRatings.schlaf,
     stimmung: currentRatings.stimmung,
     bewegung: currentRatings.bewegung,
     note: document.getElementById('weekNote').value.trim()
-  });
+  };
+
+  if (existingIdx >= 0) {
+    history[existingIdx] = entry; // Update existing entry
+    showToast('✓ Woche aktualisiert!');
+  } else {
+    history.unshift(entry);
+    showToast('✓ Woche gespeichert!');
+  }
 
   saveHistory(history);
-  resetForm();
+  clearDraft();
+  updateCheckinBanner();
   renderHistory();
-  showToast('✓ Woche gespeichert!');
 }
 
-function getWeekNumber(d) {
-  const date = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
-  const dayNum = date.getUTCDay() || 7;
-  date.setUTCDate(date.getUTCDate() + 4 - dayNum);
-  const yearStart = new Date(Date.UTC(date.getUTCFullYear(), 0, 1));
-  return Math.ceil((((date - yearStart) / 86400000) + 1) / 7);
+// ── CHECKIN BANNER ────────────────────────────────────────────
+function updateCheckinBanner() {
+  const banner = document.getElementById('checkinBanner');
+  if (!banner) return;
+  const saved = currentWeekAlreadySaved();
+  const kw = getWeekNumber(new Date());
+  if (saved) {
+    banner.innerHTML = `✓ KW ${kw} gespeichert – du kannst den Eintrag bis Sonntag noch anpassen`;
+    banner.style.background = 'var(--sage-light)';
+    banner.style.color = 'var(--sage)';
+    banner.style.borderColor = 'var(--sage)';
+  } else {
+    banner.innerHTML = `📋 KW ${kw} – noch nicht gespeichert`;
+    banner.style.background = 'var(--terracotta-light)';
+    banner.style.color = 'var(--terracotta)';
+    banner.style.borderColor = 'var(--terracotta)';
+  }
+  banner.style.display = 'block';
 }
 
 // ── RENDER HISTORY ────────────────────────────────────────────
@@ -1697,7 +1838,13 @@ function resetAllShopping() {
 }
 
 // ── INIT ──────────────────────────────────────────────────────
+checkAndResetOnNewWeek();   // Reset form if new week started (MEZ)
+restoreDraftIfCurrentWeek(); // Restore unsaved draft from current week
+updateCheckinBanner();       // Show KW status
 renderHistory();
+
+// Auto-save draft on textarea input
+document.getElementById('weekNote').addEventListener('input', saveDraft);
 </script>
 </body>
 </html>
