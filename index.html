@@ -46,8 +46,8 @@ body { font-family: 'DM Sans', sans-serif; background: var(--sand); color: var(-
 
 /* NAV */
 .nav-wrap { background: var(--sand); border-bottom: 1px solid var(--border); padding: 14px 16px 0; }
-.nav-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; padding-bottom: 14px; }
-.nav-tag { padding: 8px 16px; border-radius: 100px; border: 1.5px solid var(--border); background: white; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: var(--warm-grey); cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.nav-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; padding-bottom: 14px; }
+.nav-tag { padding: 8px 10px; border-radius: 100px; border: 1.5px solid var(--border); background: white; font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 500; color: var(--warm-grey); cursor: pointer; transition: all 0.2s; white-space: nowrap; text-align: center; }
 .nav-tag:hover { border-color: var(--sage); color: var(--sage); }
 .nav-tag.active { background: var(--sage); border-color: var(--sage); color: white; }
 
@@ -110,7 +110,9 @@ body { font-family: 'DM Sans', sans-serif; background: var(--sand); color: var(-
 
 /* SUPPLEMENTS */
 .supp-grid { display: flex; flex-direction: column; gap: 10px; }
-.supp-row { background: white; border-radius: 14px; padding: 14px 18px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.supp-row { background: white; border-radius: 14px; padding: 14px 18px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 12px; cursor: pointer; }
+.supp-row.checked { opacity: 0.45; }
+.supp-row.checked .supp-name { text-decoration: line-through; }
 .supp-left { flex: 1; min-width: 0; }
 .supp-name { font-weight: 500; font-size: 14px; }
 .supp-why { font-size: 12px; color: var(--warm-grey); margin-top: 2px; display: none; }
@@ -318,13 +320,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--sand); color: var(-
   </div>
 </div>
 
-<!-- SUB-NAV YOGA -->
-<div class="sub-nav-wrap" id="subnav-yoga">
-  <div class="sub-nav">
-    <button class="sub-tag active" onclick="showSub('yoga','nidra',this)">🌙 Yoga Nidra</button>
-    <button class="sub-tag" onclick="showSub('yoga','info',this)">ℹ️ Info</button>
-  </div>
-</div>
+<!-- SUB-NAV YOGA removed -->
 
 <div class="container">
 
@@ -393,14 +389,15 @@ body { font-family: 'DM Sans', sans-serif; background: var(--sand); color: var(-
     <div class="section-label">Supplements</div>
     <div class="section-title">Was wirklich sinnvoll ist</div>
     <div class="supp-grid">
-      <div class="supp-row"><div class="supp-left"><div class="supp-name">☀️ Vitamin D3 + K2</div><div class="supp-why">Hormonsystem & Energie – ab 40 besonders relevant</div></div><div class="supp-right"><div class="supp-when">🌅 Morgens</div><div class="supp-prio">WICHTIG</div></div></div>
-      <div class="supp-row"><div class="supp-left"><div class="supp-name">🐟 Omega-3</div><div class="supp-why">Entzündungshemmend, Haut, Bindegewebe, Stoffwechsel</div></div><div class="supp-right"><div class="supp-when">🍽 Zur Mahlzeit</div><div class="supp-prio">WICHTIG</div></div></div>
-      <div class="supp-row"><div class="supp-left"><div class="supp-name">🌙 Magnesium</div><div class="supp-why">Schlaf, Regeneration, Stressabbau</div></div><div class="supp-right"><div class="supp-when">🌙 Abends</div><div class="supp-prio">WICHTIG</div></div></div>
-      <div class="supp-row"><div class="supp-left"><div class="supp-name">✨ Kollagen</div><div class="supp-why">Bindegewebe & Haut – ab 40 nachweislich wirksam</div></div><div class="supp-right"><div class="supp-when">🌅 Morgens nüchtern</div><div class="supp-prio mid">SINNVOLL</div></div></div>
-      <div class="supp-row"><div class="supp-left"><div class="supp-name">💪 Protein-Shake</div><div class="supp-why">Lückenfüller wenn Mahlzeit knapp – kein Ersatz</div></div><div class="supp-right"><div class="supp-when">🏋️ Nach Training</div><div class="supp-prio mid">SINNVOLL</div></div></div>
-      <div class="supp-row"><div class="supp-left"><div class="supp-name">⚡ Kreatin (Monohydrat)</div><div class="supp-why">Muskelaufbau & Kraft – 3–5g täglich, auch Ruhetage</div></div><div class="supp-right"><div class="supp-when">🕐 Täglich, egal wann</div><div class="supp-prio mid">SINNVOLL</div></div></div>
-      <div class="supp-row"><div class="supp-left"><div class="supp-name">🌿 Ashwagandha</div><div class="supp-why">Cortisol regulieren bei Stress und vollem Alltag</div></div><div class="supp-right"><div class="supp-when">🌙 Abends</div><div class="supp-prio opt">OPTIONAL</div></div></div>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)" style="width:20px;height:20px;accent-color:var(--sage);flex-shrink:0;cursor:pointer;"><div class="supp-left"><div class="supp-name">☀️ Vitamin D3 + K2</div><div class="supp-why">Hormonsystem & Energie – ab 40 besonders relevant</div></div><div class="supp-right"><div class="supp-when">🌅 Morgens</div><div class="supp-prio">WICHTIG</div></div></label>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)" style="width:20px;height:20px;accent-color:var(--sage);flex-shrink:0;cursor:pointer;"><div class="supp-left"><div class="supp-name">🐟 Omega-3</div><div class="supp-why">Entzündungshemmend, Haut, Bindegewebe, Stoffwechsel</div></div><div class="supp-right"><div class="supp-when">🍽 Zur Mahlzeit</div><div class="supp-prio">WICHTIG</div></div></label>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)" style="width:20px;height:20px;accent-color:var(--sage);flex-shrink:0;cursor:pointer;"><div class="supp-left"><div class="supp-name">🌙 Magnesium</div><div class="supp-why">Schlaf, Regeneration, Stressabbau</div></div><div class="supp-right"><div class="supp-when">🌙 Abends</div><div class="supp-prio">WICHTIG</div></div></label>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)" style="width:20px;height:20px;accent-color:var(--sage);flex-shrink:0;cursor:pointer;"><div class="supp-left"><div class="supp-name">✨ Kollagen</div><div class="supp-why">Bindegewebe & Haut – ab 40 nachweislich wirksam</div></div><div class="supp-right"><div class="supp-when">🌅 Morgens nüchtern</div><div class="supp-prio mid">SINNVOLL</div></div></label>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)" style="width:20px;height:20px;accent-color:var(--sage);flex-shrink:0;cursor:pointer;"><div class="supp-left"><div class="supp-name">💪 Protein-Shake</div><div class="supp-why">Lückenfüller wenn Mahlzeit knapp – kein Ersatz</div></div><div class="supp-right"><div class="supp-when">🏋️ Nach Training</div><div class="supp-prio mid">SINNVOLL</div></div></label>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)" style="width:20px;height:20px;accent-color:var(--sage);flex-shrink:0;cursor:pointer;"><div class="supp-left"><div class="supp-name">⚡ Kreatin (Monohydrat)</div><div class="supp-why">Muskelaufbau & Kraft – 3–5g täglich, auch Ruhetage</div></div><div class="supp-right"><div class="supp-when">🕐 Täglich, egal wann</div><div class="supp-prio mid">SINNVOLL</div></div></label>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)" style="width:20px;height:20px;accent-color:var(--sage);flex-shrink:0;cursor:pointer;"><div class="supp-left"><div class="supp-name">🌿 Ashwagandha</div><div class="supp-why">Cortisol regulieren bei Stress und vollem Alltag</div></div><div class="supp-right"><div class="supp-when">🌙 Abends</div><div class="supp-prio opt">OPTIONAL</div></div></label>
     </div>
+    <button class="btn btn-secondary btn-sm" onclick="resetSupplements()" style="margin-top:12px;border-color:var(--terracotta);color:var(--terracotta);">↺ Zurücksetzen</button>
   </div>
 </div>
 
@@ -498,31 +495,16 @@ body { font-family: 'DM Sans', sans-serif; background: var(--sand); color: var(-
 
 <!-- ══════════ YOGA ══════════ -->
 <div class="page-section" id="sec-yoga">
-  <div class="sub-section active" id="sub-yoga-nidra">
-    <div class="section">
-      <div class="section-label">Yoga Nidra</div>
-      <div class="section-title">Diese Woche</div>
-      <div class="yoga-summary">
-        <h4>Fortschritt diese Woche</h4>
-        <div class="yoga-bar"><div class="yoga-bar-fill" id="yogaBarFill" style="width:0%"></div></div>
-        <div class="yoga-bar-label"><span id="yogaBarCount">0 von 7 Tagen</span><span id="yogaBarPct">0%</span></div>
-      </div>
-      <div class="yoga-week-grid" id="yogaWeekGrid"></div>
-      <button class="btn btn-secondary btn-sm" onclick="resetYogaWeek()" style="margin-top:4px;margin-bottom:24px;">↺ Woche zurücksetzen</button>
-      <div class="history-section">
-        <h3>Verlauf</h3>
-        <div id="yogaHistoryBody"><div class="no-history">Noch keine vergangenen Wochen.</div></div>
-      </div>
+  <div class="section">
+    <div class="section-label">Yoga Nidra</div>
+    <div class="section-title">Diese Woche</div>
+    <div class="yoga-summary">
+      <h4>Fortschritt diese Woche</h4>
+      <div class="yoga-bar"><div class="yoga-bar-fill" id="yogaBarFill" style="width:0%"></div></div>
+      <div class="yoga-bar-label"><span id="yogaBarCount">0 von 7 Tagen</span><span id="yogaBarPct">0%</span></div>
     </div>
-  </div>
-  <div class="sub-section" id="sub-yoga-info">
-    <div class="section">
-      <div class="section-label">Yoga Nidra</div>
-      <div class="section-title">Was ist Yoga Nidra?</div>
-      <div class="rule-card"><div class="rule-number">🌙</div><div><h4>Yogischer Schlaf</h4><p>Yoga Nidra ist eine geführte Entspannungstechnik zwischen Wachen und Schlafen. 20–30 Minuten entsprechen etwa 2–3 Stunden Tiefschlaf.</p></div></div>
-      <div class="rule-card"><div class="rule-number">⚡</div><div><h4>Warum es hilft</h4><p>Reduziert Cortisol, verbessert Schlafqualität, unterstützt Regeneration nach Training und hilft bei emotionalem Gleichgewicht.</p></div></div>
-      <div class="rule-card"><div class="rule-number">🎯</div><div><h4>Empfehlung</h4><p>Ideal nach dem Abendessen oder vor dem Schlafen. Besonders an Trainingstagen wertvoll. Auch kurze 10-Minuten-Sessions wirken.</p></div></div>
-    </div>
+    <div class="yoga-week-grid" id="yogaWeekGrid"></div>
+    <button class="btn btn-secondary btn-sm" onclick="resetYogaWeek()" style="margin-top:4px;">↺ Woche zurücksetzen</button>
   </div>
 </div>
 
@@ -911,6 +893,10 @@ function renderYogaHistory(){
 
 // ── SHOPPING ─────────────────────────────────────────────────
 function styleShopItem(cb){cb.closest('label').classList.toggle('checked',cb.checked);}
+function resetSupplements(){
+  document.querySelectorAll('#sec-supplements label.supp-row input').forEach(cb=>{cb.checked=false;cb.closest('label').classList.remove('checked');});
+  showToast('↺ Supplements zurückgesetzt');
+}
 function resetAllShopping(){
   document.querySelectorAll('#sec-einkauf input[type="checkbox"]').forEach(cb=>{cb.checked=false;cb.closest('label').classList.remove('checked');});
   showToast('↺ Liste zurückgesetzt');
