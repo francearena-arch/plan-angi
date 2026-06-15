@@ -1650,18 +1650,32 @@ function saveCheckin() {
 }
 
 // ── CHECKIN BANNER ────────────────────────────────────────────
+function getMEZWeekRange() {
+  const now = new Date();
+  const mez = toMEZDate(now);
+  const day = mez.getDay() || 7; // Mon=1 ... Sun=7
+  const monday = new Date(mez);
+  monday.setDate(mez.getDate() - (day - 1));
+  const sunday = new Date(monday);
+  sunday.setDate(monday.getDate() + 6);
+
+  const fmt = (d) => d.toLocaleDateString('de-CH', { day: '2-digit', month: '2-digit', timeZone: 'Europe/Berlin' });
+  return `${fmt(monday)} – ${fmt(sunday)}`;
+}
+
 function updateCheckinBanner() {
   const banner = document.getElementById('checkinBanner');
   if (!banner) return;
   const saved = currentWeekAlreadySaved();
   const kw = getWeekNumber(new Date());
+  const range = getMEZWeekRange();
   if (saved) {
-    banner.innerHTML = `✓ KW ${kw} gespeichert – du kannst den Eintrag bis Sonntag noch anpassen`;
+    banner.innerHTML = `✓ KW ${kw} (${range}) gespeichert – du kannst den Eintrag bis Sonntag noch anpassen`;
     banner.style.background = 'var(--sage-light)';
     banner.style.color = 'var(--sage)';
     banner.style.borderColor = 'var(--sage)';
   } else {
-    banner.innerHTML = `📋 KW ${kw} – noch nicht gespeichert`;
+    banner.innerHTML = `📋 KW ${kw} (${range}) – noch nicht gespeichert`;
     banner.style.background = 'var(--terracotta-light)';
     banner.style.color = 'var(--terracotta)';
     banner.style.borderColor = 'var(--terracotta)';
