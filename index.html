@@ -254,8 +254,75 @@ body { font-family: 'DM Sans', sans-serif; background: var(--sand); color: var(-
 
 @media (min-width: 600px) {
   .supp-why { display: block; }
-  .supp-row { display: grid; grid-template-columns: 1fr 2fr auto auto; }
+  .supp-row { display: grid; grid-template-columns: 22px minmax(0,1fr) auto; align-items: center; }
 }
+
+
+/* RESPONSIVE HARDENING – v28 */
+img, svg, canvas { max-width: 100%; height: auto; }
+button, input, textarea, select { font: inherit; }
+.nav-tag, .sub-tag, .tab, .btn { min-width: 0; }
+.nav-tag, .sub-tag, .tab span, .meal-content, .batch-card, .rule-card, .skincare-step, .supp-left, .supp-name, .supp-why, .shop-item span { overflow-wrap: anywhere; word-break: normal; }
+.supp-row input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--sage); flex-shrink: 0; cursor: pointer; }
+
+@media (max-width: 520px) {
+  html { font-size: 15px; }
+  body { overflow-x: hidden; }
+  .hero { padding: 36px 14px 30px; }
+  .hero-icon { width: 48px; height: 48px; }
+  .burger-btn { top: 12px; right: 12px; }
+  .burger-menu { right: 8px; left: auto; max-width: calc(100vw - 16px); min-width: 220px; }
+  .nav-wrap { padding: 10px 10px 0; }
+  .nav-row { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 7px; padding-bottom: 10px; }
+  .nav-tag { padding: 9px 7px; font-size: 11.5px; white-space: normal; line-height: 1.25; min-height: 42px; display: flex; align-items: center; justify-content: center; }
+  .sub-nav { padding: 10px; overflow-x: auto; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; }
+  .sub-tag { flex: 0 0 auto; min-width: 138px; white-space: normal; line-height: 1.25; }
+  .container { padding: 0 12px 70px; width: 100%; }
+  .section { margin-top: 28px; }
+  .section-title { margin-bottom: 14px; }
+  .tabs { display: grid; grid-template-columns: 1fr; gap: 8px; }
+  .tab { flex-direction: row; justify-content: center; padding: 10px 12px; font-size: 12.5px; line-height: 1.25; }
+  .meal-card { grid-template-columns: 56px minmax(0,1fr); gap: 10px; padding: 14px 12px; }
+  .meal-time .time { font-size: 15px; }
+  .meal-time .label { font-size: 8px; letter-spacing: 1px; }
+  .meal-content h3 { font-size: 13.5px; }
+  .meal-options li { font-size: 12.5px; line-height: 1.45; }
+  .sport-badge { padding: 8px 10px; font-size: 11.5px; }
+  .batch-grid { grid-template-columns: 1fr; }
+  .highlight-box { padding: 16px; }
+  .supp-grid { gap: 8px; }
+  .supp-row { display: grid; grid-template-columns: 22px minmax(0,1fr); align-items: start; gap: 10px; padding: 13px 12px; }
+  .supp-left { min-width: 0; }
+  .supp-why { display: block; font-size: 11.5px; line-height: 1.35; }
+  .supp-right { grid-column: 2; justify-content: flex-start; align-items: flex-start; flex-wrap: wrap; gap: 6px; }
+  .supp-when, .supp-prio { white-space: normal; line-height: 1.2; }
+  .supp-when { padding: 4px 8px; }
+  .shop-item { padding: 10px 12px; align-items: flex-start; line-height: 1.35; }
+  .shop-item input[type="checkbox"] { margin-top: 1px; }
+  .routine-week, .yoga-week-grid { grid-template-columns: repeat(7, minmax(36px, 1fr)); gap: 4px; }
+  .day-pill, .yoga-day { padding: 8px 2px; border-radius: 8px; }
+  .day-icon, .yoga-day .yd-icon { font-size: 15px; }
+  .day-desc { display: none; }
+  .tracker-grid { grid-template-columns: 1fr; }
+  .history-section, .weight-input-card { padding: 16px; }
+  .chart-wrap { height: 160px; overflow: hidden; }
+  .skincare-step, .rule-card { padding: 15px 12px; gap: 10px; }
+  .toast { max-width: calc(100vw - 24px); white-space: normal; text-align: center; }
+}
+
+@media (max-width: 360px) {
+  .hero h1 { font-size: 27px; }
+  .hero-sub { font-size: 13px; }
+  .nav-tag { font-size: 11px; min-height: 40px; }
+  .meal-card { grid-template-columns: 50px minmax(0,1fr); padding: 12px 10px; }
+  .meal-time .time { font-size: 14px; }
+  .meal-options li, .batch-card p, .rule-card p, .step-content p { font-size: 12px; }
+  .supp-name { font-size: 13.5px; }
+  .supp-why { font-size: 11px; }
+  .routine-week, .yoga-week-grid { grid-template-columns: repeat(7, minmax(32px, 1fr)); }
+  .day-name, .yoga-day .yd-name { font-size: 8px; letter-spacing: .5px; }
+}
+
 </style>
 </head>
 <body>
@@ -297,7 +364,7 @@ body { font-family: 'DM Sans', sans-serif; background: var(--sand); color: var(-
     <button class="nav-tag" onclick="showSection('supplements',this)">💊 Supplements</button>
     <button class="nav-tag" onclick="showSection('einkauf',this)">🛒 Einkaufsliste</button>
     <button class="nav-tag" onclick="showSection('skincare',this)">✨ Skincare</button>
-    <button class="nav-tag" onclick="showSection('yoga',this)">🧘 Nidra</button>
+    <button class="nav-tag" onclick="showSection('yoga',this)">🌙 Nidra</button>
     <button class="nav-tag" onclick="showSection('routinen',this)">🔄 Routinen</button>
     <button class="nav-tag" onclick="showSection('tracking',this)">📊 Tracking</button>
   </div>
@@ -388,13 +455,19 @@ body { font-family: 'DM Sans', sans-serif; background: var(--sand); color: var(-
     <div class="section-label">Supplements</div>
     <div class="section-title">Was wirklich sinnvoll ist</div>
     <div class="supp-grid">
-      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)" style="width:20px;height:20px;accent-color:var(--sage);flex-shrink:0;cursor:pointer;"><div class="supp-left"><div class="supp-name">☀️ Vitamin D3 + K2</div><div class="supp-why">Hormonsystem & Energie – ab 40 besonders relevant</div></div><div class="supp-right"><div class="supp-when">🌅 Morgens</div><div class="supp-prio">WICHTIG</div></div></label>
-      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)" style="width:20px;height:20px;accent-color:var(--sage);flex-shrink:0;cursor:pointer;"><div class="supp-left"><div class="supp-name">🐟 Omega-3</div><div class="supp-why">Entzündungshemmend, Haut, Bindegewebe, Stoffwechsel</div></div><div class="supp-right"><div class="supp-when">🍽 Zur Mahlzeit</div><div class="supp-prio">WICHTIG</div></div></label>
-      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)" style="width:20px;height:20px;accent-color:var(--sage);flex-shrink:0;cursor:pointer;"><div class="supp-left"><div class="supp-name">🌙 Magnesium</div><div class="supp-why">Schlaf, Regeneration, Stressabbau</div></div><div class="supp-right"><div class="supp-when">🌙 Abends</div><div class="supp-prio">WICHTIG</div></div></label>
-      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)" style="width:20px;height:20px;accent-color:var(--sage);flex-shrink:0;cursor:pointer;"><div class="supp-left"><div class="supp-name">✨ Kollagen</div><div class="supp-why">Bindegewebe & Haut – ab 40 nachweislich wirksam</div></div><div class="supp-right"><div class="supp-when">🌅 Morgens nüchtern</div><div class="supp-prio mid">SINNVOLL</div></div></label>
-      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)" style="width:20px;height:20px;accent-color:var(--sage);flex-shrink:0;cursor:pointer;"><div class="supp-left"><div class="supp-name">💪 Protein-Shake</div><div class="supp-why">Lückenfüller wenn Mahlzeit knapp – kein Ersatz</div></div><div class="supp-right"><div class="supp-when">🏋️ Nach Training</div><div class="supp-prio mid">SINNVOLL</div></div></label>
-      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)" style="width:20px;height:20px;accent-color:var(--sage);flex-shrink:0;cursor:pointer;"><div class="supp-left"><div class="supp-name">⚡ Kreatin (Monohydrat)</div><div class="supp-why">Muskelaufbau & Kraft – 3–5g täglich, auch Ruhetage</div></div><div class="supp-right"><div class="supp-when">🕐 Täglich, egal wann</div><div class="supp-prio mid">SINNVOLL</div></div></label>
-      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)" style="width:20px;height:20px;accent-color:var(--sage);flex-shrink:0;cursor:pointer;"><div class="supp-left"><div class="supp-name">🌿 Ashwagandha</div><div class="supp-why">Cortisol regulieren bei Stress und vollem Alltag</div></div><div class="supp-right"><div class="supp-when">🌙 Abends</div><div class="supp-prio opt">OPTIONAL</div></div></label>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)"><div class="supp-left"><div class="supp-name">☀️ Vitamin D3 + K2</div><div class="supp-why">Hormonsystem & Energie – ab 40 besonders relevant</div></div><div class="supp-right"><div class="supp-when">🌅 Morgens</div><div class="supp-prio">WICHTIG</div></div></label>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)"><div class="supp-left"><div class="supp-name">🐟 Omega-3</div><div class="supp-why">Entzündungshemmend, Haut, Bindegewebe, Stoffwechsel</div></div><div class="supp-right"><div class="supp-when">🍽 Zur Mahlzeit</div><div class="supp-prio">WICHTIG</div></div></label>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)"><div class="supp-left"><div class="supp-name">🌙 Magnesium</div><div class="supp-why">Schlaf, Regeneration, Stressabbau</div></div><div class="supp-right"><div class="supp-when">🌙 Abends</div><div class="supp-prio">WICHTIG</div></div></label>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)"><div class="supp-left"><div class="supp-name">✨ Kollagen</div><div class="supp-why">Bindegewebe & Haut – ab 40 nachweislich wirksam</div></div><div class="supp-right"><div class="supp-when">🌅 Morgens nüchtern</div><div class="supp-prio mid">SINNVOLL</div></div></label>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)"><div class="supp-left"><div class="supp-name">💪 Protein-Shake</div><div class="supp-why">Lückenfüller wenn Mahlzeit knapp – kein Ersatz</div></div><div class="supp-right"><div class="supp-when">🏋️ Nach Training</div><div class="supp-prio mid">SINNVOLL</div></div></label>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)"><div class="supp-left"><div class="supp-name">⚡ Kreatin (Monohydrat)</div><div class="supp-why">Muskelaufbau & Kraft – 3–5g täglich, auch Ruhetage</div></div><div class="supp-right"><div class="supp-when">🕐 Täglich, egal wann</div><div class="supp-prio mid">SINNVOLL</div></div></label>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)"><div class="supp-left"><div class="supp-name">🌿 Ashwagandha</div><div class="supp-why">Cortisol regulieren bei Stress und vollem Alltag</div></div><div class="supp-right"><div class="supp-when">🌙 Abends</div><div class="supp-prio opt">OPTIONAL</div></div></label>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)"><div class="supp-left"><div class="supp-name">🍋 Vitamin C</div><div class="supp-why">Immunsystem, Kollagenbildung und antioxidativer Support</div></div><div class="supp-right"><div class="supp-when">🌅 Morgens</div><div class="supp-prio mid">SINNVOLL</div></div></label>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)"><div class="supp-left"><div class="supp-name">🧬 Zink</div><div class="supp-why">Immunsystem, Haut und Zellstoffwechsel</div></div><div class="supp-right"><div class="supp-when">🍽 Zur Mahlzeit</div><div class="supp-prio opt">OPTIONAL</div></div></label>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)"><div class="supp-left"><div class="supp-name">⚡ Vitamin B-Komplex</div><div class="supp-why">Energie, Nerven und Belastbarkeit im Alltag</div></div><div class="supp-right"><div class="supp-when">🌅 Morgens</div><div class="supp-prio opt">OPTIONAL</div></div></label>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)"><div class="supp-left"><div class="supp-name">🦠 Probiotikum</div><div class="supp-why">Darmflora und Verdauung – besonders bei sensibler Verdauung</div></div><div class="supp-right"><div class="supp-when">🌅 Morgens</div><div class="supp-prio opt">OPTIONAL</div></div></label>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)"><div class="supp-left"><div class="supp-name">💧 Elektrolyte</div><div class="supp-why">Flüssigkeitshaushalt, Trainingstage und starkes Schwitzen</div></div><div class="supp-right"><div class="supp-when">🏋️ Bei Bedarf</div><div class="supp-prio opt">OPTIONAL</div></div></label>
+      <label class="supp-row"><input type="checkbox" onchange="styleShopItem(this)"><div class="supp-left"><div class="supp-name">🩸 Eisen</div><div class="supp-why">Nur bei nachgewiesenem Bedarf oder ärztlicher Empfehlung</div></div><div class="supp-right"><div class="supp-when">⚠️ Nach Blutbild</div><div class="supp-prio opt">OPTIONAL</div></div></label>
     </div>
     <button class="btn btn-secondary btn-sm" onclick="resetSupplements()" style="margin-top:12px;border-color:var(--terracotta);color:var(--terracotta);">↺ Zurücksetzen</button>
   </div>
@@ -460,6 +533,12 @@ body { font-family: 'DM Sans', sans-serif; background: var(--sand); color: var(-
       <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Kollagen Peptide (Pulver)</span></label>
       <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Kreatin Monohydrat</span></label>
       <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Ashwagandha (optional)</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Vitamin C</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Zink</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Vitamin B-Komplex</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Probiotikum</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Elektrolyte</span></label>
+      <label class="shop-item"><input type="checkbox" onchange="styleShopItem(this)"><span>Eisen (nur bei Bedarf)</span></label>
     </div>
     <button class="btn btn-secondary" onclick="resetAllShopping()" style="margin-top:8px;border-color:var(--terracotta);color:var(--terracotta);width:100%;">↺ Gesamte Liste zurücksetzen</button>
   </div>
